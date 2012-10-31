@@ -1,0 +1,79 @@
+# switch back to C-a
+set-option -g prefix C-a
+bind-key C-a last-window
+
+# start window numbering at 1
+set -g base-index 1
+
+# faster command sequences
+set -s escape-time 0
+
+# aggressive resizing
+setw -g aggressive-resize on
+
+# set status bar
+set -g status-bg black
+set -g status-fg white
+set -g status-left ""
+set -g status-right "#[fg=green]#H"
+
+# split windows like vim
+# vim's definition of a horizontal/vertical split is reversed from tmux's
+bind s split-window -v
+bind v split-window -h
+
+# move around panes with hjkl, as one would in vim after pressing ctrl-w
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# resize panes like vim
+# feel free to change the "1" to however many lines you want to resize by, only
+# one at a time can be slow
+bind < resize-pane -L 4
+bind > resize-pane -R 4
+bind - resize-pane -D 4
+bind + resize-pane -U 4
+
+# bind : to command-prompt like vim
+# this is the default in tmux already
+bind : command-prompt
+
+# vi-style controls for copy mode
+setw -g mode-keys vi
+
+#### COLOUR (Solarized 256): https://github.com/seebi/tmux-colors-solarized
+
+# configure for 256 colors
+set -g default-terminal "screen-256color"
+
+# default statusbar colors
+set-option -g status-bg colour235 #base02
+set-option -g status-fg colour136 #yellow
+set-option -g status-attr default
+
+# default window title colors
+set-window-option -g window-status-fg colour244 #base0
+set-window-option -g window-status-bg default
+#set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg colour166 #orange
+set-window-option -g window-status-current-bg default
+#set-window-option -g window-status-current-attr bright
+
+# pane border
+set-option -g pane-border-fg colour235 #base02
+set-option -g pane-active-border-fg colour240 #base01
+
+# message text
+set-option -g message-bg colour235 #base02
+set-option -g message-fg colour166 #orange
+
+# pane number display
+set-option -g display-panes-active-colour colour33 #blue
+set-option -g display-panes-colour colour166 #orange
+
+# clock
+set-window-option -g clock-mode-colour colour64 #green
