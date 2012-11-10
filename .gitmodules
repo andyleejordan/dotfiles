@@ -1,3 +1,3 @@
 [submodule ".vim_runtime"]
 	path = .vim_runtime
-	url = /home/andrew/.vim_runtime/
+	url = git://github.com/andschwa/vimrc.git
