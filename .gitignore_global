@@ -20,3 +20,15 @@
 *.log
 *.sql
 *.sqlite
+
+# Images
+*.jp*g
+*.png
+*.bmp
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.pdf
