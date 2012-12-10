@@ -6,18 +6,18 @@
 [ -z "$PS1" ] && return
 
 # Set environment
-PATH=$PATH:.
-TERM=xterm-16color
+PATH=$PATH:. # Big security risk, but very convenient, use at own risk
+TERM=xterm-16color # Unless you make this, just use xterm-256color
 
 # Colorized bash prompt
-export PS1="\[\e[0;32m\][\u@\h \W]\$ \[\e[0m\]"
+export PS1="\[\e[0;32m\][\u@\h \W]\$ \[\e[0m\]" # It's so pretty
 
-# tmux
+# tmux: Make new session if none available, else reattach
 if which tmux 2>&1 >/dev/null; then
     test -z "$TMUX" && (tmux attach || tmux new-session)
 fi
 
-# Set vi keys
+# Set vi keys for bash instead of emacs
 set -o vi
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -68,7 +68,5 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# Fix ls colors with solarized
+# Fix ls colors with solarized, file found in .dotfiles
 eval `dircolors ~/.dir_colors`
-
-PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:.:.:/home/andrew/bin
