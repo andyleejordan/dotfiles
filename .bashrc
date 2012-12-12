@@ -7,7 +7,7 @@
 
 # Set environment
 PATH=$PATH:. # Big security risk, but very convenient, use at own risk
-TERM=xterm-16color # Unless you make this, just use xterm-256color
+TERM=xterm-256color # Fixes color issues
 
 # Colorized bash prompt
 export PS1="\[\e[0;32m\][\u@\h \W]\$ \[\e[0m\]" # It's so pretty
