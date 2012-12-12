@@ -1,6 +1,7 @@
 """ Andrew Schwartzmeyer's VIM configurations
 
 """ Pathogen
+"source ~/.vim/bundle/vim-pathogen/autoload/pathogen.vim
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 call pathogen#helptags()
@@ -175,6 +176,8 @@ map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark 
 map <leader>nf :NERDTreeFind<cr>
 
+""" TagList
+map <leader>/ :TlistToggle<cr>
 """ MRU
 let MRU_Max_Entries = 100
 map <leader>f :MRU<CR>
