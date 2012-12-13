@@ -32,3 +32,6 @@
 *.blg
 *.dvi
 *.pdf
+
+# Vim
+tags
