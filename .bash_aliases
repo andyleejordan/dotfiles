@@ -40,3 +40,37 @@ alias ln='ln -i'
 alias chown='chown --preserve-root'
 alias chmod='chmod --preserve-root'
 alias chgrp='chgrp --preserve-root'
+
+# git
+alias gs='git status'
+alias gd='git diff '
+alias gl='git log | more'
+alias gc='git commit '
+alias gp='git push'
+
+# Extract function
+extract () {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)  tar xjf $1      ;;
+            *.tar.gz)   tar xzf $1      ;;
+            *.bz2)      bunzip2 $1      ;;
+            *.rar)      rar x $1        ;;
+            *.gz)       gunzip $1       ;;
+            *.tar)      tar xf $1       ;;
+            *.tbz2)     tar xjf $1      ;;
+            *.tgz)      tar xzf $1      ;;
+            *.zip)      unzip $1        ;;
+            *.Z)        uncompress $1   ;;
+            *)          echo "'$1' cannot be extracted via extract()" ;;
+    esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# cd then ls function
+function cdd () {
+    cd "$*"
+    ls -h --color=auto
+}
