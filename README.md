@@ -9,6 +9,13 @@ SUBMODULES: This has a submodule, .vim, which itself has submodules. Follow Git'
     cd ~/.dotfiles
     git submodule init
     git submodule update
+    ln -s .tmux.conf ~/.tmux.conf
+    ln -s .bashrc ~/.bashrc
+    ln -s .bashrc_aliases ~/.bashrc_aliases
+    ln -s dircolors-solarized/dircolors.ansi-dark ~/.dir_colors
+    ln -s .gitconfig ~/.gitconfig
+    ln -s .gitignore_global ~/.gitignore_global
+    ./gnome-terminal-colors-solarized/install.sh
 
 All files belong in home directory or relative path (personally I symlink them and have this directory as .dotfiles in home).
 
