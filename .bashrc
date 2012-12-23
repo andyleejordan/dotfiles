@@ -10,7 +10,7 @@ PATH=$PATH:. # Big security risk, but very convenient, use at own risk
 TERM=xterm-256color # Fixes color issues
 
 # Colorized bash prompt
-export PS1="\[\e[0;32m\][\u@\h \W]\$ \[\e[0m\]" # It's so pretty
+export PS1="\[\e[0;32m\][\h: \W]\$ \[\e[0m\]" # It's so pretty
 
 # tmux: Make new session if none available, else reattach
 if which tmux 2>&1 >/dev/null; then
