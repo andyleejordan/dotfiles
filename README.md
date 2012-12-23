@@ -9,14 +9,8 @@ SUBMODULES: This has a submodule, .vim, which itself has submodules. Follow Git'
     cd ~/.dotfiles
     git submodule init
     git submodule update
-    cd .vim
-    git submodule init
-    git submodule update
 
 All files belong in home directory or relative path (personally I symlink them and have this directory as .dotfiles in home).
-
-## Vim
-Vim configuration is loosely based off "[The Ultimate vimrc](https://github.com/amix/vimrc)" by [Amir Salihefendic](http://amix.dk). Plugins are located in .vim/bundle for Pathogen to "infect" i.e. load them, which itself is loaded in .vimrc. Colors are courtesy of Ethan Schoonover's [Solarized](http://ethanschoonover.com/solarized).
 
 ## Tmux
 Tmux configuration is loosely based off that found in the Arch Linux wiki and Brandur's sample [.tmux.conf](https://github.com/brandur/tmux-extra), originally found on his [blog](https://mutelight.org/practical-tmux). Also added are vi like configurations, and the Solarized color scheme (NOTE: this requires the default terminal to be set, use xterm-256color unless you make xterm-16color).
