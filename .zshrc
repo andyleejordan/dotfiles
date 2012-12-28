@@ -1,39 +1,36 @@
-# Path to your oh-my-zsh configuration.
+# Setup environment
 ZSH=$HOME/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+PATH=$PATH:. # Big security risk, but very convenient, use at own risk
+TERM=xterm-256color # Fixes color issues
 ZSH_THEME="robbyrussell"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Tmux: Make new session if none available, else reattach
+if which tmux 2>&1 >/dev/null; then
+    test -z "$TMUX" && (tmux attach || tmux new-session)
+fi
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git extract)
 
 source $ZSH/oh-my-zsh.sh
 
-# Customize to your needs...
+# Command exists function
+_command_exists() {
+    type "$1" &> /dev/null ;
+    }
+
+# Show the fortune while we set up other things
+if _command_exists fortune && [ "$TERM_PROGRAM" != "DTerm" ]; then
+    fortune
+    echo
+fi
+
+# Load bash aliases
+if [ -f ~/.shell_aliases ]; then
+    . ~/.shell_aliases
+fi
+
+# Fix ls colors with solarized, file found in .dotfiles
+if _command_exists dircolors; then
+    eval `dircolors --bourne-shell ~/.dir_colors`
+fi
