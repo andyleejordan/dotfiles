@@ -1,6 +1,4 @@
 # ~/.bashrc: executed by bash(2) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -12,7 +10,7 @@ TERM=xterm-256color # Fixes color issues
 # Colorized bash prompt
 export PS1="\[\e[0;32m\][\h: \W]\$ \[\e[0m\]" # It's so pretty
 
-# tmux: Make new session if none available, else reattach
+# Tmux: Make new session if none available, else reattach
 if which tmux 2>&1 >/dev/null; then
     test -z "$TMUX" && (tmux attach || tmux new-session)
 fi
@@ -58,8 +56,8 @@ if _command_exists fortune && [ "$TERM_PROGRAM" != "DTerm" ]; then
 fi
 
 # Load bash aliases
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.shell_aliases ]; then
+    . ~/.shell_aliases
 fi
 
 # enable programmable completion features
