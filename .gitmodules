@@ -7,3 +7,6 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule "powerline"]
+	path = powerline
+	url = git://github.com/Lokaltog/powerline.git
