@@ -22,6 +22,11 @@ if _command_exists fortune && [ "$TERM_PROGRAM" != "DTerm" ]; then
     echo
 fi
 
+# Fix ls colors with Solarized, file found in .dotfiles
+if _command_exists dircolors; then
+    eval `dircolors ~/.dir_colors`
+fi
+
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(
     autojump
@@ -41,6 +46,9 @@ limit coredumpsize 0
 setopt menu_complete
 setopt no_beep
 
+# Temporary workaround for tab completion LS_COLORS; Issue #1563
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
 # Vi style
 bindkey '^R' history-incremental-search-backward
 bindkey '^S' history-incremental-search-forward
@@ -50,9 +58,4 @@ bindkey '^N' history-search-forward
 # Load bash aliases
 if [ -f ~/.shell_aliases ]; then
     . ~/.shell_aliases
-fi
-
-# Fix ls colors with Solarized, file found in .dotfiles
-if _command_exists dircolors; then
-    eval `dircolors ~/.dir_colors`
 fi
