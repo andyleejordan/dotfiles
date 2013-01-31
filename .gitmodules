@@ -10,3 +10,6 @@
 [submodule "powerline"]
 	path = powerline
 	url = git://github.com/Lokaltog/powerline.git
+[submodule "xfce4-terminal-colors-solarized"]
+	path = xfce4-terminal-colors-solarized
+	url = git://github.com/sgerrand/xfce4-terminal-colors-solarized.git
