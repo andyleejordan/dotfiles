@@ -1,6 +1,6 @@
 # Setup environment
 ZSH=$HOME/.oh-my-zsh # Point to location of oh-my-zsh
-PATH=$PATH:. # Big security risk, but very convenient, use at own risk
+PATH=$PATH:~/bin/android-sdk-linux/platform-tools/:~/bin/android-sdk-linux/tools/:. # Big security risk, but very convenient, use at own risk
 TERM="xterm-256color" # Fixes color issues
 ZSH_THEME="agnoster" # Awesome Solarized theme
 DEFAULT_USER="andrew" # Used for agnoster
@@ -35,6 +35,7 @@ plugins=(
     extract
     git
     git-extras
+    history
     python
     url-tools
     vi-mode)
