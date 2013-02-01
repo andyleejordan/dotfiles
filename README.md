@@ -37,6 +37,8 @@ Programs
 * python
 * python3
 * powerline
+* android-sdk-linux
+* vmware-tools
 
 Repos to clone
 * dotfiles
