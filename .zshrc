@@ -30,11 +30,14 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(
     autojump
-    compleat
     debian
     extract
     git
     git-extras
+    gitfast
+    git-flow
+    github
+    git-remote-branch
     history
     python
     url-tools
