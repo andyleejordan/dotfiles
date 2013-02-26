@@ -1,15 +1,3 @@
-[submodule "gnome-terminal-colors-solarized"]
-	path = gnome-terminal-colors-solarized
-	url = git://github.com/sigurdga/gnome-terminal-colors-solarized.git
-[submodule "dircolors-solarized"]
-	path = dircolors-solarized
-	url = git://github.com/seebi/dircolors-solarized.git
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
-[submodule "powerline"]
-	path = powerline
-	url = git://github.com/Lokaltog/powerline.git
-[submodule "xfce4-terminal-colors-solarized"]
-	path = xfce4-terminal-colors-solarized
-	url = git://github.com/sgerrand/xfce4-terminal-colors-solarized.git
