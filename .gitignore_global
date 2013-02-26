@@ -1,4 +1,5 @@
 # Compiled source 
+*.pyc
 *.com
 *.class
 *.dll
@@ -8,13 +9,22 @@
 
 # Packages 
 *.7z
-*.dmg
-*.gz
-*.iso
 *.jar
 *.rar
-*.tar
 *.zip
+*.gz
+*.bzip
+*.bz2
+*.xz
+*.lzma
+*.iso
+*.tar
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.deb
+*.rpm
 
 # Logs and databases 
 *.log
@@ -35,3 +45,15 @@
 
 # Vim
 tags
+.netrwhist
+view
+
+# Mac OS X
+.DS_Store
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
