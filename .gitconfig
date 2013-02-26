@@ -3,8 +3,10 @@
 	name = Andrew Schwartzmeyer
 [core]
 	editor = vim
-	excludesfile = /home/andrew/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [merge]
 	tool = vimdiff
 [color]
 	ui = true
+[push]
+	default = simple
