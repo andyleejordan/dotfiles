@@ -1,6 +1,6 @@
 # Setup environment
 ZSH="$HOME/.oh-my-zsh" # Point to location of oh-my-zsh
-PATH="/usr/local/bin:$PATH:."
+PATH="/usr/local/bin:/usr/local/share/python:$PATH:."
 TERM="xterm-256color" # Fixes color issues
 ZSH_THEME=""
 MY_ZSH_THEME=$ZSH_THEME
