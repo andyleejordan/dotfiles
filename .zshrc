@@ -18,16 +18,41 @@ if _command_exists fortune && [ "$TERM_PROGRAM" != "DTerm" ]; then
     echo
 fi
 
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Common plugins
 plugins=(
-    brew
     extract
     git
     history
-    osx
     python
     url-tools
     vi-mode)
+
+# Common aliases
+if [ -f ~/.common_aliases ]; then
+    . ~/.common_aliases
+fi
+
+# GNU plugins/aliases
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    plugins=(
+        aptitude
+        debian)
+
+    if [ -f ~/.gnu_aliases ]; then
+        . ~/.gnu_aliases
+    fi
+
+# Mac OS X plugins/aliases
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    plugins=(
+        brew
+        osx)
+
+    if [ -f ~/.osx_aliases ]; then
+        . ~/.osx_aliases
+    fi
+
+fi
 
 source $ZSH/oh-my-zsh.sh
 source "/Users/andrew/Code/agnoster/agnoster.zsh-theme"
@@ -36,8 +61,3 @@ source "/Users/andrew/Code/agnoster/agnoster.zsh-theme"
 limit coredumpsize 0
 setopt menu_complete
 setopt no_beep
-
-# Load aliases
-if [ -f ~/.shell_aliases ]; then
-    . ~/.shell_aliases
-fi
