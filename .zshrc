@@ -31,20 +31,20 @@ plugins=(
     vi-mode)
 
 # Common aliases
-source $DOTFILES/.common_aliases
+source $DOTFILES/aliases/aliases.zsh
 
 # GNU plugins/aliases
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     plugins+=(
         aptitude
         debian)
-    source $DOTFILES/.gnu_aliases
+    source $DOTFILES/.gnu.zsh
 # Mac OS X plugins/aliases
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     plugins+=(
         brew
         osx)
-    source $DOTFILES ~/.osx_aliases
+    source $DOTFILES ~/.osx.zsh
 fi
 
 source $ZSH/oh-my-zsh.sh
