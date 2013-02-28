@@ -6,6 +6,7 @@ ZSH_THEME=""
 MY_ZSH_THEME=$ZSH_THEME
 DEFAULT_USER="andrew" # Used for agnoster
 EDITOR="vim"
+DOTFILES="$HOME/.dotfiles"
 
 # Command exists function
 _command_exists() {
@@ -20,38 +21,30 @@ fi
 
 # Common plugins
 plugins=(
+    autojump
     extract
     git
     history
+    pip
     python
     url-tools
     vi-mode)
 
 # Common aliases
-if [ -f ~/.common_aliases ]; then
-    . ~/.common_aliases
-fi
+source $DOTFILES/.common_aliases
 
 # GNU plugins/aliases
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    plugins=(
+    plugins+=(
         aptitude
         debian)
-
-    if [ -f ~/.gnu_aliases ]; then
-        . ~/.gnu_aliases
-    fi
-
+    source $DOTFILES/.gnu_aliases
 # Mac OS X plugins/aliases
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    plugins=(
+    plugins+=(
         brew
         osx)
-
-    if [ -f ~/.osx_aliases ]; then
-        . ~/.osx_aliases
-    fi
-
+    source $DOTFILES ~/.osx_aliases
 fi
 
 source $ZSH/oh-my-zsh.sh
