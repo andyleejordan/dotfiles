@@ -1,0 +1,191 @@
+""" Andrew Schwartzmeyer's VIM configurations
+
+""" Set Vim mode, not Vi
+set nocompatible
+
+""" Vundle
+filetype off
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'hallison/vim-markdown.git'
+Bundle 'jcf/vim-latex'
+Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'majutsushi/tagbar'
+Bundle 'myusuf3/numbers.vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'SirVer/ultisnips.git'
+Bundle 'sjl/gundo.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'TaskList.vim'
+Bundle 'mru.vim'
+
+""" Filetypes/completion
+filetype plugin on
+filetype indent on
+set ofu=syntaxcomplete#Complete
+let g:tex_flavor='latex'
+
+""" General
+set number                      " Line numbers
+set backspace=eol,start,indent  " Backspace in insert mode
+set history=1000                " Save history
+set visualbell                  " No sounds
+set autoread                    " Reload changed files
+set hidden                      " Allows background buffers
+set encoding=utf8               " Set utf-8 encoding
+set mouse=a                     " Allow mouse to copy/paste/scroll
+
+""" Appearance
+syntax on                       " Syntax highlighting
+set t_Co=16                     " 16 colors
+set background=dark             " Dark backgrounds rock
+colorscheme solarized           " Thank you Ethan Schoonover
+set laststatus=2                " Enable Powerline
+set ruler                       " Show position of cursor
+set showmatch                   " Show matching parenthesis
+set colorcolumn=80              " Show column 80
+
+""" Navigation
+map j gj
+map k gk
+map 0 ^
+map - $
+
+""" Scrolling
+set scrolloff=8
+set sidescrolloff=16
+set sidescroll=1
+
+""" Folding
+set foldmethod=indent           " Fold on indents
+set foldnestmax=3               " Limit 3 folds
+"set nofoldenable                " Disable folding by default
+
+""" Searching
+set ignorecase                  " Ignore case when searching
+set smartcase                   " Don't ignore case if not all lower
+set hlsearch                    " Highlight search terms
+set incsearch                   " Search as I type
+set magic                       " Enable regular expressions
+
+""" Formatting
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set shiftround
+set smarttab
+set autoindent
+set copyindent
+set smartindent
+set wrap                        " Enable soft wrapping
+set linebreak                   " Wrap at acceptable points
+set nolist                      " Disable inserting of newlines
+
+""" Performance
+set lazyredraw
+set noswapfile
+set nobackup
+set nowb
+
+""" Mappings
+let mapleader = ","
+let g:mapleader = ","
+
+""" Turn off highlighting
+map <silent> <leader><cr> :noh<cr>
+
+""" Nerd Tree
+map <leader>nn :NERDTreeToggle<cr>
+map <leader>nb :NERDTreeFromBookmark 
+map <leader>nf :NERDTreeFind<cr>
+
+""" TagList
+map <leader>/ :TagbarToggle<cr>
+
+""" Gundo
+map <leader>u :GundoToggle<cr>
+
+""" Move panes easily
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+""" Tab switching
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove 
+map <leader>t<leader> :tabnext
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+
+""" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+""" Toggle paste mode
+map <leader>p :setlocal paste!<cr>
+
+""" Spell checking
+map <leader>ss :setlocal spell!<cr>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+
+""" MRU
+let MRU_Max_Entries = 100
+map <leader>f :MRU<CR>
+
+""" Wildmenu completion
+set wildmenu
+set wildmode=list:longest
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.DS_Store                       " OSX bullshit
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=**.class                          " Cursed Java class files
+
+""" Buffer switching behavior
+try
+    set switchbuf=useopen,usetab,newtab
+    set stal=2
+catch
+endtry
+
+""" Persistent undo
+try
+    silent !mkdir ~/.vim/undodir > /dev/null 2>&1
+    set undodir=~/.vim/undodir
+    set undofile
+catch
+endtry
+
+""" Return to last edit position
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+set viminfo^=%
+
+""" Save when losing focus
+set autowriteall " Auto-save files when switching buffers or leaving vim.
+au FocusLost * silent! :wa
+au TabLeave * silent! :wa
+
+""" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
