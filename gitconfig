@@ -1,0 +1,12 @@
+[user]
+	email = andrew.schwartzmeyer@gmail.com
+	name = Andrew Schwartzmeyer
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore_global
+[merge]
+	tool = vimdiff
+[color]
+	ui = true
+[push]
+	default = simple
