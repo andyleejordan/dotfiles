@@ -6,7 +6,8 @@ plugins=(
     pip
     python
     url-tools
-    vi-mode)
+    vi-mode
+    wakeonlan)
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     plugins+=(debian)
