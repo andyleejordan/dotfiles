@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Borrowed from gmarik:
+# https://github.com/gmarik/dotfiles/blob/master/bin/git-mirror-dropbox
+
+set -e 
+
+mirror_dropbox() {
+  repo=$(basename -s .git $(pwd))
+  dropbox=~/Dropbox/Documents/Code/.gitrepos
+  git clone --bare ./.git/ ${dropbox}/${repo}
+  git remote add backup ${dropbox}/${repo}
+  git push backup --mirror
+}
+
+repo_not_found() {
+  echo "${git_dir} not found"
+  exit 1
+}
+
+git_dir=${1:-`pwd`}/.git
+
+[ -d ${git_dir} ] && mirror_dropbox || repo_not_found
