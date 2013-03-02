@@ -10,3 +10,5 @@
 	ui = true
 [push]
 	default = simple
+[alias]
+    backup = push --mirror backup
