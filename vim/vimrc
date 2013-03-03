@@ -32,7 +32,8 @@ Bundle 'mru.vim'
 filetype plugin on
 filetype indent on
 set ofu=syntaxcomplete#Complete
-let g:tex_flavor='latex'
+let g:tex_flavor='latex'                        " Work around for LaTeX
+let g:syntastic_python_checkers=['flake8']      " Use Flake8 for Syntastic
 
 """ General
 set number                      " Line numbers
