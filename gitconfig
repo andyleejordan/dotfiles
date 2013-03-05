@@ -2,7 +2,7 @@
 	email = andrew.schwartzmeyer@gmail.com
 	name = Andrew Schwartzmeyer
 [core]
-	editor = vim
+	editor = /usr/local/bin/vim
 	excludesfile = ~/.gitignore_global
 [merge]
 	tool = vimdiff
