@@ -6,6 +6,7 @@ alias ping='ping -c 5'
 alias root='sudo su'
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown -hP now'
+alias update-all='brew update && brew upgrade && upgrade_oh_my_zsh && vim +BundleUpdate +qall'
 
 # ls
 alias lr='ls -R'                    # recursive ls
