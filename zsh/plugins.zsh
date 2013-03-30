@@ -5,6 +5,7 @@ plugins=(
     history
     pip
     python
+    tmux
     url-tools
     vi-mode
     wakeonlan)

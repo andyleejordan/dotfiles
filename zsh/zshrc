@@ -4,6 +4,7 @@ export PATH="~/bin:/usr/local/bin:$PATH"
 export PATH="$PATH:/usr/local/share/python3:/usr/local/share/python:."
 TERM="xterm-256color" # Fixes color issues
 ZSH_THEME="agnoster_beta"
+ZSH_TMUX_AUTOSTART=true
 DEFAULT_USER="andrew" # Used for agnoster
 EDITOR="vim"
 
