@@ -1,6 +1,7 @@
 plugins=(
     autojump
     extract
+    fortune
     git
     history
     pip
@@ -11,7 +12,7 @@ plugins=(
     wakeonlan)
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    plugins+=(debian)
+    plugins+=(debian gnu-colors)
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     plugins+=(brew osx)
 fi

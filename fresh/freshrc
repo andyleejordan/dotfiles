@@ -5,7 +5,6 @@ fresh bin/git-mirror-dropbox --bin
 fresh git/gitconfig --file
 fresh git/gitignore_global --file
 fresh tmux/tmux.conf --file
-fresh zsh/fortune.zsh
 fresh zsh/plugins.zsh
 fresh zsh/zshrc --file
 fresh vim/vimrc --file
