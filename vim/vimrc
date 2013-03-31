@@ -70,7 +70,7 @@ set sidescroll=1
 """ Folding
 set foldmethod=indent           " Fold on indents
 set foldnestmax=3               " Limit 3 folds
-"set nofoldenable                " Disable folding by default
+set nofoldenable                " Disable folding by default
 
 """ Searching
 set ignorecase                  " Ignore case when searching
