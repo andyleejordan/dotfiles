@@ -13,3 +13,5 @@ source $ZSH/oh-my-zsh.sh
 limit coredumpsize 0
 setopt menu_complete
 setopt no_beep
+
+export PATH="~/bin:/usr/local/bin:$PATH:/usr/local/share/python3:/usr/local/share/python:/usr/local/opt/ruby/bin:/usr/local/share/npm/bin:."
