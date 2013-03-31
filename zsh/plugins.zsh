@@ -5,6 +5,7 @@ plugins=(
     gem
     git
     history
+    node
     pip
     python
     ruby
