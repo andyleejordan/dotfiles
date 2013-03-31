@@ -2,10 +2,12 @@ plugins=(
     autojump
     extract
     fortune
+    gem
     git
     history
     pip
     python
+    ruby
     tmux
     url-tools
     vi-mode
