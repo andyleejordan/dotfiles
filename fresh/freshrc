@@ -8,4 +8,4 @@ fresh tmux/tmux.conf --file
 fresh zsh/plugins.zsh
 fresh zsh/zshrc --file
 fresh vim/vimrc --file
-fresh wakeonlan/deepthought --file=~/.wakeonlan/deepthought
+fresh wakeonlan --file=~/.wakeonlan/
