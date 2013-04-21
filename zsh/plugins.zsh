@@ -12,7 +12,8 @@ plugins=(
     tmux
     url-tools
     vi-mode
-    wakeonlan)
+    wakeonlan
+    virtualenvwrapper)
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     plugins+=(debian gnu-colors)
