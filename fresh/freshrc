@@ -1,4 +1,4 @@
-fresh freshshell/fresh bin/fresh --bin
+fresh andschwa/fresh bin/fresh --bin
 fresh aliases/aliases.zsh
 fresh aliases/osx.zsh
 fresh bin/git-mirror-dropbox --bin
