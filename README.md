@@ -1,7 +1,7 @@
 .dotfiles
 =========
-Andrew Schwartzmeyer's terminal configurations.
------------------------------------------------
+My terminal configurations.
+---------------------------
 
 Here lives my dotfiles repo, for all my configuration files. It uses fresh to manage my customizations for Vim (using Vundle to manage the plugins), Zsh (using the oh-my-zsh framework and my own choice of plugins), [Powerline](https://github.com/Lokaltog/powerline) for the Zsh agnoster theme and Vim plugin (need to patch your fonts, follow lokaltog's docs), and other miscellaneous items.
 
