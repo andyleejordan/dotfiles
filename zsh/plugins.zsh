@@ -1,14 +1,15 @@
 plugins=(
-    autojump
     extract
     fortune
     gem
     git
+    gpg-agent
     history
     node
     pip
     python
     ruby
+    ssh-agent
     tmux
     url-tools
     vi-mode
