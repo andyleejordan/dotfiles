@@ -1,13 +1,9 @@
 fresh andschwa/fresh bin/fresh --bin
 fresh aliases/aliases.zsh
-fresh aliases/osx.zsh
 fresh bin/git-mirror-dropbox --bin
 fresh git/gitconfig --file
 fresh git/gitignore_global --file
 fresh tmux/tmux.conf --file
-fresh zsh/tmux.zsh
-fresh zsh/gnu-colors.zsh
-fresh zsh/fortune.zsh
 fresh zsh/plugins.zsh
 fresh zsh/zshrc --file
 fresh vim/vimrc --file
