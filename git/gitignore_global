@@ -57,3 +57,7 @@ Icon
 ._*
 .Spotlight-V100
 .Trashes
+
+# Common repo scripts
+apply.sh
+push.sh
