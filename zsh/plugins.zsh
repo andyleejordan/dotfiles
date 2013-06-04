@@ -3,7 +3,6 @@ plugins=(
     fortune
     gem
     git
-    gpg-agent
     history
     node
     pip
