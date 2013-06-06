@@ -49,7 +49,6 @@ set mouse=a                     " Allow mouse to copy/paste/scroll
 
 """ Appearance
 syntax on                       " Syntax highlighting
-let g:solarized_termtrans=1     " Workaround for background
 set t_Co=16                     " 16 colors
 set background=dark             " Dark backgrounds rock
 colorscheme solarized           " Thank you Ethan Schoonover
