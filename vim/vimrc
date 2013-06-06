@@ -176,10 +176,5 @@ autocmd BufReadPost *
      \ endif
 set viminfo^=%
 
-""" Save when losing focus
-set autowriteall " Auto-save files when switching buffers or leaving vim.
-au FocusLost * silent! :wa
-au TabLeave * silent! :wa
-
 """ Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
