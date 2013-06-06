@@ -1,22 +1,23 @@
 plugins=(
+    colored-man
+    cp
     extract
     fortune
     gem
     git
     history
-    node
     pip
     python
-    ruby
     ssh-agent
     tmux
     url-tools
     vi-mode
-    wakeonlan
-    virtualenvwrapper)
+    virtualenvwrapper
+    vundle
+    wakeonlan)
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     plugins+=(debian gnu-colors)
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    plugins+=(brew osx)
+    plugins+=(brew copydir copyfile osx)
 fi
