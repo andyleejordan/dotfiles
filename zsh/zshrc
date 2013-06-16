@@ -1,8 +1,8 @@
 # Setup environment
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     export PATH="~bin:/usr/local/bin:/usr/local/share/python:$PATH:."
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    export PATH="~/bin:/usr/local/bin:$PATH:/usr/local/share/python3:/usr/local/share/python:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems:/usr/local/share/npm/bin:."
+elif [[ "$OSTYPE" == darwin* ]]; then
+    export PATH="~/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/local/share/python3:/usr/local/share/python:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems:/usr/local/share/npm/bin:."
 fi
 
 ZSH="$HOME/.oh-my-zsh" # Point to location of oh-my-zsh
