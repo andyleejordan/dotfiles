@@ -4,10 +4,12 @@ plugins=(
     fortune
     gem
     git
+    gpg-agent
     history
     pip
     python
-    ssh-agent
+    ruby
+    rsync
     tmux
     url-tools
     virtualenvwrapper
