@@ -1,3 +1,7 @@
+# emacs
+alias e=emacsclient -t
+alias ec=emacsclient -c
+
 # misc
 alias more='less'
 alias df='df -h'
