@@ -1,8 +1,10 @@
 fresh andschwa/fresh bin/fresh --bin
+fresh andschwa/oh-my-zsh . --file=~/.oh-my-zsh/
 fresh aliases/aliases.zsh
 fresh bin/git-mirror-dropbox --bin
 fresh git/gitconfig --file
 fresh git/gitignore_global --file
+fresh gmarik/vundle . --file=~/.vim/bundle/vundle/
 fresh tmux/tmux.conf --file
 fresh seebi/tmux-colors-solarized tmuxcolors-dark.conf --file=~/.tmux.conf
 fresh zsh/plugins.zsh
