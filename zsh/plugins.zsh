@@ -8,6 +8,7 @@ plugins=(
     history
     pip
     python
+    mercurial
     ruby
     rsync
     tmux
