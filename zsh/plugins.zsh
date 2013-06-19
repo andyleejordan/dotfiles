@@ -1,5 +1,4 @@
 plugins=(
-    colored-man
     cp
     extract
     fortune
@@ -11,9 +10,7 @@ plugins=(
     ssh-agent
     tmux
     url-tools
-    vi-mode
     virtualenvwrapper
-    vundle
     wakeonlan)
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
