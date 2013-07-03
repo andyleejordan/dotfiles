@@ -1,6 +1,6 @@
 # emacs
-alias e=emacsclient -t
-alias ec=emacsclient -c
+alias e='emacsclient -t'
+alias ec='emacsclient -c -n'
 
 # misc
 alias more='less'
