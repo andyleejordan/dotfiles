@@ -8,8 +8,6 @@ alias df='df -h'
 alias du='du -c -h'
 alias ping='ping -c 5'
 alias root='sudo su'
-alias reboot='sudo reboot'
-alias shutdown='sudo shutdown -hP now'
 
 # ls
 alias lr='ls -R'                    # recursive ls
@@ -20,6 +18,9 @@ alias lt='ll -rt'                   # sort by date
 alias lm='la | less'
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    alias shutdown='shutdown -P now'
+    alias reboot='shutdown -r now'
+    alias halt='halt -P'
     alias egrep='egrep --color=auto'
     alias ls='ls -h --color=auto'
     alias cp='cp -i'
@@ -29,9 +30,14 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     alias chown='chown --preserve-root'
     alias chmod='chmod --preserve-root'
     alias chgrp='chgrp --preserve-root'
-    alias update-all='adg && vim +BundleUpdate +qall'
+    alias update_all='sudo apt-get update -y && sudo apt-get upgrade -y && fresh update'
 elif [[ "$OSTYPE" == "darwin"* ]]; then
+    alias shutdown='shutdown -hP now'
+    alias reboot='shutdown -r now'
+    alias sleep='shutdown -s now'
+    alias halt='halt -q'
     alias ls='ls -h -G'
+    alias o='open'
     alias unlock_files='chflags -R nouchg *'
-    alias update-all='brew update && brew upgrade && vim +BundleUpdate +qall'
+    alias update_all='brew update && brew upgrade && fresh update'
 fi
