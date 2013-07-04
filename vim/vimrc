@@ -8,10 +8,9 @@ filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'hallison/vim-markdown.git'
 Bundle 'jcf/vim-latex'
+Bundle 'jnurmine/Zenburn'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'Lokaltog/vim-easymotion'
@@ -49,9 +48,8 @@ set mouse=a                     " Allow mouse to copy/paste/scroll
 
 """ Appearance
 syntax on                       " Syntax highlighting
-set t_Co=16                     " 16 colors
-set background=dark             " Dark backgrounds rock
-colorscheme solarized           " Thank you Ethan Schoonover
+set t_Co=256                    " 256 colors
+colors zenburn                  " Zenburn colors
 set laststatus=2                " Enable Powerline
 set ruler                       " Show position of cursor
 set showmatch                   " Show matching parenthesis
