@@ -1,6 +1,5 @@
 fresh andschwa/fresh bin/fresh --bin
 fresh andschwa/oh-my-zsh . --file=~/.oh-my-zsh/
-fresh andschwa/emacs . --file=~/.emacs.d/
 fresh aliases/aliases.zsh
 fresh bin/git-mirror-dropbox --bin
 fresh git/gitconfig --file
