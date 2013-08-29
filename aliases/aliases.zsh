@@ -1,5 +1,5 @@
 # emacs
-alias e='emacsclient -t'
+alias e='emacsclient -n'
 alias ec='emacsclient -c -n'
 
 # misc
