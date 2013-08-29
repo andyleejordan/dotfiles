@@ -1,14 +1,14 @@
 [user]
-	email = andrew.schwartzmeyer@gmail.com
+	email = andrew@schwartzmeyer.com
 	name = Andrew Schwartzmeyer
 [core]
-	editor = vim
+	editor = "emacsclient -n"
 	excludesfile = ~/.gitignore_global
 [merge]
-	tool = vimdiff
+	tool = emerge
 [color]
 	ui = true
 [push]
 	default = simple
 [alias]
-    backup = push --mirror backup
+        backup = push --mirror backup
