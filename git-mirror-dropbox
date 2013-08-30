@@ -7,7 +7,7 @@ set -e
 
 mirror_dropbox() {
   repo=$(basename -s .git $(pwd))
-  dropbox=~/Dropbox/Documents/Code/.gitrepos
+  dropbox=~/Dropbox/Archive/.gitrepos
   git clone --bare ./.git/ ${dropbox}/${repo}
   git remote add backup ${dropbox}/${repo}
   git push backup --mirror
