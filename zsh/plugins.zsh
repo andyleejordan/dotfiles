@@ -17,7 +17,7 @@ plugins=(
     wakeonlan)
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    plugins+=(debian gnu-colors)
+    plugins+=(debian)
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     plugins+=(brew copydir copyfile osx)
 fi
