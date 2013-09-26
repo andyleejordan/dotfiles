@@ -2,7 +2,7 @@
 	email = andrew@schwartzmeyer.com
 	name = Andrew Schwartzmeyer
 [core]
-	editor = "emacsclient -n"
+	editor = "emacsclient -c"
 	excludesfile = ~/.gitignore_global
 [merge]
 	tool = emerge
