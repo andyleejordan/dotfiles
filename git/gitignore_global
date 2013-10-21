@@ -43,6 +43,10 @@
 *.dvi
 *.pdf
 
+# Emacs
+\#*#
+.#*
+
 # Vim
 tags
 .netrwhist
