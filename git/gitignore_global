@@ -58,6 +58,11 @@ Icon
 .Spotlight-V100
 .Trashes
 
+# BitTorrent Sync
+.SyncArchive
+.SyncID
+.SyncIgnore
+
 # Common repo scripts
 apply.sh
 push.sh
