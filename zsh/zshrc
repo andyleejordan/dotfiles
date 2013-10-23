@@ -19,3 +19,6 @@ source $ZSH/oh-my-zsh.sh
 limit coredumpsize 0
 setopt menu_complete
 setopt no_beep
+
+# boxen
+[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
