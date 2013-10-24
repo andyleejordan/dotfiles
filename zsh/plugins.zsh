@@ -11,7 +11,6 @@ plugins=(
     mercurial
     ruby
     rsync
-    tmux
     url-tools
     virtualenvwrapper
     wakeonlan)
