@@ -1,15 +1,14 @@
 # Setup environment
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    export PATH="~bin:/usr/local/bin:/usr/local/share/python:$PATH:."
+    export PATH="~/bin:/usr/local/bin:$PATH:."
 elif [[ "$OSTYPE" == darwin* ]]; then
-    export PATH="~/bin:/usr/local/bin:/usr/local/sbin:$PATH:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems:/usr/local/share/npm/bin:."
+    export PATH="~/bin:/usr/local/bin:$PATH:."
 fi
 
-ZSH="$HOME/.oh-my-zsh" # Point to location of oh-my-zsh
-TERM="xterm-256color" # Fixes color issues
+ZSH="$HOME/.oh-my-zsh"
+TERM="xterm-256color"
 DISABLE_AUTO_UPDATE=true
 ZSH_THEME="ys"
-DEFAULT_USER="andrew" # Used for agnoster
 EDITOR="emacsclient -c"
 
 source ~/.fresh/build/shell.sh
