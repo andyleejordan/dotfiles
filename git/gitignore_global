@@ -65,6 +65,7 @@ Icon
 .SyncArchive
 .SyncID
 .SyncIgnore
+.!sync
 
 # Common repo scripts
 apply.sh
