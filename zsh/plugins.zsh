@@ -1,17 +1,22 @@
 plugins=(
+    bower
+    bundler
     cp
     extract
     fortune
     gem
     git
     gpg-agent
-    history
-    pip
-    python
+    heroku
+    history-ag
+    jump
     mercurial
-    ruby
+    npm
+    pip
     rsync
-    url-tools
+    themes
+    vagrant
+    virtualenv
     virtualenvwrapper
     wakeonlan)
 
