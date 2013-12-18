@@ -29,8 +29,8 @@
 
 # Logs and databases 
 *.log
-*.sql
 *.sqlite
+*.db
 
 # Images
 *.jp*g
@@ -67,7 +67,3 @@ Icon
 .SyncID
 .SyncIgnore
 *.!sync
-
-# Common repo scripts
-apply.sh
-push.sh
