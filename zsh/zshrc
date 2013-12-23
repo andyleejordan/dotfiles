@@ -20,4 +20,4 @@ setopt menu_complete
 setopt no_beep
 
 # boxen
-[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+# [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
