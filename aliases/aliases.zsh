@@ -37,7 +37,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     alias chown='chown --preserve-root'
     alias chmod='chmod --preserve-root'
     alias chgrp='chgrp --preserve-root'
-    alias pup='sudo $apt_pref update -y && sudo #apt_pref upgrade -y && fresh update'
+    alias pup='sudo $apt_pref update -y && sudo $apt_pref upgrade -y && fresh update'
     alias pag='$apt_pref search'
     alias pcl='sudo $apt_pref autoclean'
     alias pi='sudo $apt_pref install'
