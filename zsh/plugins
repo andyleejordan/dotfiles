@@ -1,6 +1,4 @@
 plugins=(
-    bower
-    bundler
     cp
     extract
     fortune
@@ -10,8 +8,6 @@ plugins=(
     heroku
     history-ag
     jump
-    mercurial
-    npm
     pip
     rsync
     themes
@@ -19,9 +15,3 @@ plugins=(
     virtualenv
     virtualenvwrapper
     wakeonlan)
-
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    plugins+=()
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    plugins+=(brew copydir copyfile osx)
-fi

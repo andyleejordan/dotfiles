@@ -1,0 +1,25 @@
+if [[ -e $( which -p aptitude 2>&1 ) ]]; then
+    apt_pref='aptitude'
+else
+    apt_pref='apt-get'
+fi
+
+alias shutdown='shutdown -P now'
+alias reboot='shutdown -r now'
+alias halt='halt -P'
+alias egrep='egrep --color=auto'
+alias ls='ls -h --color=auto'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -I'                    # 'rm -i' prompts for every file
+alias ln='ln -i'
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+alias pup='sudo $apt_pref update && sudo $apt_pref upgrade -y && pcl && fresh update'
+alias pag='$apt_pref search'
+alias pcl='sudo $apt_pref autoclean'
+alias pi='sudo $apt_pref install'
+alias pr='sudo $apt_pref purge'
+alias dia='sudo dpkg -i ./*.deb'
+alias di='sudo dpkg -i'

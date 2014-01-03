@@ -1,0 +1,27 @@
+# emacs
+alias e='emacsclient -n'
+alias ec='emacsclient -c -n'
+alias et='emacsclient -t'
+
+# misc
+alias more='less'
+alias df='df -h'
+alias du='du -c -h'
+alias ping='ping -c 5'
+alias root='sudo su'
+
+# ls
+alias lr='ls -R'                    # recursive ls
+alias ll='ls -l'
+alias la='ls -A'
+alias lz='ll -rS'                   # sort by size
+alias lt='ll -rt'                   # sort by date
+alias lm='la | less'
+
+# power
+alias shutdown='sudo shutdown -hP now'
+alias reboot='sudo reboot now'
+
+# disk usage
+alias du='du -h'
+alias dut='du -c'

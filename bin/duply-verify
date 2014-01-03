@@ -1,0 +1,6 @@
+#!/bin/bash
+export PATH=/usr/local/bin:$PATH
+ulimit -n 1024
+source ~/.backuppass
+duply slartibartfast verify_purge --force
+duply krikkit verify_purge --force

@@ -1,0 +1,5 @@
+#!/bin/bash
+export PATH=/usr/local/bin:$PATH
+ulimit -n 1024
+source ~/.backuppass
+caffeinate -s nice duply $1 backup

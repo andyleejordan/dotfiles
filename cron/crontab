@@ -1,3 +1,3 @@
-30 */6 * * * (source ~/.backupenv; nice duply slartibartfast backup)
-0 * * * * (source ~/.backupenv; nice duply krikkit backup)
-0 1 */4 * * (source ~/.backupenv; duply slartibartfast verify_purge --force; duply krikkit verify_purge --force)
+30 */6 * * * ~/bin/duply-backup slartibartfast
+0 * * * * ~/bin/duply-backup krikkit
+0 1 */4 * * ~/bin/duply-verify
