@@ -1,0 +1,13 @@
+GPG_KEY='A5BF0243'
+GPG_PW=''
+GPG_OPTS='--use-agent'
+TARGET='rsync://andrew@slartibartfast.schwartzmeyer.com//mnt/backup'
+SOURCE='/Users/andrew'
+FILENAME='.duplicity-ignore'
+DUPL_PARAMS="$DUPL_PARAMS --exclude-if-present '$FILENAME'"
+MAX_AGE=8M
+MAX_FULL_BACKUPS=4
+MAX_FULLS_WITH_INCRS=2
+MAX_FULLBKP_AGE=2M
+DUPL_PARAMS="$DUPL_PARAMS --full-if-older-than $MAX_FULLBKP_AGE " 
+VERBOSITY=2

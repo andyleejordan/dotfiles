@@ -1,0 +1,11 @@
+GPG_KEY='A5BF0243'
+GPG_PW=''
+GPG_OPTS='--use-agent'
+TARGET='rsync://andrew@krikkit.schwartzmeyer.com/backup'
+SOURCE='~/Documents'
+FILENAME='.duplicity-ignore'
+DUPL_PARAMS="$DUPL_PARAMS --exclude-if-present '$FILENAME'"
+MAX_AGE=2M
+MAX_FULL_BACKUPS=1
+MAX_FULLS_WITH_INCRS=1
+VERBOSITY=2

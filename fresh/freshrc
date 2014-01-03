@@ -2,6 +2,8 @@ fresh andschwa/fresh bin/fresh --bin
 fresh andschwa/oh-my-zsh . --file=~/.oh-my-zsh/
 fresh aliases/aliases.zsh
 fresh bin/git-mirror-dropbox --bin
+fresh cron/crontab --file
+fresh duply --file=~/.duply/
 fresh git/gitconfig --file
 fresh git/gitignore_global --file
 fresh zsh/plugins.zsh

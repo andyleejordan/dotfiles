@@ -1,0 +1,3 @@
+30 */6 * * * (source ~/.gnupg/gpg-agent.env; PATH=/usr/local/bin:$PATH; ulimit -n 1024; nice duply slartibartfast backup)
+0 * * * * (source ~/.gnupg/gpg-agent.env; PATH=/usr/local/bin:$PATH; ulimit -n 1024; nice duply krikkit backup)
+0 1 */4 * * (source ~/.gnupg/gpg-agent.env; PATH=/usr/local/bin:$PATH; duply slartibartfast verify_purge --force; duply krikkit verify_purge --force)
