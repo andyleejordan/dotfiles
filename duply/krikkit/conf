@@ -1,6 +1,5 @@
 GPG_KEY='A5BF0243'
-GPG_PW=''
-GPG_OPTS='--use-agent'
+GPG_PW=$PASSPHRASE
 TARGET='rsync://andrew@krikkit.schwartzmeyer.com/backup'
 SOURCE='~/Documents'
 FILENAME='.duplicity-ignore'

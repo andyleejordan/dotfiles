@@ -1,6 +1,5 @@
 GPG_KEY='A5BF0243'
-GPG_PW=''
-GPG_OPTS='--use-agent'
+GPG_PW=$PASSPHRASE
 TARGET='rsync://andrew@slartibartfast.schwartzmeyer.com//mnt/backup'
 SOURCE='/Users/andrew'
 FILENAME='.duplicity-ignore'
