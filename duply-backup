@@ -1,5 +1,15 @@
 #!/bin/bash
+LOCK=~/.duply/$1.lock
 export PATH=/usr/local/bin:$PATH
 ulimit -n 1024
 source ~/.backuppass
-caffeinate -s nice duply $1 backup
+
+if lockfile -600 -r 3 $LOCK; then
+    if (pmset -g ps | grep AC); then
+	caffeinate -s nice duply $1 backup
+	STATUS=$?
+    else STATUS=0
+    fi
+    rm -f $LOCK
+fi
+exit STATUS
