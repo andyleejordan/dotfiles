@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+from os import symlink, walk
+from os.path import basename, dirname, join
+
+if __name__ == '__main__':
+    for root, dirs, files in walk('/Users/andrew/Documents'):
+        for file_ in files:
+            name = join(root, file_)
+            if name.endswith('org'):
+                ignore_list = ('#', 'web', 'archive', 'assignment', 'midterm',
+                               'write-up', 'write_up', 'phase', 'presentation')
+                if any(ignore in name for ignore in ignore_list):
+                    print("Ignored {}".format(name))
+                    continue
+                else:
+                    rename = basename(name)
+                    print("Linking {} as {}".format(name, rename))
+                symlink(name, '/Users/andrew/.org/'+rename)
