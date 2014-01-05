@@ -1,0 +1,17 @@
+plugins=(
+    cp
+    extract
+    fortune
+    gem
+    git
+    gpg-agent
+    heroku
+    history-ag
+    jump
+    pip
+    rsync
+    themes
+    vagrant
+    virtualenv
+    virtualenvwrapper
+    wakeonlan)

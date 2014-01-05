@@ -1,0 +1,8 @@
+# Setup environment
+export PATH="~/bin:/usr/local/bin:$PATH:."
+
+TERM="xterm-256color"
+EDITOR="emacsclient -c"
+
+# rvm setup
+source ~/.rvm/scripts/rvm
