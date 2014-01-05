@@ -1,1 +1,0 @@
-plugins+=(brew copydir copyfile osx)

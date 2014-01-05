@@ -1,3 +1,0 @@
-30 */6 * * * ~/bin/duply-backup slartibartfast
-0 * * * * ~/bin/duply-backup krikkit
-0 1 */4 * * ~/bin/duply-verify
