@@ -5,4 +5,7 @@ TERM="xterm-256color"
 EDITOR="emacsclient -c"
 
 # rvm setup
-source ~/.rvm/scripts/rvm
+rvm=~/.rvm/scripts/rvm
+if [ -e $rvm ]; then
+    source $rvm
+fi
