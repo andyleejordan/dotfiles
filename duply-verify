@@ -1,11 +1,15 @@
 #!/bin/bash
-LOCK=~/.duply/verify.lock
+lockfile=~/.duply/verify.lock
 export PATH=/usr/local/bin:$PATH
 ulimit -n 1024
-source ~/.backuppass
 
-if lockfile -600 -r 3 $LOCK; then
+if [ ! -e $lockfile ]; then
+    trap "rm -f $lockfile; exit" INT TERM EXIT
+    touch $lockfile
     duply slartibartfast verify_purge --force
     duply krikkit verify_purge --force
-    rm -f $LOCK
+    rm $lockfile
+    trap - INT TERM EXIT
+else
+    echo "duply-backup $1 is already running"
 fi

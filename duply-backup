@@ -2,7 +2,6 @@
 lockfile=~/.duply/$1.lock
 export PATH=/usr/local/bin:$PATH
 ulimit -n 1024
-source ~/.backuppass
 
 if [ ! -e $lockfile ]; then
     trap "rm -f $lockfile; exit" INT TERM EXIT
