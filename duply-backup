@@ -6,7 +6,7 @@ ulimit -n 1024
 if [ ! -e $lockfile ]; then
     trap "rm -f $lockfile; exit" INT TERM EXIT
     touch $lockfile
-    if (which pmset && which caffeinate); then
+    if (hash pmset 2>/dev/null && hash caffeinate 2>/dev/null); then
 	if (pmset -g ps | grep AC); then
 	    caffeinate -s nice duply "$1" backup
 	fi
