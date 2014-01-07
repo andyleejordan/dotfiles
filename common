@@ -1,11 +1,17 @@
 # Setup environment
-export PATH="~/bin:/usr/local/bin:$PATH:."
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="$1:$PATH"
+    fi
+}
+paths=("$HOME/bin" "/usr/local/bin")
+pathadd paths
 
 TERM="xterm-256color"
 EDITOR="emacsclient -c"
 
 # rvm setup
-rvm=~/.rvm/scripts/rvm
+rvm="$HOME/.rvm/scripts/rvm"
 if [ -e $rvm ]; then
     source $rvm
 fi
