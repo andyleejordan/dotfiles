@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-from os import symlink, walk
+#
+# Copyright 2014 Andrew Schwartzmeyer
+
+from os import environ, symlink, walk
 from os.path import basename, dirname, join
 
 if __name__ == '__main__':
-    for root, dirs, files in walk('/Users/andrew/Documents'):
+    for root, dirs, files in walk(environ['HOME']+'/Documents'):
         for file_ in files:
             name = join(root, file_)
             if name.endswith('org'):
@@ -15,4 +18,4 @@ if __name__ == '__main__':
                 else:
                     rename = basename(name)
                     print("Linking {} as {}".format(name, rename))
-                symlink(name, '/Users/andrew/.org/'+rename)
+                symlink(name, environ['HOME']+'/.org/'+rename)
