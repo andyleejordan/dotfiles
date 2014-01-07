@@ -1,15 +1,5 @@
 #!/bin/bash
-lockfile=~/.duply/verify.lock
-export PATH=/usr/local/bin:$PATH
+set -o errexit -o nounset -o xtrace
 ulimit -n 1024
 
-if [ ! -e $lockfile ]; then
-    trap "rm -f $lockfile; exit" INT TERM EXIT
-    touch $lockfile
-    duply slartibartfast verify_purge --force
-    duply krikkit verify_purge --force
-    rm $lockfile
-    trap - INT TERM EXIT
-else
-    echo "duply-backup $1 is already running"
-fi
+alone battery-safe nice duply "$1" verify_purge
