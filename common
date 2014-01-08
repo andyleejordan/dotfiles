@@ -1,11 +1,14 @@
 # Setup environment
-pathadd() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        PATH="$1:$PATH"
-    fi
+path_front() {
+    # removes arg from PATH and removes extraneous colons
+    PATH=$(echo $PATH | sed -e "s,$1,,g" -e 's/::/:/g' \
+	-e 's/^://' -e 's/:$//')
+    # adds arg to front of PATH if it is as directory
+    if [ -d "$1" ]; then PATH="$1:$PATH"; fi
 }
-paths=("$HOME/bin" "/usr/local/bin")
-pathadd paths
+
+paths=("/usr/local/bin" "$HOME/bin")
+path_front $paths
 
 TERM="xterm-256color"
 EDITOR="emacsclient -c"
