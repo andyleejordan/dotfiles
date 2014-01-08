@@ -1,8 +1,0 @@
-#!/bin/bash
-#
-# Copyright 2014 Andrew Schwartzmeyer
-
-set -o errexit -o nounset -o xtrace
-ulimit -n 1024
-
-alone battery-safe nice duply "$1" verify_purge
