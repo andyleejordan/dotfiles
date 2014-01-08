@@ -9,5 +9,5 @@ if (hash pmset 2>/dev/null && hash caffeinate 2>/dev/null); then
       	exit
     fi
 else 
-    eval $@
+    eval "$@"
 fi
