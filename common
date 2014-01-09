@@ -15,6 +15,8 @@ EDITOR="emacsclient -c"
 
 # rvm setup
 rvm="$HOME/.rvm/scripts/rvm"
-if [ -e $rvm ]; then
-    source $rvm
-fi
+if [ -e $rvm ]; then source $rvm; fi
+
+# home brew API
+brew_token="$HOME/.homebrew"
+if [ -e $brew_token ]; then source $brew_token; fi
