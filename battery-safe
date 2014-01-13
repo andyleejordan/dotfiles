@@ -1,5 +1,8 @@
 #!/bin/bash
-set -o errexit -o nounset
+
+# Copyright 2014 Andrew Schwartzmeyer
+
+set -eu
 
 if (hash pmset 2>/dev/null && hash caffeinate 2>/dev/null); then
     if (pmset -g ps | grep AC); then
