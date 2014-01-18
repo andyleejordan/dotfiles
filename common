@@ -20,3 +20,6 @@ if [ -e $rvm ]; then source $rvm; fi
 # home brew API
 brew_token="$HOME/.homebrew"
 if [ -e $brew_token ]; then source $brew_token; fi
+
+# boxen
+[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
