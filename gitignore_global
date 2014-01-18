@@ -61,9 +61,3 @@ Icon
 ._*
 .Spotlight-V100
 .Trashes
-
-# BitTorrent Sync
-.SyncArchive
-.SyncID
-.SyncIgnore
-*.!sync
