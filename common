@@ -1,15 +1,4 @@
 # Setup environment
-path_front() {
-    # removes arg from PATH and removes extraneous colons
-    PATH=$(echo $PATH | sed -e "s,$1,,g" -e 's/::/:/g' \
-	-e 's/^://' -e 's/:$//')
-    # adds arg to front of PATH if it is as directory
-    if [ -d "$1" ]; then PATH="$1:$PATH"; fi
-}
-
-paths=("/usr/local/bin" "$HOME/bin")
-path_front $paths
-
 TERM="xterm-256color"
 EDITOR="emacsclient -c"
 
@@ -23,3 +12,15 @@ if [ -e $brew_token ]; then source $brew_token; fi
 
 # boxen
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+
+# add paths (if need be)
+path_front() {
+    # removes arg from PATH and removes extraneous colons
+    PATH=$(echo $PATH | sed -e "s,$1,,g" -e 's/::/:/g' \
+	-e 's/^://' -e 's/:$//')
+    # adds arg to front of PATH if it is as directory
+    if [ -d "$1" ]; then PATH="$1:$PATH"; fi
+}
+
+paths=("/usr/local/bin" "$HOME/bin")
+path_front $paths
