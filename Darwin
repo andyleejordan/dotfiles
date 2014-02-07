@@ -1,3 +1,4 @@
+alias emacs="open -a /Applications/Emacs.app $1"
 alias sleep='shutdown -s now'
 alias ls='ls -h -G'
 alias o='open'
