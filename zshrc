@@ -1,5 +1,4 @@
 ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="sorin"
 DISABLE_AUTO_UPDATE=true
 
 source ~/.fresh/build/shell.sh

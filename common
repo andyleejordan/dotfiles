@@ -11,9 +11,12 @@ github_token="$HOME/.github"
 homebrew_token="$HOME/.homebrew"
 [ -e $homebrew_token ] && source $homebrew_token
 
-# boxen setup
+# boxen
 [ -e /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
 # path
 path_front "bin"
 path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "/usr/local/bin" "/usr/texbin" "~/bin"
+
+# prompt
+source ~/.liquidprompt/liquidprompt
