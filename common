@@ -1,25 +1,4 @@
-# functions
-function path_front {
-    for dir; do
-    # removes arg from PATH and removes extraneous colons
-    PATH=$(echo $PATH | sed -E -e "s,(^|:)${dir}(:|$),:,g" \
-	-e "s,(^:)|(:$),,g")
-    # adds arg to front of PATH if it is as directory
-    [ -d ${dir} ] && PATH="${dir}:$PATH"
-    done;
-}
-
-path_front "bin" \
-    "/usr/texbin" \
-    "/usr/local/bin" \
-    "/usr/bin" \
-    "/usr/sbin" \
-    "/bin" \
-    "/sbin" \
-    "~/bin" \
-
-
-# Setup environment
+# environment
 TERM="xterm-256color"
 ALTERNATE_EDITOR=""
 EDITOR="emacsclient -c -n"
@@ -34,3 +13,7 @@ homebrew_token="$HOME/.homebrew"
 
 # boxen setup
 [ -e /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+
+# path
+path_front "bin"
+path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "/usr/local/bin" "/usr/texbin" "~/bin"
