@@ -42,7 +42,6 @@
 *.bbl
 *.blg
 *.dvi
-*.pdf
 
 # Emacs
 \#*#
