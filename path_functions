@@ -1,23 +1,25 @@
 # Function to take array of paths and add them (cleanly) to the front
 function path_front {
+    # Get OS dependent alias to reverse words of a string
+    [[ $(uname) == 'Darwin' ]] && alias reverse='tail -r' || alias reverse='tac'
     # reverse the args so first path is added last (front-most)
-    for dir in $(echo $@ | tr " " "\n" | tail -r); do
+    for dir in $(echo $@ | tr " " "\n" | reverse); do
     # removes arg from PATH and removes extraneous colons
     PATH=$(echo $PATH | sed -E -e "s,(^|:)${dir}(:|$),:,g" \
 	-e "s,(^:)|(:$),,g")
     # adds arg to front of PATH if it is as directory
     [ -d ${dir} ] && PATH="${dir}:$PATH"
-    done;
+    done
 }
 
 # Function to take array of paths and them (cleanly) to the back
 function path_back {
-    # no tail -r here, last path given is added last (very end)
+    # no reverse here, last path given is added last (very end)
     for dir; do
     # removes arg from PATH and removes extraneous colons
     PATH=$(echo $PATH | sed -E -e "s,(^|:)${dir}(:|$),:,g" \
 	-e "s,(^:)|(:$),,g")
     # adds arg to front of PATH if it is as directory
     [ -d ${dir} ] && PATH="$PATH:${dir}"
-    done;
+    done
 }
