@@ -1,8 +1,10 @@
-ZSH="$HOME/.oh-my-zsh"
-DISABLE_AUTO_UPDATE=true
-
+# source common configuration
 source ~/.shrc
-source $ZSH/oh-my-zsh.sh
+
+# prezto
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
 # Zsh configuration
 limit coredumpsize 0
