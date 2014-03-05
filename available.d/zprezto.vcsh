@@ -1,0 +1,2 @@
+[$HOME/.zprezto]
+checkout = git clone 'https://github.com/sorin-ionescu/prezto.git' '.zprezto'

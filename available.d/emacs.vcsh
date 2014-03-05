@@ -1,0 +1,5 @@
+[$HOME/.emacs.d]
+checkout = git clone 'git@github.com:andschwa/emacs.git' '.emacs.d'
+
+[$HOME/.cask]
+checkout = git clone 'git://github.com/cask/cask.git' '.cask'

@@ -1,0 +1,2 @@
+[$HOME/.duply]
+checkout = git clone 'git@suchcodemuchlove.com:dotfiles/duply.git' '.duply'
