@@ -27,6 +27,42 @@ alias reboot='sudo reboot now'
 alias du='du -h'
 alias dut='du -c'
 
+if [[ $OSTYPE == darwin* ]]
+then
+    alias emacs="open -a /Applications/Emacs.app $1"
+    alias sleep='shutdown -s now'
+    alias ls='ls -h -G'
+    alias o='open'
+    alias unlock_files='chflags -R nouchg *'
+    alias pup='brew update && brew upgrade && pcl && fresh update'
+    alias pag='brew search'
+    alias pcl='brew cleanup && brew prune'
+    alias pi='brew install'
+    alias pr='brew uninstall'
+    alias psh='brew info'
+elif [[ $OSTYPE == linux-gnu ]]
+then
+    alias shutdown='sudo shutdown -P now'
+    alias reboot='sudo shutdown -r now'
+    alias halt='sudo halt -P'
+    alias ls='ls -h --color=auto'
+    alias cp='cp -i'
+    alias mv='mv -i'
+    alias rm='rm -I'                    # 'rm -i' prompts for every file
+    alias ln='ln -i'
+    alias chown='chown --preserve-root'
+    alias chmod='chmod --preserve-root'
+    alias chgrp='chgrp --preserve-root'
+    alias pup='sudo aptitude update && sudo aptitude upgrade -y && pcl && fresh update'
+    alias pag='aptitude search'
+    alias pcl='sudo aptitude autoclean'
+    alias pi='sudo aptitude install'
+    alias pr='sudo aptitude purge'
+    alias psh='aptitude show'
+    alias dia='sudo dpkg -i ./*.deb'
+    alias di='sudo dpkg -i'
+fi
+
 ## environment
 TERM="xterm-256color"
 ALTERNATE_EDITOR=""
