@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-
 # Copyright 2014 Andrew Schwartzmeyer
+# Script to symlink all non-ignored org files to ~/.org
 
 from os import environ, symlink, walk
 from os.path import basename, dirname, join
