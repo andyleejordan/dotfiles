@@ -1,7 +1,7 @@
 ZSH="$HOME/.oh-my-zsh"
 DISABLE_AUTO_UPDATE=true
 
-source ~/.fresh/build/shell.sh
+source ~/.shrc
 source $ZSH/oh-my-zsh.sh
 
 # Zsh configuration

@@ -1,1 +1,1 @@
-source ~/.fresh/build/shell.sh
+source ~/.shrc
