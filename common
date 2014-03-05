@@ -1,22 +1,51 @@
-# environment
+## aliases
+# emacs
+alias e='emacsclient -n'
+alias ec='emacsclient -c -n'
+alias et='emacsclient -t'
+
+# misc
+alias more='less'
+alias df='df -h'
+alias du='du -c -h'
+alias ping='ping -c 5'
+alias root='sudo su'
+
+# ls
+alias lr='ls -R'                    # recursive ls
+alias ll='ls -l'
+alias la='ls -A'
+alias lz='ll -rS'                   # sort by size
+alias lt='ll -rt'                   # sort by date
+alias lm='la | less'
+
+# power
+alias shutdown='sudo shutdown -hP now'
+alias reboot='sudo reboot now'
+
+# disk usage
+alias du='du -h'
+alias dut='du -c'
+
+## environment
 TERM="xterm-256color"
 ALTERNATE_EDITOR=""
 EDITOR="emacsclient -c -n"
 
-# GitHub API
+## GitHub API
 github_token="$HOME/.github"
 [ -e $github_token ] && source $github_token
 
-# homebrew GitHub API
+## homebrew GitHub API
 homebrew_token="$HOME/.homebrew"
 [ -e $homebrew_token ] && source $homebrew_token
 
-# boxen
+## boxen
 [ -e /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 
-# path
+## path
 path_front "bin"
 path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "/usr/local/bin" "/usr/texbin" "~/bin"
 
-# prompt
+## prompt
 source ~/.liquidprompt/liquidprompt
