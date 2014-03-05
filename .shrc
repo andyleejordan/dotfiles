@@ -82,7 +82,7 @@ homebrew_token="$HOME/.homebrew"
 ## path
 source ~/.path_edit.sh
 path_front "bin"
-path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "/usr/local/bin" "/usr/texbin" "~/bin"
+path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "/usr/local/bin" "/usr/texbin" "$HOME/bin" "$HOME/.cask/bin"
 
 ## prompt
 source ~/.liquidprompt/liquidprompt
