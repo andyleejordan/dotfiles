@@ -1,7 +1,5 @@
-#!/bin/bash
-
+#!/bin/sh
 # Copyright 2014 Andrew Schwartzmeyer
-
 set -eux
 
 battery-safe nice alone "$@"
