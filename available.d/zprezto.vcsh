@@ -1,2 +1,2 @@
 [$HOME/.zprezto]
-checkout = git clone 'https://github.com/sorin-ionescu/prezto.git' '.zprezto'
+checkout = git clone 'git://github.com/sorin-ionescu/prezto.git' '.zprezto'
