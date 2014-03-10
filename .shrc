@@ -7,46 +7,37 @@ alias et='emacsclient -t'
 # misc
 alias ping='ping -c 8'
 alias root='sudo su'
-alias cppc='cppcheck --enable=all --suppress=missingIncludeSystem .'
-
-# power
-alias shutdown='sudo shutdown -hP now'
-alias reboot='sudo reboot now'
+alias cppc='cppcheck --std=c++11 --enable=all --suppress=missingIncludeSystem .'
 
 if [[ $OSTYPE == darwin* ]]
 then
-    alias emacs="open -a /Applications/Emacs.app $1"
+    # power
+    alias shutdown='sudo shutdown -hP now'
+    alias reboot='sudo reboot now'
     alias sleep='shutdown -s now'
-    alias ls='ls -h -G'
-    alias o='open'
-    alias unlock_files='chflags -R nouchg *'
-    alias pup='brew update && brew upgrade && pcl && fresh update'
+    # packages via homebrew
     alias pag='brew search'
+    alias pup='brew update && brew outdated'
     alias pcl='brew cleanup && brew prune'
     alias pi='brew install'
     alias pr='brew uninstall'
-    alias psh='brew info'
+    alias pin='brew info'
+    # misc
+    alias emacs="open -a /Applications/Emacs.app $1"
+    alias unlock_files='chflags -R nouchg *'
 elif [[ $OSTYPE == linux-gnu ]]
 then
+    # power
     alias shutdown='sudo shutdown -P now'
     alias reboot='sudo shutdown -r now'
     alias halt='sudo halt -P'
-    alias ls='ls -h --color=auto'
-    alias cp='cp -i'
-    alias mv='mv -i'
-    alias rm='rm -I'                    # 'rm -i' prompts for every file
-    alias ln='ln -i'
-    alias chown='chown --preserve-root'
-    alias chmod='chmod --preserve-root'
-    alias chgrp='chgrp --preserve-root'
-    alias pup='sudo aptitude update && sudo aptitude upgrade -y && pcl && fresh update'
     alias pag='aptitude search'
+    alias pup='sudo aptitude update && sudo aptitude upgrade'
     alias pcl='sudo aptitude autoclean'
     alias pi='sudo aptitude install'
     alias pr='sudo aptitude purge'
-    alias psh='aptitude show'
-    alias dia='sudo dpkg -i ./*.deb'
-    alias di='sudo dpkg -i'
+    alias pin='aptitude show'
+    alias debi='sudo dpkg -i'
 fi
 
 ## environment
