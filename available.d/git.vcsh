@@ -1,2 +1,6 @@
 [$HOME/.config/vcsh/repo.d/git.git]
-checkout = vcsh clone 'git@suchcodemuchlove.com:dotfiles/git.git' 'git'
+checkout	= vcsh clone 'git@suchcodemuchlove.com:dotfiles/git.git' 'git'
+update		= vcsh git pull
+push		= vcsh git push
+status		= vcsh git status
+gc		= vcsh git gc
