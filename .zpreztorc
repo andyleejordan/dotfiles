@@ -11,10 +11,12 @@ zstyle ':prezto:load' pmodule \
     'terminal' \
     'editor' \
     'history' \
+    'history-substring-search' \
     'directory' \
     'spectrum' \
     'utility' \
     'completion' \
+    'syntax-highlighting' \
     'prompt'
 
 # Set the key mapping style to 'emacs' or 'vi'.
