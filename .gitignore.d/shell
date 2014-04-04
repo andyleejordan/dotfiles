@@ -1,0 +1,9 @@
+*
+!/.bashrc
+!/.gitignore.d
+!/.gitignore.d/shell
+!/.path_edit.sh
+!/.shrc
+!/.zpreztorc
+!/.zprofile
+!/.zshrc
