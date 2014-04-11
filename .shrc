@@ -56,12 +56,9 @@ github_token="$HOME/.github"
 homebrew_token="$HOME/.homebrew"
 [ -e $homebrew_token ] && source $homebrew_token
 
-## boxen
-[ -e /opt/boxen/env.sh ] && source /opt/boxen/env.sh
-
 ## path
 source ~/.path_edit.sh
-path_front "bin" "$HOME/bin" "/usr/local/bin"
+path_front "bin" "$HOME/bin" "/usr/local/bin" "$HOME/.rbenv/bin"
 path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin"
 
 if [[ $OSTYPE == darwin* ]]
@@ -71,6 +68,9 @@ elif [[ $OSTYPE == linux-gnu ]]
 then
     path_back "$HOME/.cask/bin"
 fi
+
+## rbenv
+eval "$(rbenv init -)"
 
 ## prompt
 source ~/.liquidprompt/liquidprompt
