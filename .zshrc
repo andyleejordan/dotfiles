@@ -1,7 +1,6 @@
 # prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+prezto_init="${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+[[ -s $prezto_init ]] && [[ $TERM != "dumb" ]] && source $prezto_init
 
 # source common configuration
 source ~/.shrc

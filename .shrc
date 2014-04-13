@@ -50,11 +50,11 @@ alias e=$EDITOR
 
 ## GitHub API
 github_token="$HOME/.github"
-[ -e $github_token ] && source $github_token
+[[ -e $github_token ]] && source $github_token
 
 ## homebrew GitHub API
 homebrew_token="$HOME/.homebrew"
-[ -e $homebrew_token ] && source $homebrew_token
+[[ -e $homebrew_token ]] && source $homebrew_token
 
 ## path
 source ~/.path_edit.sh
@@ -73,4 +73,4 @@ fi
 eval "$(rbenv init -)"
 
 ## prompt
-[[ $TERM = "dumb" ]] || source ~/.liquidprompt/liquidprompt
+[[ $TERM != "dumb" ]] && source ~/.liquidprompt/liquidprompt
