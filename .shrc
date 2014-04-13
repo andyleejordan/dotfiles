@@ -73,4 +73,4 @@ fi
 eval "$(rbenv init -)"
 
 ## prompt
-source ~/.liquidprompt/liquidprompt
+[[ $TERM = "dumb" ]] || source ~/.liquidprompt/liquidprompt
