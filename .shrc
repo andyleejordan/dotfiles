@@ -13,7 +13,6 @@ then
     alias sleep='shutdown -s now'
 
     # packages via homebrew
-    alias brew='brew -v'
     alias pag='brew search'
     alias pup='brew update && brew upgrade'
     alias pcl='brew cleanup && brew prune'
