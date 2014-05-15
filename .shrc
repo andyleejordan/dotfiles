@@ -70,7 +70,7 @@ then
 fi
 
 ## rbenv
-eval "$(rbenv init -)"
+[[ -e "$HOME/.rbenv" ]] && eval "$(rbenv init -)"
 
 ## prompt
 [[ $TERM != "dumb" ]] && source ~/.liquidprompt/liquidprompt
