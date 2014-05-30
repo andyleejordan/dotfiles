@@ -15,3 +15,5 @@
         backup = push --mirror backup
 [commit]
 	gpgsign = true
+[pull]
+	ff = true
