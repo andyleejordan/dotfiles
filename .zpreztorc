@@ -7,6 +7,7 @@ zstyle ':prezto:load' pmodule \
     'archive' \
     'emacs' \
     'git' \
+    'gpg' \
     'environment' \
     'terminal' \
     'editor' \
