@@ -1,6 +1,7 @@
 [user]
 	email = andrew@schwartzmeyer.com
 	name = Andrew Schwartzmeyer
+	signingkey = A84A216F
 [core]
 	editor = "emacsclient -c"
 	excludesfile = ~/.gitignore_global
@@ -12,3 +13,5 @@
 	default = simple
 [alias]
         backup = push --mirror backup
+[commit]
+	gpgsign = true
