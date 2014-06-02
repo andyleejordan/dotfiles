@@ -69,8 +69,10 @@ then
     path_back "$HOME/.cask/bin"
 fi
 
+[[ -e ~/.localrc ]] && source ~/.localrc
+
 ## rbenv
-[[ -e "$HOME/.rbenv" ]] && eval "$(rbenv init -)"
+[[ -e ~/.rbenv ]] && eval "$(rbenv init -)"
 
 ## prompt
 [[ $TERM != "dumb" ]] && source ~/.liquidprompt/liquidprompt
