@@ -41,11 +41,11 @@ then
     alias debi='sudo dpkg -i'
 
     ## editor
-    ALTERNATE_EDITOR=''
+    ALTERNATE_EDITOR='nano'
 fi
 
 # editor
-EDITOR="emacsclient -c -n -a $ALTERNATE_EDITOR"
+EDITOR="emacsclient -n -a $ALTERNATE_EDITOR"
 alias e=$EDITOR
 
 ## GitHub API
@@ -69,8 +69,10 @@ then
     path_back "$HOME/.cask/bin"
 fi
 
+[[ -e ~/.localrc ]] && source ~/.localrc
+
 ## rbenv
-[[ -e "$HOME/.rbenv" ]] && eval "$(rbenv init -)"
+[[ -e ~/.rbenv ]] && eval "$(rbenv init -)"
 
 ## prompt
 [[ $TERM != "dumb" ]] && source ~/.liquidprompt/liquidprompt
