@@ -75,4 +75,4 @@ fi
 [[ -e ~/.rbenv ]] && eval "$(rbenv init -)"
 
 ## prompt
-[[ $TERM != "dumb" ]] && source ~/.liquidprompt/liquidprompt
+[[ $TERM != "dumb" ]] && [[ -e ~/.liquidprompt/ ]] && source ~/.liquidprompt/liquidprompt
