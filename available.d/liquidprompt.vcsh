@@ -1,2 +1,2 @@
 [$HOME/.liquidprompt]
-checkout = git clone 'git://github.com/nojhan/liquidprompt.git' '.liquidprompt'
+checkout = git clone --recursive 'git://github.com/nojhan/liquidprompt.git' '.liquidprompt'
