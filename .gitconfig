@@ -17,3 +17,5 @@
 	gpgsign = true
 [pull]
 	ff = true
+[rerere]
+	enabled = true
