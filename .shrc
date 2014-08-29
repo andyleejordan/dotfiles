@@ -48,6 +48,9 @@ fi
 EDITOR="emacsclient -n -a $ALTERNATE_EDITOR"
 alias e=$EDITOR
 
+# less options
+export LESS='-F -g -i -M -R -S -w -z-4'
+
 ## GitHub API
 github_token="$HOME/.github"
 [[ -e $github_token ]] && source $github_token
