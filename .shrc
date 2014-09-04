@@ -72,7 +72,16 @@ then
     path_back "$HOME/.cask/bin"
 fi
 
+## local settings
 [[ -e ~/.localrc ]] && source ~/.localrc
+
+## gpg-agent
+if [ -f "$HOME/.gpg-agent-info" ]; then
+    source "$HOME/.gpg-agent-info"
+    export GPG_AGENT_INFO
+    export SSH_AUTH_SOCK
+fi
+export GPG_TTY=$(tty)
 
 ## rbenv
 [[ -e ~/.rbenv ]] && eval "$(rbenv init -)"
