@@ -1,0 +1,20 @@
+* Andrew Schwartzmeyer's Scripts
+** Mine
+These scripts are licensed under the AGPLv3.
+
+- =alone= is a command lock mechanism
+- =battery-safe= runs a command only if on AC power
+- =dotfiles= is a script to bootstrap my dotfiles (install vcsh and
+  myrepos, and perform a mr checkout)
+- =org-link= is a script to symlink all non-ignored Emacs =org-mode=
+  files found in recursive search of a given base directory to a given
+  target directory
+- =polite= chains =battery-safe nice alone=
+
+** Others'
+For convenience, I keep local copies of the following external scripts
+in my =~/bin= folder:
+
+- [[http://habilis.net/cronic/][cronic]] is a cure for Cron's chronic email problem
+- [[http://duply.net/][duply]] is a duplicity backup profile manager
+- [[http://myrepos.branchable.com/][mr]] is a tool to manage all your version control repositories
