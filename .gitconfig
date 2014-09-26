@@ -13,9 +13,9 @@
 	default = simple
 [alias]
         backup = push --mirror backup
-[commit]
-	gpgsign = true
 [pull]
 	ff = true
 [rerere]
 	enabled = true
+[include]
+	path = ~/.gitconfig_local
