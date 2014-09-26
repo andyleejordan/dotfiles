@@ -34,6 +34,14 @@
 #
 #
 #  CHANGELOG:
+#  1.9.0 (24.8.2014)
+#  - bugfix: env vars were not exported when external script was executable
+#  - rework GPG_KEY handling, allow virtually anything now (uid, keyid etc.) 
+#    see gpg manpage, section "How to specify a user ID"
+#    let gpg complain when the delivered values are invalid for whatever reason
+#  - started to rework tmp space checking, exposed folder & writable check
+#    TODO: reimplement enough file space available checking
+#
 #  1.8.0 (13.7.2014)
 #  - add command verifyPath to expose 'verify --file-to-restore' action
 #  - add time parameter support to verify command
@@ -354,7 +362,7 @@
 ME_LONG="$0"
 ME="$(basename $0)"
 ME_NAME="${ME%%.*}"
-ME_VERSION="1.8.0"
+ME_VERSION="1.9.0"
 ME_WEBSITE="http://duply.net"
 
 # default config values
@@ -564,8 +572,8 @@ TIME FORMATS:
     1h78m (interval, 1 hour 78 minutes ago)
 
 PRE/POST SCRIPTS:
-  All internal duply variables will be readable in the scripts.
-  Some of interest might be
+  Useful internal duply variables will be readable in the scripts.
+  Some of interest may be
 
     CONFDIR, SOURCE, TARGET_URL_<PROT|HOSTPATH|USER|PASS>, 
     GPG_<KEYS_ENC|KEY_SIGN|PW>, CMD_<PREV|NEXT>
@@ -626,20 +634,24 @@ function create_config {
     cat <<EOF >"$CONF"
 # gpg encryption settings, simple settings:
 #  GPG_KEY='disabled' - disables encryption alltogether
-#  GPG_KEY='<key1>[,<key2>]'; GPG_PW='pass' - encrypt with keys, sign 
-#    with key1 if secret key available and use GPG_PW for sign & decrypt
+#  GPG_KEY='<key1>[,<key2>]'; GPG_PW='pass' - encrypt with keys,
+#   sign if secret key of key1 is available use GPG_PW for sign & decrypt
+#  Note: you can specify keys via all methods described in gpg manpage,
+#        section "How to specify a user ID", escape commas (,) via backslash (\)
+#        e.g. 'Mueller, Horst', 'Bernd' -> 'Mueller\, Horst, Bernd'
+#        as they are used to separate the entries
 #  GPG_PW='passphrase' - symmetric encryption using passphrase only
 GPG_KEY='${DEFAULT_GPG_KEY}'
 GPG_PW='${DEFAULT_GPG_PW}'
 # gpg encryption settings in detail (extended settings)
 #  the above settings translate to the following more specific settings
-#  GPG_KEYS_ENC='<keyid1>,[<keyid2>,...]' - list of pubkeys to encrypt to
+#  GPG_KEYS_ENC='<keyid1>[,<keyid2>,...]' - list of pubkeys to encrypt to
 #  GPG_KEY_SIGN='<keyid1>|disabled' - a secret key for signing
 #  GPG_PW='<passphrase>' - needed for signing, decryption and symmetric
 #   encryption. If you want to deliver different passphrases for e.g. 
 #   several keys or symmetric encryption plus key signing you can use
-#   gpg-agent. Add '--use-agent' to the duplicity parameters below.
-#   also see "A NOTE ON SYMMETRIC ENCRYPTION AND SIGNING" in duplicity manpage
+#   gpg-agent. Simply make sure that GPG_AGENT_INFO is set in environment.
+#   also see "A NOTE ON SYMMETRIC ENCRYPTION AND SIGNING" in duplicity manpage 
 # notes on en/decryption
 #  private key and passphrase will only be needed for decryption or signing.
 #  decryption happens on restore and incrementals (compare archdir contents).
@@ -882,13 +894,12 @@ Hint${hint:+s}:
 "
 }
 
-# TODO
 function error_gpg_key {
-  local KEY_ID=$1
-  local KIND=$2
+  local KEY_ID="$1"
+  local KIND="$2"
   error_gpg "${KIND} gpg key '${KEY_ID}' cannot be found." \
 "Doublecheck if the above key is listed by 'gpg --list-keys' or available 
-  as gpg key file '$(basename "$(gpg_keyfile ${KEY_ID})")' in the profile folder.
+  as gpg key file '$(basename "$(gpg_keyfile "${KEY_ID}")")' in the profile folder.
   If not you can put it there and $ME will autoimport it on the next run.
   Alternatively import it manually as the user you plan to run $ME with."
 }
@@ -982,11 +993,11 @@ function run_cmd {
   CMD_ERR=0
   if [ -n "$PREVIEW" ]; then
     CMD_OUT=$( echo "$@ 2>&1" )
-    CMD_MSG="-- Run cmd '$CMD_MSG' --\n$CMD_OUT"
+    CMD_MSG="-- Run cmd -- $CMD_MSG --\n$CMD_OUT"
   elif [ -n "$CMD_DISABLED" ]; then
     CMD_MSG="$CMD_MSG (DISABLED) - $CMD_DISABLED"
   else
-    CMD_OUT=` eval $@ 2>&1 `
+    CMD_OUT=` eval "$@" 2>&1 `
     CMD_ERR=$?
     if [ "$CMD_ERR" = "0" ]; then
       CMD_MSG="$CMD_MSG (OK)"
@@ -1024,8 +1035,8 @@ function duplicity_params_global {
   if gpg_disabled; then
     local DUPL_PARAM_ENC='--no-encryption'
   else
-    local DUPL_PARAM_ENC=$(gpg_prefix_keyset ' --encrypt-key ' 'GPG_KEYS_ENC')
-    gpg_signing && local DUPL_PARAM_SIGN=$(gpg_prefix_keyset ' --sign-key ' 'GPG_KEY_SIGN')
+    local DUPL_PARAM_ENC=$(gpg_prefix_keyset '--encrypt-key' "${GPG_KEYS_ENC_ARRAY[@]}")
+    gpg_signing && local DUPL_PARAM_SIGN=$(gpg_prefix_keyset '--sign-key' "$GPG_KEY_SIGN")
     # interpret password settings
     var_isset 'GPG_PW' && DUPL_ARG_ENC="PASSPHRASE=$(qw "${GPG_PW}")"
     var_isset 'GPG_PW_SIGN' && DUPL_ARG_ENC="${DUPL_ARG_ENC} SIGN_PASSPHRASE=$(qw "${GPG_PW_SIGN}")"
@@ -1153,12 +1164,12 @@ function date_from_nsecs {
 }
 
 function var_isset {
-	if [ -z "$1" ]; then
-		echo "ERROR: function var_isset needs a string as parameter"
-	elif eval "[ \"\${$1}\" == 'not_set' ]" || eval "[ \"\${$1-not_set}\" != 'not_set' ]"; then
-		return 0
-	fi
-	return 1
+  if [ -z "$1" ]; then
+    echo "ERROR: function var_isset needs a string as parameter"
+  elif eval "[ \"\${$1}\" == 'not_set' ]" || eval "[ \"\${$1-not_set}\" != 'not_set' ]"; then
+    return 0
+  fi
+  return 1
 }
 
 function url_encode {
@@ -1184,17 +1195,53 @@ function tolower {
   echo "$@"|awk '$0=tolower($0)'
 }
 
+function isnumber {
+  case "$*" in
+    ''|*[!0-9]*) return 1;;
+    *) return 0;;
+  esac
+}
+
+#function tmp_space {
+#  
+#  if ! isnumber $VOLSIZE; then
+#    inform "failed to determine free space (please report, this is a bug)"
+#    return
+#  fi
+#  
+# get free temp space
+#  TEMP_FREE="$(df -P -k "$TEMP_DIR" 2>/dev/null | awk 'END{pos=(NF-2);if(pos>0) print $pos;}')"
+#  # check for free space or FAIL
+#  if [ $((${TEMP_FREE:-0}-${VOLSIZE:-0}*1024)) -lt 0-lt 0 ]; then
+#    error "Temporary file space '$TEMP_DIR' free space is smaller ($((TEMP_FREE/1024))MB)
+#than one duplicity volume (${VOLSIZE}MB).
+#    
+#  Hint: Free space or change TEMP_DIR setting."
+#fi
+#
+#}
+
 function gpg_disabled {
-  echo "${GPG_KEY}${GPG_KEYS_ENC}" | grep -iq 'disabled'
+  echo "${GPG_KEY}" | grep -iq -e '^disabled$'
+}
+
+# usage: join SEPARATOR "entry1" "entry2"
+function join {
+  local SEP="$1" ENTRY OUT; shift;
+  for ENTRY in "$@"; do
+    ENTRY=${ENTRY//$SEP/\\$SEP}
+    [ -z "$OUT" ] && OUT=$ENTRY || OUT="$OUT$SEP$ENTRY"
+  done
+  echo $OUT
 }
 
 function gpg_signing {
-  return $(echo ${GPG_KEY_SIGN} | grep -ic 'disabled')
+  echo ${GPG_KEY_SIGN} | grep -v -q -e '^disabled$'
 }
 
 # parameter key id, key_type
 function gpg_keyfile {
-  local GPG_KEY="$1" TYPE="$2"
+  local GPG_KEY=$(gpg_key_legalize $1) TYPE="$2"
   local KEYFILE="${KEYFILE//.asc/${GPG_KEY:+.$GPG_KEY}.asc}"
   echo "${KEYFILE//.asc/${TYPE:+.$(tolower $TYPE)}.asc}"
 }
@@ -1204,8 +1251,8 @@ function gpg_import {
   local i FILE FOUND=0 KEY_ID="$1" KEY_TYPE="$2" KEY_FP="" ERR=0
   # create a list of legacy key file names and current naming scheme
   # we always import pub and sec if they are avail in conf folder
-  local KEYFILES=( "$CONFDIR/gpgkey" "$(gpg_keyfile $KEY_ID)" \
-                   "$(gpg_keyfile $KEY_ID PUB)" "$(gpg_keyfile $KEY_ID SEC)")
+  local KEYFILES=( "$CONFDIR/gpgkey" $(gpg_keyfile "$KEY_ID") \
+                   $(gpg_keyfile "$KEY_ID" PUB) $(gpg_keyfile "$KEY_ID" SEC))
 
   # Try autoimport from existing old gpgkey files 
   # and new gpgkey.XXX.asc files (since v1.4.2)
@@ -1231,8 +1278,8 @@ function gpg_import {
   fi
 
   # try to set trust automagically
-  CMD_MSG="Autoset trust of key '$KEY_ID'to ultimate"
-  run_cmd echo $(gpg_fingerprint $KEY_ID):6: \| "$GPG" $GPG_OPTS --import-ownertrust --batch --logger-fd 1
+  CMD_MSG="Autoset trust of key '$KEY_ID' to ultimate"
+  run_cmd echo $(gpg_fingerprint "$KEY_ID"):6: \| "$GPG" $GPG_OPTS --import-ownertrust --batch --logger-fd 1
   if [ "$CMD_ERR" = "0" ] && [ -z "$PREVIEW" ]; then 
    # success on all levels, we're done
    return $ERR
@@ -1243,31 +1290,29 @@ function gpg_import {
 with the command \"trust\" to \"ultimate\" (5) now.
 Exit the edit mode of gpg with \"quit\"."
   CMD_MSG="Running gpg to manually edit key '$KEY_ID'"
-  run_cmd sleep 5\; "$GPG" $GPG_OPTS --edit-key $KEY_ID
+  run_cmd sleep 5\; "$GPG" $GPG_OPTS --edit-key "$KEY_ID"
 
   return $ERR
 }
 
-# check for 8 digits and using 0x00.. here because gpg uses substring matching by default
 # see 'How to specify a user ID' on gpg manpage
 function gpg_fingerprint {
-  [ ${#1} -eq 8 ] \
-    && local PRINT=$("$GPG" $GPG_OPTS --fingerprint 0x"$1" 2>&1|awk -F= 'NR==2{gsub(/ /,"",$2);$2=toupper($2); if ( $2 ~ /^[A-F0-9]+$/ && length($2) == 40 ) print $2; else exit 1}') \
+  local PRINT=$("$GPG" $GPG_OPTS --fingerprint "$1" 2>&1|awk -F= 'NR==2{gsub(/ /,"",$2);$2=toupper($2); if ( $2 ~ /^[A-F0-9]+$/ && length($2) == 40 ) print $2; else exit 1}') \
     && [ -n "$PRINT" ] && echo $PRINT && return 0
   return 1
 }
 
 function gpg_export_if_needed {
-  local SUCCESS FILE KEY_TYPE KEY_LIST=$1
+  local SUCCESS FILE KEY_TYPE
   local TMPFILE="$TEMP_DIR/${ME_NAME}.$$.$(date_fix %s).gpgexp"
-  for KEY_ID in $KEY_LIST; do
+  for KEY_ID in "$@"; do
     # check if already exported, do it if not
     for KEY_TYPE in PUB SEC; do
-      FILE="$(gpg_keyfile $KEY_ID $KEY_TYPE)"
-      if [ ! -f "$FILE" ] && eval gpg_$(tolower $KEY_TYPE)_avail $KEY_ID; then
+      FILE="$(gpg_keyfile "$KEY_ID" $KEY_TYPE)"
+      if [ ! -f "$FILE" ] && eval gpg_$(tolower $KEY_TYPE)_avail \"$KEY_ID\"; then
         # exporting
-        CMD_MSG="Export $KEY_TYPE key $KEY_ID"
-        run_cmd $GPG $GPG_OPTS --armor --export"$(test "SEC" = "$KEY_TYPE" && echo -secret-keys)"" $KEY_ID >> \"$TMPFILE\""
+        CMD_MSG="Export $KEY_TYPE key '$KEY_ID'"
+        run_cmd $GPG $GPG_OPTS --armor --export"$(test "SEC" = "$KEY_TYPE" && echo -secret-keys)"" $(qw $KEY_ID) >> \"$TMPFILE\""
 
         if [ "$CMD_ERR" = "0" ]; then
           CMD_MSG="Write file '"$(basename "$FILE")"'"
@@ -1290,18 +1335,27 @@ function gpg_export_if_needed {
 You should backup your changed profile folder now and store it in a safe place."
 }
 
+# replace all non-alnum chars with underscore (for file operations)
+function gpg_key_legalize {
+  echo $* | awk '{gsub(/[^a-zA-Z0-9]/,"_",$0); print}'
+}
+
 function gpg_key_cache {
   local RES
+  local MODE=$1
+  shift
   local PREFIX="GPG_KEY"
-  local CACHE="PREFIX_$1_$2"
-  if [ "$1" = "RESET" ]; then
-    eval unset PREFIX_PUB_$2 PREFIX_SEC_$2
+  local SUFFIX=$(gpg_key_legalize "$@")
+  local KEYID="$*"
+  local CACHE="${PREFIX}_${MODE}_${SUFFIX}"
+  if [ "$MODE" = "RESET" ]; then
+    eval unset ${PREFIX}_PUB_$SUFFIX ${PREFIX}_SEC_$SUFFIX
     return 255
   elif ! var_isset "$CACHE"; then
-    if [ "$1" = "PUB" ]; then
-      RES=$("$GPG" $GPG_OPTS --list-key "$2" > /dev/null 2>&1; echo -n $?)
-    elif [ "$1" = "SEC" ]; then
-      RES=$("$GPG" $GPG_OPTS --list-secret-key "$2" > /dev/null 2>&1; echo -n $?)
+    if [ "$MODE" = "PUB" ]; then
+      RES=$("$GPG" $GPG_OPTS --list-key "$KEYID" > /dev/null 2>&1; echo -n $?)
+    elif [ "$MODE" = "SEC" ]; then
+      RES=$("$GPG" $GPG_OPTS --list-secret-key "$KEYID" > /dev/null 2>&1; echo -n $?)
     else
       return 255
     fi
@@ -1311,34 +1365,34 @@ function gpg_key_cache {
 }
 
 function gpg_pub_avail {
-  gpg_key_cache PUB $1
+  gpg_key_cache PUB "$@"
 }
 
 function gpg_sec_avail {
-  gpg_key_cache SEC $1
+  gpg_key_cache SEC "$@"
 }
 
 function gpg_key_format {
   echo $1 | grep -q '^[0-9a-fA-F]\{8\}$'
 }
 
-function gpg_split_keyset {
-  awk "BEGIN{ keys=toupper(\"$@\"); gsub(/[^A-Z0-9]/,\" \",keys); print keys }"
-}
+#function gpg_split_keyset {
+#  return
+#  awk "BEGIN{ keys=toupper(\"$@\"); gsub(/[^A-Z0-9]/,\" \",keys); print keys }"
+#}
 
-function gpg_join_keyset {
-  local KEY_ID OUT
-  for KEY_ID in $@; do
-    [ -z "$OUT" ] && OUT=$KEY_ID || OUT=${OUT},${KEY_ID}
-  done
-  echo $OUT
+# splits a comma separated line into lines, respects escaped commas
+function gpg_split_keyset2 {
+  local LIST
+  LIST=$(echo "$@" | awk '{ gsub(/,/,"\n",$0); gsub(/\\\n/,",",$0); print $0 }')
+  echo -e "$LIST"
 }
 
 function gpg_prefix_keyset {
-  local KEY_ID OUT KEYSET
-  [ -n "$2" ] && eval "local KEYSET=\"\${$2[@]}\""
-  for KEY_ID in $KEYSET; do
-    OUT=${OUT}${1}${KEY_ID}
+  local PREFIX="$1" OUT=""
+  shift
+  for KEY_ID in "$@"; do
+    OUT="${OUT} $PREFIX $(qw ${KEY_ID})"
   done
   echo $OUT
 }
@@ -1352,18 +1406,17 @@ function gpg_passwd {
         print $0; exit}' "$CONF"
 }
 
+# return success if at least one secret key is available
 function gpg_key_decryptable {
-  # decryption needs pass, might be empty, but must be set
-  #var_isset 'GPG_PW' || return 1
   local KEY_ID
-  for KEY_ID in ${GPG_KEYS_ENC[@]}; do
-    gpg_sec_avail $KEY_ID && return 0
+  for KEY_ID in "${GPG_KEYS_ENC_ARRAY[@]}"; do
+    gpg_sec_avail "$KEY_ID" && return 0
   done
   return 1
 }
 
 function gpg_symmetric {
-  [ -z "${GPG_KEY}${GPG_KEYS_ENC}" ]
+  [ -z "${GPG_KEY}${GPG_KEYS_ENC_ARRAY}" ]
 }
 
 # checks for max two params if they are set, typically GPG_PW & GPG_PW_SIGN
@@ -1654,17 +1707,16 @@ fi
 
 # GPG config plausibility check1 (disabled check) #############################
 if gpg_disabled; then
-	: # encryption disabled, all is well
-
+  : # encryption disabled, all is well
 elif [ -z "${GPG_KEY}${GPG_KEYS_ENC}${GPG_KEY_SIGN}" ] && ! var_isset 'GPG_PW'; then
-	warning "GPG_KEY and GPG_PW are empty or not set in conf file 
+  warning "GPG_KEY, GPG_KEYS_ENC, GPG_KEY_SIGN and GPG_PW are empty/not set in conf file 
 '$CONF'.
 Will disable encryption for duplicity now.
 
 Hint: 
  If you really want to use _no_ encryption you can disable this warning by 
  setting GPG_KEY='disabled' in conf file."
- GPG_KEY='disabled'
+  GPG_KEY='disabled'
 fi
 
 # GPG availability check (now we know if gpg is really needed)#################
@@ -1688,29 +1740,20 @@ if [ "$GPG_KEY" == "${DEFAULT_GPG_KEY}" ]; then
 '$CONF'."
 fi
 
-# disabled as keys can really be given in too many forms e.g. short/long id, fingerprint, email, name ...
-## check gpg keys format
-#for KEY_SET_NAME in GPG_KEY GPG_KEYS_ENC $(gpg_signing && echo -n GPG_KEY_SIGN); do
-#  eval KEY_SET="\${${KEY_SET_NAME}}"
-#  for KEY_ID in $(gpg_split_keyset "$KEY_SET"); do
-#    # test format [ ! $(echo $GPG_KEY | grep '^[0-9a-fA-F]\{8\}$') ] not set correct (8 digit ID) or
-#    gpg_key_format ${KEY_ID} || \
-#      error_gpg "GPG key '${KEY_ID}' set in '${KEY_SET_NAME}' is not \na valid 8 character hex digit string e.g. '012345AB'."
-#  done
-#done
-
-# create enc gpg keys array, for further processing
-GPG_KEYS_ENC=( $(gpg_split_keyset ${GPG_KEY}) $(gpg_split_keyset ${GPG_KEYS_ENC}) )
+# create array of gpg encr keys, for further processing
+OIFS="$IFS" IFS=$'\n'
+GPG_KEYS_ENC_ARRAY=( $( gpg_split_keyset2 ${GPG_KEY},${GPG_KEYS_ENC} ) )
+IFS="$OIFS"
 
 # check gpg encr public keys availability
-for (( i = 0 ; i < ${#GPG_KEYS_ENC[@]} ; i++ )); do
-  KEY_ID=${GPG_KEYS_ENC[$i]}
+for (( i = 0 ; i < ${#GPG_KEYS_ENC_ARRAY[@]} ; i++ )); do
+  KEY_ID="${GPG_KEYS_ENC_ARRAY[$i]}"
   # test availability, try to import, retest
-  if ! gpg_pub_avail ${KEY_ID}; then
+  if ! gpg_pub_avail "${KEY_ID}"; then
     echo "Encryption public key '${KEY_ID}' not found."
     gpg_import "${KEY_ID}" PUB
-    gpg_key_cache RESET ${KEY_ID}
-    gpg_pub_avail ${KEY_ID} || error_gpg_key "${KEY_ID}" "Public"
+    gpg_key_cache RESET "${KEY_ID}"
+    gpg_pub_avail "${KEY_ID}" || error_gpg_key "${KEY_ID}" "Public"
   fi
 done
 
@@ -1720,19 +1763,19 @@ if ! gpg_signing; then
   echo "Signing disabled per configuration."
 # try first key, if one set
 elif ! var_isset 'GPG_KEY_SIGN'; then
-  KEY_ID=${GPG_KEYS_ENC[0]}
+  KEY_ID="${GPG_KEYS_ENC_ARRAY[0]}"
   if [ -z "${KEY_ID}" ]; then
     echo "Signing disabled. Not GPG_KEY entries in config."
     GPG_KEY_SIGN='disabled'
   else  
     # use avail OR try import OR fail
     if gpg_sec_avail "${KEY_ID}"; then
-      GPG_KEY_SIGN=${KEY_ID}
+      GPG_KEY_SIGN="${KEY_ID}"
     else
       gpg_import "${KEY_ID}" SEC
-      gpg_key_cache RESET ${KEY_ID}
+      gpg_key_cache RESET "${KEY_ID}"
       if gpg_sec_avail "${KEY_ID}"; then
-        GPG_KEY_SIGN=${KEY_ID}
+        GPG_KEY_SIGN="${KEY_ID}"
       fi
     fi
 
@@ -1745,14 +1788,12 @@ elif ! var_isset 'GPG_KEY_SIGN'; then
     fi
   fi
 else
-  KEY_ID=${GPG_KEY_SIGN}
-  if ! gpg_sec_avail ${KEY_ID}; then
+  KEY_ID="${GPG_KEY_SIGN}"
+  if ! gpg_sec_avail "${KEY_ID}"; then
     inform "Secret signing key defined in setting GPG_KEY_SIGN='${KEY_ID}' not found.\nTry to import."
     gpg_import "${KEY_ID}" SEC
-    gpg_key_cache RESET ${KEY_ID}
-    gpg_sec_avail ${KEY_ID} || error_gpg_key "${KEY_ID}" "Private"
-  else
-    echo "Use configured key '${KEY_ID}' as signing key."
+    gpg_key_cache RESET "${KEY_ID}"
+    gpg_sec_avail "${KEY_ID}" || error_gpg_key "${KEY_ID}" "Private"
   fi
 fi
 
@@ -1773,14 +1814,15 @@ if gpg_symmetric && var_isset GPG_PW && var_isset GPG_PW_SIGN &&\
 This is unfortunately impossible. For details see duplicity manpage, 
 section 'A Note On Symmetric Encryption And Signing'.
 
-Tip: Separate signing keys may have empty passwords e.g. GPG_PW_SIGN=''."
+Tip: Separate signing keys may have empty passwords e.g. GPG_PW_SIGN=''.
+Tip2: Use gpg-agent."
 fi
 # key enc can deal without, but might profit from gpg-agent
 # if GPG_PW is not set alltogether
 # if signing key is different from first (main) enc key (we can only pipe one pass into gpg)
 if ! gpg_symmetric && \
    ( ! var_isset GPG_PW || \
-     ( gpg_signing && ! var_isset GPG_PW_SIGN && [ "$GPG_KEY_SIGN" != "${GPG_KEYS_ENC[0]}" ] ) ); then
+     ( gpg_signing && ! var_isset GPG_PW_SIGN && [ "$GPG_KEY_SIGN" != "${GPG_KEYS_ENC_ARRAY[0]}" ] ) ); then
 
   GPG_AGENT_ERR=$(gpg_agent_avail ; echo $?)
   if [ "$GPG_AGENT_ERR" -eq 1 ]; then
@@ -1797,34 +1839,30 @@ fi
 fi
 
 # config plausibility check - SPACE ###########################################
-# is tmp writeable
-# is tmp big enough
-if [ ! -d "$TEMP_DIR" ]; then
+
+# is tmp is a folder
+CMD_MSG="Checking TEMP_DIR '${TEMP_DIR}' is a folder"
+run_cmd test -d "$TEMP_DIR"
+if [ "$CMD_ERR" != "0" ]; then
     error "Temporary file space '$TEMP_DIR' is not a directory."
-elif [ ! -w "$TEMP_DIR" ]; then
+fi    
+# is tmp writeable
+CMD_MSG="Checking TEMP_DIR '${TEMP_DIR}' is writable"
+run_cmd test -w "$TEMP_DIR"
+if [ "$CMD_ERR" != "0" ]; then
     error "Temporary file space '$TEMP_DIR' not writable."
 fi
 
+
 # get volsize, default duplicity volume size is 25MB since v0.5.07
 VOLSIZE=${VOLSIZE:-25}
-# get free temp space
-TEMP_FREE="$(df $TEMP_DIR 2>/dev/null | awk 'END{pos=(NF-2);if(pos>0) print $pos;}')"
-# check for free space or FAIL
-if [ "$((${TEMP_FREE:-0}-${VOLSIZE:-0}*1024))" -lt 0 ]; then
-    error "Temporary file space '$TEMP_DIR' free space is smaller ($((TEMP_FREE/1024))MB)
-than one duplicity volume (${VOLSIZE}MB).
-    
-  Hint: Free space or change TEMP_DIR setting."
-fi
+# double if asynch is on
+echo $@ $DUPL_PARAMS | grep -q -e '--asynchronous-upload' && FACTOR=2 || FACTOR=1
 
-# check for enough async upload space and WARN only
-if [ $((${TEMP_FREE:-0}-2*${VOLSIZE:-0}*1024)) -lt 0 ]; then
-    warning "Temporary file space '$TEMP_DIR' free space is smaller ($((TEMP_FREE/1024))MB)
-than two duplicity volumes (2x${VOLSIZE}MB). This can lead to problems when 
-using the --asynchronous-upload option.
-    
-  Hint: Free space or change TEMP_DIR setting."
-fi
+# TODO: check for enough (async= upload space and WARN only
+#       use function tmp_space 
+echo TODO: reimplent tmp space check
+
 
 # test - GPG SANITY #####################################################################
 # if encryption is disabled, skip this whole section
@@ -1842,31 +1880,31 @@ function cleanup_gpgtest {
 
 # signing enabled?
 if gpg_signing; then
-  CMD_PARAM_SIGN="--sign --default-key ${GPG_KEY_SIGN}"
-  CMD_MSG_SIGN="Sign with ${GPG_KEY_SIGN}"
+  CMD_PARAM_SIGN="--sign --default-key $(qw ${GPG_KEY_SIGN})"
+  CMD_MSG_SIGN="Sign with '${GPG_KEY_SIGN}'"
 fi
 
 # using keys
-if [ ${#GPG_KEYS_ENC[@]} -gt 0 ]; then
+if [ ${#GPG_KEYS_ENC_ARRAY[@]} -gt 0 ]; then
 
-  for KEY_ID in ${GPG_KEYS_ENC[@]}; do
-    CMD_PARAMS="$CMD_PARAMS -r ${KEY_ID}"
+  for KEY_ID in "${GPG_KEYS_ENC_ARRAY[@]}"; do
+    CMD_PARAMS="$CMD_PARAMS -r $(qw ${KEY_ID})"
   done
   # check encrypting
-  CMD_MSG="Test - Encrypt to $(gpg_join_keyset ${GPG_KEYS_ENC[@]})${CMD_MSG_SIGN:+ & $CMD_MSG_SIGN}"
+  CMD_MSG="Test - Encrypt to '$(join "','" "${GPG_KEYS_ENC_ARRAY[@]}")'${CMD_MSG_SIGN:+ & $CMD_MSG_SIGN}"
   run_cmd $(gpg_pass_pipein GPG_PW_SIGN GPG_PW) $GPG $CMD_PARAM_SIGN $(gpg_param_passwd GPG_PW_SIGN GPG_PW) $CMD_PARAMS $GPG_USEAGENT --status-fd 1 $GPG_OPTS -o "${GPG_TEST}_ENC" -e "$ME_LONG"
 
   if [ "$CMD_ERR" != "0" ]; then 
     KEY_NOTRUST=$(echo "$CMD_OUT"|awk '/^\[GNUPG:\] INV_RECP 10/ { print $4 }')
     [ -n "$KEY_NOTRUST" ] && HINT="Key '${KEY_NOTRUST}' seems to be untrusted. If you really trust this key try to
-  'gpg --edit-key $KEY_NOTRUST' and raise the trust level to ultimate. If you
+  'gpg --edit-key "$KEY_NOTRUST"' and raise the trust level to ultimate. If you
   can trust all of your keys set GPG_OPTS='--trust-model always' in conf file."
     error_gpg_test "Encryption failed (Code $CMD_ERR).${CMD_OUT:+\n$CMD_OUT}" "$HINT"
   fi
 
   # check decrypting
   CMD_MSG="Test - Decrypt"
-  gpg_key_decryptable || CMD_DISABLED="No matching secret key or GPG_PW not set."
+  gpg_key_decryptable || CMD_DISABLED="No matching secret key available."
   run_cmd $(gpg_pass_pipein GPG_PW) "$GPG" $(gpg_param_passwd GPG_PW) $GPG_OPTS -o "${GPG_TEST}_DEC" $GPG_USEAGENT -d "${GPG_TEST}_ENC"
 
   if [ "$CMD_ERR" != "0" ]; then 
@@ -1910,7 +1948,7 @@ fi # end disabled
 [ -f "$EXCLUDE" ] || touch "$EXCLUDE"
 
 # export only used keys, if bkp not already exists ######################################
-gpg_export_if_needed "${GPG_KEYS_ENC[@]} $(gpg_signing && echo $GPG_KEY_SIGN)"
+gpg_export_if_needed "${GPG_KEYS_ENC_ARRAY[@]}" "$(gpg_signing && echo $GPG_KEY_SIGN)"
 
 
 # command execution #####################################################################
@@ -2055,6 +2093,12 @@ elif [ "$cmd" == 'and' ] || [ "$cmd" == 'or' ]; then
   unset 'CMD_SKIP';
   continue
 fi
+
+# export some useful env vars for external scripts/programs to use
+export CONFDIR SOURCE TARGET_URL_PROT TARGET_URL_HOSTPATH \
+       TARGET_URL_USER TARGET_URL_PASS \
+       GPG_KEYS_ENC=$(join "\n" "${GPG_KEYS_ENC_ARRAY[@]}") GPG_KEY_SIGN \
+       GPG_PW CMD_PREV CMD_NEXT
 
 # save start time
 RUN_START=$(date_fix %s)$(nsecs)
