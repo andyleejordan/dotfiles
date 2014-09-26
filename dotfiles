@@ -1,0 +1,33 @@
+#!/bin/bash
+# Copyright 2014 Andrew Schwartzmeyer
+set -u
+
+cd ~
+if [[ ! -e ~/.ssh/id_rsa.pub ]]; then
+    ssh-keygen
+    cat .ssh/id_rsa.pub
+    read -p "Add SSH key to GitLab and GitHub! Press any key to continue... " -n1 -s
+else
+    echo "SSH key already exists, continuing..."
+fi
+
+echo "Installing vcsh and myrepos..."
+mkdir -p src
+cd src
+git clone https://github.com/RichiH/vcsh.git
+cd vcsh
+sudo make install
+cd ~
+vcsh clone git@suchcodemuchlove.com:dotfiles/mr.git
+cd src
+git clone git://myrepos.branchable.com/ myrepos
+cd myrepos
+sudo make install
+
+echo "Pulling in dotfiles..."
+cd ~
+[[ -e ~/.bashrc ]] && mv ~/.bashrc ~/.bashrc.orig
+mr checkout
+vcsh run mr git update-index --assume-unchanged LICENSE README.org
+rm LICENSE README.org
+echo "Dotfiles setup! Reload session to contine..."
