@@ -12,14 +12,6 @@ then
     alias reboot='sudo reboot now'
     alias sleep='shutdown -s now'
 
-    # packages via homebrew
-    alias pag='brew search'
-    alias pup='brew update && brew upgrade'
-    alias pcl='brew cleanup && brew prune'
-    alias pi='brew install'
-    alias pr='brew uninstall'
-    alias pin='brew info'
-
     # misc
     alias unlock_files='chflags -R nouchg *'
 
@@ -32,16 +24,50 @@ then
     alias shutdown='sudo shutdown -P now'
     alias reboot='sudo shutdown -r now'
     alias halt='sudo halt -P'
-    alias pag='aptitude search'
-    alias pup='sudo aptitude update && sudo aptitude upgrade'
-    alias pcl='sudo aptitude autoclean'
-    alias pi='sudo aptitude install'
-    alias pr='sudo aptitude purge'
-    alias pin='aptitude show'
-    alias debi='sudo dpkg -i'
 
     ## editor
     ALTERNATE_EDITOR='nano'
+fi
+
+if command -v brew >/dev/null 2>&1; then
+    alias pag='brew search'
+    alias pu='brew update'
+    alias pup='brew update && brew upgrade'
+    alias pcl='brew cleanup && brew prune'
+    alias pi='brew install'
+    alias pr='brew uninstall'
+    alias pre='brew reinstall'
+    alias pin='brew info'
+    alias pli='brew install'
+elif command -v aptitude >/dev/null 2>&1; then
+    alias pag='aptitude search'
+    alias pu='sudo aptitude update'
+    alias pup='sudo aptitude update && sudo aptitude upgrade'
+    alias pcl='sudo aptitude clean && sudo aptitude autoclean'
+    alias pi='sudo aptitude install'
+    alias pr='sudo aptitude purge'
+    alias pre='sudo aptitude reinstall'
+    alias pin='aptitude show'
+    alias pli='sudo dpkg -i'
+elif command -v apt-get >/dev/null 2>&1; then
+    alias pag='apt-cache search'
+    alias pu='sudo apt-get update'
+    alias pup='sudo apt-get update && sudo apt-get upgrade'
+    alias pcl='sudo apt-get autoclean && sudo apt-get autoremove'
+    alias pi='sudo apt-get install'
+    alias pr='sudo apt-get purge'
+    alias pre='sudo apt-get install --reinstall'
+    alias pin='apt-cache show'
+    alias pli='sudo dpkg -i'
+elif command -v pacman >/dev/null 2>&1; then
+    alias pag='pacman -Ss'
+    alais pu='sudo pacman -Sy'
+    alias pup='sudo pacman -Syu'
+    alias pcl='sudo pacman -Sc'
+    alias pi='sudo pacman -S'
+    alias pr='sudo pacman -Rs'
+    alias pin='pacman -Si'
+    alias pli='sudo pacman -U'
 fi
 
 # editor
