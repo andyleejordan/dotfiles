@@ -265,6 +265,13 @@ configuration.
 
 Be verbose.
 
+=item -m
+
+=item --minimal
+
+Minimise output. If a command fails or there is any output then the usual
+output will be shown.
+
 =item -q
 
 =item --quiet
@@ -568,6 +575,7 @@ use constant {
 # configurables
 my $config_overridden=0;
 my $verbose=0;
+my $minimal=0;
 my $quiet=0;
 my $stats=0;
 my $force=0;
@@ -578,6 +586,7 @@ my $no_chdir=0;
 my $jobs=1;
 my $trust_all=0;
 my $directory=getcwd();
+my $terminal=-t STDOUT && eval{require IO::Pty::Easy;IO::Pty::Easy->import();1;};
 
 my $HOME_MR_CONFIG = "$ENV{HOME}/.mrconfig";
 $ENV{MR_CONFIG}=find_mrconfig();
@@ -721,6 +730,34 @@ sub fulldir {
 	return $subdir =~ /^\// ? $subdir : $topdir.$subdir;
 }
 
+sub terminal_friendly_spawn {
+	my $actionmsg = shift;
+	my $sh = shift;
+	my $quiet = shift;
+	my $minimal = shift;
+	my $output = "";
+	if ($terminal) {
+		my $pty = IO::Pty::Easy->new;
+		$pty->spawn($sh);
+		while ($pty->is_active) {
+			my $data = $pty->read();
+			$output .= $data if defined $data;
+		}
+		$pty->close;
+	} else {
+		$output = qx/$sh 2>&1/;
+	}
+	my $ret = $?;
+	if ($quiet && $ret != 0) {
+		print "$actionmsg\n" if $actionmsg;
+		print STDERR $output;
+	} elsif (!$quiet && (!$minimal || $output)) {
+		print "$actionmsg\n" if $actionmsg;
+		print $output;
+	}
+	return ($ret, $output ? 1 : 0);
+}
+
 sub action {
 	my ($action, $dir, $topdir, $subdir, $force_checkout) = @_;
 	my $fulldir=fulldir($topdir, $subdir);
@@ -800,7 +837,7 @@ sub action {
 			return FAILED;
 		}
 		else {
-			print STDERR "mr $action: no defined action for $vcs repository $fulldir, skipping\n";
+			print STDERR "mr $action: no defined action for $vcs repository $fulldir, skipping\n" unless $minimal;
 			return SKIPPED;
 		}
 	}
@@ -814,22 +851,16 @@ sub action {
 			$s=~s/^\Q$fulldir\E\/?//;
 			$actionmsg="mr $action: $fulldir (in subdir $s)";
 		}
-		print "$actionmsg\n" unless $quiet;
+		print "$actionmsg\n" unless $quiet || $minimal;
 
-		my $hookret=hook("pre_$action", $topdir, $subdir);
+		my ($hookret, $hook_out)=hook("pre_$action", $topdir, $subdir);
 		return $hookret if $hookret != OK;
 
-		my $ret=runsh $action, $topdir, $subdir,
+		my ($ret, $out)=runsh $action, $topdir, $subdir,
 			$command, \@ARGV, sub {
 				my $sh=shift;
-				if ($quiet) {
-					my $output = qx/$sh 2>&1/;
-					my $ret = $?;
-					if ($ret != 0) {
-						print "$actionmsg\n";
-						print STDERR $output;
-					}
-					return $ret;
+				if (!$jobs || $jobs > 1 || $quiet || $minimal) {
+					return terminal_friendly_spawn($actionmsg, $sh, $quiet, $minimal);
 				}
 				else {
 					system($sh);
@@ -867,7 +898,7 @@ sub action {
 				return FAILED;
 			}
 
-			my $ret=hook("post_$action", $topdir, $subdir);
+			my ($ret, $hook_out)=hook("post_$action", $topdir, $subdir);
 			return $ret if $ret != OK;
 			
 			if ($is_checkout || $is_update) {
@@ -877,11 +908,11 @@ sub action {
 						return FAILED;
 					}
 				}
-				my $ret=hook("fixups", $topdir, $subdir);
+				my ($ret, $hook_out)=hook("fixups", $topdir, $subdir);
 				return $ret if $ret != OK;
 			}
 			
-			return OK;
+			return (OK, $out || $hook_out);
 		}
 	}
 }
@@ -891,15 +922,10 @@ sub hook {
 
 	my $command=$config{$topdir}{$subdir}{$hook};
 	return OK unless defined $command;
-	my $ret=runsh $hook, $topdir, $subdir, $command, [], sub {
+	my ($ret,$out)=runsh $hook, $topdir, $subdir, $command, [], sub {
 			my $sh=shift;
-			if ($quiet) {
-				my $output = qx/$sh 2>&1/;
-				my $ret = $?;
-				if ($ret != 0) {
-					print STDERR $output;
-				}
-				return $ret;
+			if (!$jobs || $jobs > 1 || $quiet || $minimal) {
+				return terminal_friendly_spawn(undef, $sh, $quiet, $minimal);
 			}
 			else {
 				system($sh);
@@ -919,7 +945,7 @@ sub hook {
 		}
 	}
 
-	return OK;
+	return (OK, $out);
 }
 
 # run actions on multiple repos, in parallel
@@ -947,7 +973,7 @@ sub mrs {
 				close CHILD_STDERR;
 				close $outfh;
 				close $errfh;
-				exit action($action, @$repo);
+				exit +(action($action, @$repo))[0];
 			}
 			close CHILD_STDOUT;
 			close CHILD_STDERR;
@@ -978,7 +1004,7 @@ sub mrs {
 						    	waitpid($active[$i][0], 0);
 							print STDOUT $out[$i][0];
 							print STDERR $out[$i][1];
-							record($active[$i][1], $? >> 8);
+							record($active[$i][1], $? >> 8, $out[$i][0] || $out[$i][1]);
 						    	splice(@fhs, $i, 1);
 						    	splice(@active, $i, 1);
 						    	splice(@out, $i, 1);
@@ -995,10 +1021,11 @@ sub mrs {
 sub record {
 	my $dir=shift()->[0];
 	my $ret=shift;
+	my $out=shift;
 
 	if ($ret == OK) {
 		push @ok, $dir;
-		print "\n" unless $quiet;
+		print "\n" unless $quiet || ($minimal && !$out);
 	}
 	elsif ($ret == FAILED) {
 		if ($interactive) {
@@ -1007,7 +1034,7 @@ sub record {
 			system((getpwuid($<))[8], "-i");
 		}
 		push @failed, $dir;
-		print "\n" unless $quiet;
+		print "\n";
 	}
 	elsif ($ret == SKIPPED) {
 		push @skipped, $dir;
@@ -1029,10 +1056,10 @@ sub showstats {
 		showstat($#ok+1, "ok", "ok"),
 		showstat($#failed+1, "failed", "failed"),
 		showstat($#skipped+1, "skipped", "skipped"),
-	).")\n" unless $quiet;
+	).")\n" unless $quiet || $minimal;
 	if ($stats) {
 		if (@skipped) {
-			print "mr $action: (skipped: ".join(" ", @skipped).")\n" unless $quiet;
+			print "mr $action: (skipped: ".join(" ", @skipped).")\n" unless $quiet || $minimal;
 		}
 		if (@failed) {
 			print STDERR "mr $action: (failed: ".join(" ", @failed).")\n";
@@ -1154,7 +1181,8 @@ sub is_trusted_config {
 			while (<TRUST>) {
 				chomp;
 				s/^~\//$ENV{HOME}\//;
-				$trusted{abs_path($_)}=1;
+				my $d=abs_path($_);
+				$trusted{$d}=1 if defined $d;
 			}
 			close TRUST;
 		}
@@ -1823,6 +1851,7 @@ sub getopts {
 		"p|path" => sub { }, # now default, ignore
 		"f|force" => \$force,
 		"v|verbose" => \$verbose,
+		"m|minimal" => \$minimal,
 		"q|quiet" => \$quiet,
 		"s|stats" => \$stats,
 		"k|insecure" => \$insecure,
@@ -2058,6 +2087,7 @@ svn_grep = ack-grep "$@"
 git_svn_grep = git grep "$@"
 git_grep = git grep "$@"
 bzr_grep = ack-grep "$@"
+darcs_grep = ack-grep "$@"
 
 run = "$@"
 
