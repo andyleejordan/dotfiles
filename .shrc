@@ -88,15 +88,7 @@ homebrew_token="$HOME/.homebrew"
 ## path
 source ~/.path_edit.sh
 path_front "bin" "$HOME/bin" "/usr/local/bin" "$HOME/.rbenv/bin"
-path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin"
-
-if [[ $OSTYPE == darwin* ]]
-then
-    path_back "/usr/texbin"
-elif [[ $OSTYPE == linux-gnu ]]
-then
-    path_back "$HOME/.cask/bin"
-fi
+path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "$HOME/.cask/bin"
 
 ## local settings
 [[ -e ~/.localrc ]] && source ~/.localrc
