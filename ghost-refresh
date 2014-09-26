@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-
-cd /opt/ghost/andrew/content/themes/Vapor
-sudo git pull
-sudo chown -R ghost:ghost .
-sudo supervisorctl restart ghost_andrew
