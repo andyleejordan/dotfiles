@@ -21,7 +21,7 @@ for FILE in $CONFLICTS; do
 done
 
 echo "Pulling in dotfiles..."
-vcsh clone git@suchcodemuchlove.com:dotfiles/mr.git
+vcsh clone git@github.com:andschwa/dotfiles.git
 
 mr checkout
 vcsh run mr git update-index --assume-unchanged LICENSE README.org
