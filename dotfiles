@@ -24,7 +24,7 @@ echo "Pulling in dotfiles..."
 vcsh clone git@github.com:andschwa/dotfiles.git
 
 mr update
-vcsh run mr git update-index --assume-unchanged LICENSE README.org
+vcsh run dotfiles git update-index --assume-unchanged LICENSE README.org
 rm -f ~/LICENSE ~/README.org
 
 echo "Dotfiles setup! Reload session to contine..."
