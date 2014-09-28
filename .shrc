@@ -61,7 +61,7 @@ elif command -v apt-get >/dev/null 2>&1; then
     alias pli='sudo dpkg -i'
 elif command -v pacman >/dev/null 2>&1; then
     alias pag='pacman -Ss'
-    alais pu='sudo pacman -Sy'
+    alias pu='sudo pacman -Sy'
     alias pup='sudo pacman -Syu'
     alias pcl='sudo pacman -Sc'
     alias pi='sudo pacman -S'
