@@ -6,12 +6,11 @@ cd ~
 if [[ ! -e ~/.ssh/id_rsa.pub ]]; then
     ssh-keygen
     cat .ssh/id_rsa.pub
-    read -p "Add SSH key to GitLab and GitHub! Press any key to continue... " -n1 -s
+    read -p "Add SSH keys where needed! Press any key to continue... " -n1 -s
 else
     echo "SSH key already exists, continuing..."
 fi
 
-echo "Cloning bin..."
 git clone git@github.com:andschwa/bin.git
 ./bin/vcsh clone git@suchcodemuchlove.com:dotfiles/mr.git
 
