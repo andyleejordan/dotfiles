@@ -14,11 +14,17 @@ fi
 git clone git@github.com:andschwa/bin.git
 PATH="$PATH:$HOME/bin"
 
+echo "Backing up conflicting files..."
+CONFLICTS=".bashrc .gitconfig .gitignore_global .mrconfig .tmux.conf .zprofile .zshrc"
+for FILE in $CONFLICTS; do
+    [[ -e "${FILE}" ]] && mv "${FILE}" "${FILE}.orig"
+done
+
 echo "Pulling in dotfiles..."
 vcsh clone git@suchcodemuchlove.com:dotfiles/mr.git
-[[ -e ~/.bashrc ]] && mv ~/.bashrc ~/.bashrc.orig
+
 mr checkout
 vcsh run mr git update-index --assume-unchanged LICENSE README.org
-rm LICENSE README.org
+rm -f ~/LICENSE ~/README.org
 
 echo "Dotfiles setup! Reload session to contine..."
