@@ -11,23 +11,14 @@ else
     echo "SSH key already exists, continuing..."
 fi
 
-echo "Installing vcsh and myrepos..."
-mkdir -p src
-cd src
-git clone https://github.com/RichiH/vcsh.git
-cd vcsh
-sudo make install
-cd ~
-vcsh clone git@suchcodemuchlove.com:dotfiles/mr.git
-cd src
-git clone git://myrepos.branchable.com/ myrepos
-cd myrepos
-sudo make install
+echo "Cloning bin..."
+git clone git@github.com:andschwa/bin.git
+./bin/vcsh clone git@suchcodemuchlove.com:dotfiles/mr.git
 
 echo "Pulling in dotfiles..."
-cd ~
 [[ -e ~/.bashrc ]] && mv ~/.bashrc ~/.bashrc.orig
-mr checkout
-vcsh run mr git update-index --assume-unchanged LICENSE README.org
+./bin/mr checkout
+./bin/vcsh run mr git update-index --assume-unchanged LICENSE README.org
 rm LICENSE README.org
+
 echo "Dotfiles setup! Reload session to contine..."
