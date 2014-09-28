@@ -23,7 +23,7 @@ done
 echo "Pulling in dotfiles..."
 vcsh clone git@github.com:andschwa/dotfiles.git
 
-mr checkout
+mr update
 vcsh run mr git update-index --assume-unchanged LICENSE README.org
 rm -f ~/LICENSE ~/README.org
 
