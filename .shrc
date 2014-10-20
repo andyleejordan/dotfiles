@@ -29,6 +29,7 @@ then
     ALTERNATE_EDITOR='nano'
 fi
 
+alias pem='pushd ~/.emacs.d && cask update && popd'
 if command -v brew >/dev/null 2>&1; then
     alias pag='brew search'
     alias pu='brew update'
