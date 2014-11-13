@@ -34,6 +34,10 @@
 #
 #
 #  CHANGELOG:
+#  1.9.1 (13.10.2014)
+#  - export CMD_ERR now for scripts to detect if CMD_PREV failed/succeeded
+#  - bugfix: CMD_PREV contained command even if it was skipped
+#
 #  1.9.0 (24.8.2014)
 #  - bugfix: env vars were not exported when external script was executable
 #  - rework GPG_KEY handling, allow virtually anything now (uid, keyid etc.) 
@@ -362,7 +366,7 @@
 ME_LONG="$0"
 ME="$(basename $0)"
 ME_NAME="${ME%%.*}"
-ME_VERSION="1.9.0"
+ME_VERSION="1.9.1"
 ME_WEBSITE="http://duply.net"
 
 # default config values
@@ -508,7 +512,7 @@ SEPARATORS:
              the next command will only be executed if the previous failed
 
    example:  
-    'pre_and_bkp_or_verify_post' translates to 'pre+bkp-verify_post
+    'pre+bkp-verify_post' translates to 'pre_and_bkp_or_verify_post'
 
 COMMANDS:
   usage      get usage help text
@@ -576,12 +580,13 @@ PRE/POST SCRIPTS:
   Some of interest may be
 
     CONFDIR, SOURCE, TARGET_URL_<PROT|HOSTPATH|USER|PASS>, 
-    GPG_<KEYS_ENC|KEY_SIGN|PW>, CMD_<PREV|NEXT>
+    GPG_<KEYS_ENC|KEY_SIGN|PW>, CMD_<PREV|NEXT>, CMD_ERR
 
   The CMD_* variables were introduced to allow different actions according to 
   the command the scripts were attached to e.g. 'pre_bkp_post_pre_verify_post' 
   will call the pre script two times, with CMD_NEXT variable set to 'bkp' 
   on the first and to 'verify' on the second run.
+  CMD_ERR holds the exit code of the CMD_PREV .
 
 EXAMPLES:
   create profile 'humbug':  
@@ -990,7 +995,7 @@ function run_script { # run pre/post scripts
 
 function run_cmd {
   # run or print escaped cmd string
-  CMD_ERR=0
+  local CMD_ERR=0
   if [ -n "$PREVIEW" ]; then
     CMD_OUT=$( echo "$@ 2>&1" )
     CMD_MSG="-- Run cmd -- $CMD_MSG --\n$CMD_OUT"
@@ -1264,7 +1269,7 @@ function gpg_import {
       
       CMD_MSG="Import keyfile '$FILE' to keyring"
       run_cmd "$GPG" $GPG_OPTS --batch --import "$FILE"
-      if [ "$CMD_ERR" != "0" ]; then 
+      if [ "$?" != "0" ]; then 
         warning "Import failed.${CMD_OUT:+\n$CMD_OUT}"
         ERR=1
         # continue with next
@@ -1280,7 +1285,7 @@ function gpg_import {
   # try to set trust automagically
   CMD_MSG="Autoset trust of key '$KEY_ID' to ultimate"
   run_cmd echo $(gpg_fingerprint "$KEY_ID"):6: \| "$GPG" $GPG_OPTS --import-ownertrust --batch --logger-fd 1
-  if [ "$CMD_ERR" = "0" ] && [ -z "$PREVIEW" ]; then 
+  if [ "$?" = "0" ] && [ -z "$PREVIEW" ]; then 
    # success on all levels, we're done
    return $ERR
   fi
@@ -1313,6 +1318,7 @@ function gpg_export_if_needed {
         # exporting
         CMD_MSG="Export $KEY_TYPE key '$KEY_ID'"
         run_cmd $GPG $GPG_OPTS --armor --export"$(test "SEC" = "$KEY_TYPE" && echo -secret-keys)"" $(qw $KEY_ID) >> \"$TMPFILE\""
+        CMD_ERR=$?
 
         if [ "$CMD_ERR" = "0" ]; then
           CMD_MSG="Write file '"$(basename "$FILE")"'"
@@ -1843,13 +1849,13 @@ fi
 # is tmp is a folder
 CMD_MSG="Checking TEMP_DIR '${TEMP_DIR}' is a folder"
 run_cmd test -d "$TEMP_DIR"
-if [ "$CMD_ERR" != "0" ]; then
+if [ "$?" != "0" ]; then
     error "Temporary file space '$TEMP_DIR' is not a directory."
 fi    
 # is tmp writeable
 CMD_MSG="Checking TEMP_DIR '${TEMP_DIR}' is writable"
 run_cmd test -w "$TEMP_DIR"
-if [ "$CMD_ERR" != "0" ]; then
+if [ "$?" != "0" ]; then
     error "Temporary file space '$TEMP_DIR' not writable."
 fi
 
@@ -1893,6 +1899,7 @@ if [ ${#GPG_KEYS_ENC_ARRAY[@]} -gt 0 ]; then
   # check encrypting
   CMD_MSG="Test - Encrypt to '$(join "','" "${GPG_KEYS_ENC_ARRAY[@]}")'${CMD_MSG_SIGN:+ & $CMD_MSG_SIGN}"
   run_cmd $(gpg_pass_pipein GPG_PW_SIGN GPG_PW) $GPG $CMD_PARAM_SIGN $(gpg_param_passwd GPG_PW_SIGN GPG_PW) $CMD_PARAMS $GPG_USEAGENT --status-fd 1 $GPG_OPTS -o "${GPG_TEST}_ENC" -e "$ME_LONG"
+  CMD_ERR=$?
 
   if [ "$CMD_ERR" != "0" ]; then 
     KEY_NOTRUST=$(echo "$CMD_OUT"|awk '/^\[GNUPG:\] INV_RECP 10/ { print $4 }')
@@ -1906,6 +1913,7 @@ if [ ${#GPG_KEYS_ENC_ARRAY[@]} -gt 0 ]; then
   CMD_MSG="Test - Decrypt"
   gpg_key_decryptable || CMD_DISABLED="No matching secret key available."
   run_cmd $(gpg_pass_pipein GPG_PW) "$GPG" $(gpg_param_passwd GPG_PW) $GPG_OPTS -o "${GPG_TEST}_DEC" $GPG_USEAGENT -d "${GPG_TEST}_ENC"
+  CMD_ERR=$?
 
   if [ "$CMD_ERR" != "0" ]; then 
     error_gpg_test "Decryption failed.${CMD_OUT:+\n$CMD_OUT}"
@@ -1916,6 +1924,7 @@ else
   # check encrypting
   CMD_MSG="Test - Encryption with passphrase${CMD_MSG_SIGN:+ & $CMD_MSG_SIGN}"
   run_cmd $(gpg_pass_pipein GPG_PW) "$GPG" $GPG_OPTS $CMD_PARAM_SIGN --passphrase-fd 0 -o "${GPG_TEST}_ENC" --batch -c "$ME_LONG"
+  CMD_ERR=$?
   if [ "$CMD_ERR" != "0" ]; then 
     error_gpg_test "Encryption failed.${CMD_OUT:+\n$CMD_OUT}"
   fi
@@ -1923,6 +1932,7 @@ else
   # check decrypting
   CMD_MSG="Test - Decryption with passphrase"
   run_cmd $(gpg_pass_pipein GPG_PW) "$GPG" $GPG_OPTS --passphrase-fd 0 -o "${GPG_TEST}_DEC" --batch -d "${GPG_TEST}_ENC"
+  CMD_ERR=$?
   if [ "$CMD_ERR" != "0" ]; then 
     error_gpg_test "Decryption failed.${CMD_OUT:+\n$CMD_OUT}"
   fi
@@ -1932,7 +1942,7 @@ fi
 CMD_MSG="Test - Compare"
 [ -r "${GPG_TEST}_DEC" ] || CMD_DISABLED="File not found. Nothing to compare."
 run_cmd "test \"\$(cat '$ME_LONG')\" = \"\$(cat '${GPG_TEST}_DEC')\""
-
+CMD_ERR=$?
 if [ "$CMD_ERR" = "0" ]; then 
   cleanup_gpgtest
 else
@@ -2072,33 +2082,41 @@ do
 # raise index in cmd array for pre/post param
 var_isset 'CMD_NO' && CMD_NO=$((++CMD_NO)) || CMD_NO=0
 
-# get prev/nextcmd vars
-nextno=$(($CMD_NO+1))
-[ "$nextno" -lt "${#CMDS[@]}" ] && CMD_NEXT=${CMDS[$nextno]} || CMD_NEXT='END'
-prevno=$(($CMD_NO-1))
-[ "$prevno" -ge 0 ] && CMD_PREV=${CMDS[$prevno]} || CMD_PREV='START'
-
 # deal with condition "commands"
+unset SKIP_NOW
 if var_isset 'CMD_SKIP' && [ $CMD_SKIP -gt 0 ]; then
   echo -e "\n--- Skipping command $(toupper $cmd) ! ---"
   CMD_SKIP=$(($CMD_SKIP - 1))
-  continue
+  SKIP_NOW="yes"
 elif [ "$cmd" == 'and' ] && [ "$CMD_ERR" -ne "0" ]; then
   CMD_SKIP=1
-  continue
+  SKIP_NOW="yes"
 elif [ "$cmd" == 'or' ] && [ "$CMD_ERR" -eq "0" ]; then
   CMD_SKIP=1
-  continue
+  SKIP_NOW="yes"
 elif [ "$cmd" == 'and' ] || [ "$cmd" == 'or' ]; then
   unset 'CMD_SKIP';
+  SKIP_NOW="yes"
+fi
+
+# sum up how many commands we skip and actually skip
+if [ -n "$SKIP_NOW" ]; then
+  CMD_SKIPPED=$((${CMD_SKIPPED-0} + 1))
   continue
 fi
+
+# get prev/nextcmd vars
+nextno=$(($CMD_NO+1))
+[ "$nextno" -lt "${#CMDS[@]}" ] && CMD_NEXT=${CMDS[$nextno]} || CMD_NEXT='END'
+# get previous command minus skipped commands
+prevno=$(( $CMD_NO - ${CMD_SKIPPED-0} - 1 )); unset CMD_SKIPPED
+[ "$prevno" -ge 0 ] && CMD_PREV=${CMDS[$prevno]} || CMD_PREV='START'
 
 # export some useful env vars for external scripts/programs to use
 export CONFDIR SOURCE TARGET_URL_PROT TARGET_URL_HOSTPATH \
        TARGET_URL_USER TARGET_URL_PASS \
        GPG_KEYS_ENC=$(join "\n" "${GPG_KEYS_ENC_ARRAY[@]}") GPG_KEY_SIGN \
-       GPG_PW CMD_PREV CMD_NEXT
+       GPG_PW CMD_PREV CMD_NEXT CMD_ERR
 
 # save start time
 RUN_START=$(date_fix %s)$(nsecs)
