@@ -1,4 +1,5 @@
-# Compiled source 
+# Compiled source
+*.elc
 *.pyc
 *.com
 *.class
@@ -27,22 +28,11 @@
 *.deb
 *.rpm
 
-# Logs and databases 
-*.log
-*.sqlite
-*.db
-
-# Images
-*.jp*g
-*.png
-*.bmp
-
 # LaTeX
 *.aux
 *.bbl
 *.blg
 *.dvi
-*.pdf
 
 # Emacs
 \#*#
