@@ -9,6 +9,6 @@ if (hash pmset 2>/dev/null && hash caffeinate 2>/dev/null); then
 	echo "$@ would run if not on battery power"
       	exit
     fi
-else 
+else
     eval "$@"
 fi

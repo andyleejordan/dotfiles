@@ -7,27 +7,26 @@ if [[ ! -e ~/.ssh/id_rsa.pub ]]; then
     hash ssh-keygen >/dev/null 2>&1 || { echo >&2 "Please install ssh-keygen"; exit 1; }
     ssh-keygen
     cat .ssh/id_rsa.pub
-    read -p "Add SSH keys where needed! Press any key to continue... " -n1 -s
+    read -s -p "Add SSH key to GitLab then press enter to continue... "
 else
     echo "SSH key already exists, continuing..."
 fi
 
 hash git >/dev/null 2>&1 || { echo >&2 "Please install git"; exit 1; }
-git clone git@github.com:andschwa/bin.git
+echo "Pulling in ~/bin..."
+[[ -d "bin" ]] || git clone git@suchcodemuchlove.com:dotfiles/bin.git
 PATH="$PATH:$HOME/bin"
 
-echo "Backing up conflicting files..."
-CONFLICTS=".bashrc .gitconfig .gitignore_global .mrconfig .tmux.conf .zprofile .zshrc"
-for FILE in $CONFLICTS; do
-    [[ -e "${FILE}" ]] && mv "${FILE}" "${FILE}.orig"
+echo "Backing up potentially conflicting files..."
+CONFLICTS=".bashrc .gitconfig .gitignore_global .mackup.cfg .mrconfig .offlineimaprc .path_edit.sh .shrc .tmux.conf .zpreztorc .zprofile .zshrc"
+for file in $CONFLICTS; do
+    [[ ( -e "${file}" ) && ( ! -e "${file}.orig" ) ]] && mv "${file}" "${file}.orig"
 done
 
 echo "Pulling in dotfiles..."
 # Note that vcsh and mr are in ~/bin
-vcsh clone git@github.com:andschwa/dotfiles.git
-
+[[ -d ".mr" ]] || git clone git@suchcodemuchlove.com:dotfiles/mr.git '.mr'
+ln -s .mr/mrconfig .mrconfig
 mr update
-vcsh run dotfiles git update-index --assume-unchanged LICENSE README.org
-rm -f ~/LICENSE ~/README.org
 
 echo "Dotfiles setup! Reload session to contine..."
