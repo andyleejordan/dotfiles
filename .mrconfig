@@ -1,0 +1,11 @@
+[DEFAULT]
+git_gc = git gc "$@"
+
+vcsh_checkout = git checkout "$@"
+vcsh_fetch    = git fetch "$@"
+vcsh_push     = git push "$@"
+vcsh_status   = git status "$@"
+
+jobs = 8
+
+include = cat ~/.config/mr/config.d/*
