@@ -121,6 +121,10 @@ source ~/.path_edit.sh
 path_front "bin" "$HOME/bin" "/usr/local/bin" "$HOME/.rbenv/bin"
 path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "$HOME/.cask/bin"
 
+## pyenv
+command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
+command -v pyenv-virtualenv-init >/dev/null 2>&1 && eval "$(pyenv virtualenv-init -)"
+
 ## local settings
 [[ -e ~/.localrc ]] && source ~/.localrc
 
