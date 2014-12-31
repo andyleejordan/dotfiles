@@ -1,8 +1,8 @@
 * Andrew Schwartzmeyer's dotfiles
 ** bootstrap
 #+begin_src sh
-curl https://suchcodemuchlove.com/dotfiles/bin/raw/master/dotfiles | bash
-#+end_src sh
+  curl https://suchcodemuchlove.com/dotfiles/bin/raw/master/dotfiles > bootstrap && bash bootstrap
+#+end_src
 ** myrepos and vcsh
 I use [[http://myrepos.branchable.com/][myrepos]] in conjunction with
 [[https://github.com/RichiH/vcsh][vcsh]] to fully automate the syncing
