@@ -10,12 +10,8 @@ zstyle ':prezto:load' pmodule \
     'archive' \
     'editor' \
     'git' \
-    'homebrew' \
     'osx' \
-    'pacman' \
-    'rsync' \
     'tmux' \
-    'yum' \
     'history' \
     'directory' \
     'utility' \
