@@ -1,6 +1,8 @@
 [user]
 	email = andrew@schwartzmeyer.com
 	name = Andrew Schwartzmeyer
+[credential]
+	helper = cache --timeout 30000 # seconds
 [core]
 	editor = "emacsclient -c"
 	excludesfile = ~/.gitignore_global
