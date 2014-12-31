@@ -12,7 +12,7 @@ With the =mr= (myrepos) configuration files in =~/.mr/repos-enabled=,
 the command =mr checkout= (after cloning this repository to =~/.mr=)
 will automatically clone my:
 
-- [[https://github.com/andschwa/bin][scripts (~/bin)]] scripts
+- [[https://github.com/andschwa/bin][~/bin]] scripts
 - [[http://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration][git]] configuration
 - [[https://github.com/nojhan/liquidprompt][liquidprompt]] shell theme
 - [[https://github.com/andschwa/shell][shell]] configuration
