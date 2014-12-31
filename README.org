@@ -1,0 +1,68 @@
+* Andrew Schwartzmeyer's dotfiles
+** bootstrap
+#+begin_src sh
+curl https://raw.githubusercontent.com/andschwa/bin/master/dotfiles | bash
+#+end_src sh
+** vcsh and myrepos
+I use [[https://github.com/RichiH/vcsh][vcsh]] in conjunction with [[http://myrepos.branchable.com/][myrepos]] to fully automate the syncing
+and version control of my various dotfiles.
+
+With the =mr= (myrepos) configuration files in
+=~/.config/mr/available.d=, the command =mr checkout= (after cloning
+this repository into my home directory using =vcsh clone dotfiles=)
+will automatically clone my:
+
+- [[https://github.com/andschwa/bin][scripts (~/bin)]]
+- [[https://github.com/cask/cask][Cask]] (Emacs package manager)
+- crontabs
+- [[http://duply.net/][duply]] backup profiles
+- [[https://github.com/andschwa/emacs][Emacs configuration]]
+- git settings
+- [[https://github.com/nojhan/liquidprompt][liquidprompt]] shell theme
+- OS X app settings using [[https://github.com/lra/mackup][mackup]]
+- these dotfiles using mr
+- [[http://offlineimap.org/][offlinemap]] settings (if enabled)
+- [[https://github.com/sstephenson/rbenv][rbenv]] (Ruby version manager)
+- [[https://github.com/andschwa/shell][shell configuration]]
+- [[http://sieve.info/][sieve]] mail filters (if enabled)
+- [[http://tmux.sourceforge.net/][tmux]] configuration with [[https://github.com/tmux-plugins/tpm][tpm]] (plugin manager)
+- [[https://github.com/sorin-ionescu/prezto/][prezto]] zsh modules
+
+Enabling non-default repositories is as simple as symlinking from
+=available.d= to =config.d=.
+
+The repositories that track bare files which belong in =$HOME= (such
+as git, mr, and shell), are all "cloned" into =$HOME=
+concurrently. The magic that makes this happen is =vcsh=, which bare
+clones the repositores to =~/.config/vcsh/repos.d= and sets their
+(shared) working directory to =$HOME=. Version control access to the
+different repositories is then delegated to =vcsh=, such as =vcsh foo
+status= or =vcsh bar diff=, which allows full use of git (or any other
+myrepos supported VCS). In this way, files that belong to different
+repositories (such as =~.gitconfig= and =.zshrc=) can happily coexist
+(without being symlinked!) in the same directory.
+
+*** A note on untracked files
+For convenience, =vcsh write-gitignore repo= generates
+=~/.gitignore.d/repo= which causes repositories to ignore untracked
+files (at generation). This is great, but if you happen to manually
+move a vcsh repo (say because you renamed it) or do something else
+funky, its configuraiton will need to be fixed with =vcsh upgrade
+repo= (which updates its excludesfile).
+
+** git assume-unchanged
+Since this repository is cloned into =$HOME=, and I didn't want the
+=LICENSE= and =README.org= littering my home directory, I found an
+obscure option thanks to GitHub's help, =git update-index
+--assume-unchanged path=, that allows me to delete the files, and then
+have vcsh (really, git) not care that they're non-existent. Putting it
+all together:
+
+#+begin_src sh
+vcsh run mr git update-index --assume-unchanged LICENSE README.org
+rm ~/LICENSE ~/README.org
+#+end_src sh
+** license
+Except where otherwise noted (e.g. cronic and duply), scripts (and
+other code) are written and licensed by me, Andrew Schwartzmeyer,
+under the provided AGPLv3 License.
