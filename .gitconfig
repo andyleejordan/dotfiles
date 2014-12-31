@@ -4,19 +4,19 @@
 [core]
 	editor = "emacsclient -c"
 	excludesfile = ~/.gitignore_global
-[merge]
-	tool = emerge
-[color]
-	ui = true
-[push]
-	default = simple
-[alias]
-        backup = push --mirror backup
-[pull]
-	ff = true
-[rerere]
-	enabled = true
-[include]
-	path = ~/.gitconfig_local
 [commit]
 	verbose = true
+[pull]
+	ff = true
+[push]
+	default = simple
+[merge]
+	tool = emerge
+[rerere]
+	enabled = true
+[color]
+	ui = true
+[alias]
+        backup = push --mirror backup
+[include]
+	path = ~/.gitconfig_local
