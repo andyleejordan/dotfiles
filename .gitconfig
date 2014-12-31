@@ -18,3 +18,5 @@
 	enabled = true
 [include]
 	path = ~/.gitconfig_local
+[commit]
+	verbose = true
