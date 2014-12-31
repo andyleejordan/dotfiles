@@ -1,7 +1,6 @@
 [user]
 	email = andrew@schwartzmeyer.com
 	name = Andrew Schwartzmeyer
-	signingkey = A84A216F
 [core]
 	editor = "emacsclient -c"
 	excludesfile = ~/.gitignore_global
