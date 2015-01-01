@@ -1,9 +1,2 @@
 [DEFAULT]
-jobs = 8
-
-vcsh_checkout = git checkout "$@"
-vcsh_fetch    = git fetch "$@"
-vcsh_push     = git push "$@"
-vcsh_status   = git status "$@"
-
 include = cat ~/.mr/repos-enabled/*
