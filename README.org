@@ -12,8 +12,16 @@
 - Executes =mr update= which does everything else
 
 ** structure
-I use [[http://myrepos.branchable.com/][myrepos]] in conjunction with [[https://github.com/RichiH/vcsh][vcsh]] to fully automate the syncing
+I use [[http://myrepos.branchable.com/][myrepos]] in combination with [[https://github.com/RichiH/vcsh][vcsh]] to fully automate the syncing
 and version control of my various dotfile repositories.
+
+This combination lets there exist a Git repository for each set of
+dotfiles, such as my Emacs repo for =~/.emacs.d=, alongside those
+co-existing in the same directory, that is, my Git repo has
+=~/.gitconfig= and =~/.gitignore_global=, but my Zsh repo has
+=~/.zshrc=, =~/.zprofile=, and =~/.zpreztorc=. Elements of this group
+of Git repositories can be toggled at will, and clearly have their own
+history and visibility to others.
 
 *** myrepos - multiple repo management
 Myrepos is a tool that enables parallel management of version control
@@ -69,17 +77,20 @@ in the same manner as any other.
 My dotfiles framework is a modification of that documented by the
 author of =vcsh= [[https://github.com/RichiH/vcsh/tree/master/doc][RichiH]]. Making this work for your own needs ought to
 be relatively simple; just get your dotfiles into whatever set of
-repos makes sense to you, and add them to =mr=. I like having a
-separate file per repo, which get symlinked to the folder included by
-=mr=, so that I can configure which repos are pulled in on each
-machine. I also preferred using =vcsh= so that I have separate repos
-tracking logically separate files in my home folder. If you want them
-all in the same repo, then =vcsh= need not be used, and it can be
-placed under =[.]= in a =mr= configuration; see the =mr= author's
-[[https://github.com/joeyh/myrepos/blob/master/mrconfig.complex][example]] of a more complex setup. My bootstrap script handles the =mr=
-and =vcsh= dependencies by pulling in my =~/bin= scripts, which
-include both, so modify it as needed (you may prefer your distro's
-packages or your own scripts folder).
+repos makes sense to you, and add them to =mr=.
+
+Having a set of repositories lets me share only some publicly, as well
+as keep their histories separate. I like having a separate file per
+repo, which gets symlinked to the folder included by =mr=, so that I
+can configure which repos are pulled in on each machine. I also
+preferred using =vcsh= so that I have separate repos tracking
+logically separate files in my home folder. If you want them all in
+the same repo, then =vcsh= need not be used, and it can be placed
+under =[.]= in a =mr= configuration; see the =mr= author's [[https://github.com/joeyh/myrepos/blob/master/mrconfig.complex][example]] of
+a more complex setup. My bootstrap script handles the =mr= and =vcsh=
+dependencies by pulling in my =~/bin= scripts, which include both, so
+modify it as needed (you may prefer your distro's packages or your own
+scripts folder).
 
 ** license
 Except where otherwise noted (e.g. cronic, duply, mr, and vcsh),
