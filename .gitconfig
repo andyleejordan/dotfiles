@@ -6,8 +6,14 @@
 [core]
 	editor = "emacsclient -c"
 	excludesfile = ~/.gitignore_global
+	abbrev = 12
 [commit]
 	verbose = true
+[log]
+	decorate = true
+	abbrevCommit = true
+[format]
+	pretty = oneline
 [pull]
 	ff = true
 [push]
