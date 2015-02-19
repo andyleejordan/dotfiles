@@ -5,5 +5,5 @@ server=/tmp/emacs501/server
 if [[ -e $server ]]; then
     emacsclient -s $server "$@"
 else
-    open -a /Applications/Emacs.app "$@"
+    open -a ~/Applications/Emacs.app "$@"
 fi
