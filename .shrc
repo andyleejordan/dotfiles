@@ -16,8 +16,7 @@ then
     alias unlock_files='chflags -R nouchg *'
 
     ## editor
-    ALTERNATE_EDITOR='mg'
-    alias emacs="open -a Emacs $1"
+    EDITOR='ec -n "$@"'
 elif [[ $OSTYPE == linux-gnu ]]
 then
     # power
@@ -27,7 +26,10 @@ then
 
     ## editor
     ALTERNATE_EDITOR='nano'
+    EDITOR="emacsclient -n"
 fi
+
+alias e=$EDITOR
 
 # simplified package management
 # pag - search
@@ -100,10 +102,6 @@ elif command -v yum >/dev/null 2>&1; then
     alias pu='sudo yum update-to'
     alias pup='sudo yum update'
 fi
-
-# editor
-EDITOR="emacsclient -n -a $ALTERNATE_EDITOR"
-alias e=$EDITOR
 
 # less options
 export LESS='-g -i -M -R -S -w -z-4'
