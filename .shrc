@@ -138,4 +138,4 @@ export GPG_TTY=$(tty)
 [[ -e ~/.rbenv ]] && eval "$(rbenv init -)"
 
 ## prompt
-[[ $TERM != "dumb" ]] && [[ -e ~/.liquidprompt/ ]] && source ~/.liquidprompt/liquidprompt
+[[ -e ~/.liquidprompt/ ]] && source ~/.liquidprompt/liquidprompt
