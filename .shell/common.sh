@@ -13,7 +13,7 @@ path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "$HOME/.cask/bin"
 source ~/.shell/aliases.sh
 
 ## local settings
-[[ -e ~/.localrc ]] && source ~/.localrc
+[[ -e ~/.shell/local.sh ]] && source ~/.shell/local.sh
 
 ## pyenv
 command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
