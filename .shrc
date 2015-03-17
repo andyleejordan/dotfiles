@@ -1,5 +1,4 @@
 ## aliases
-
 # misc
 alias ping='ping -c 8'
 alias root='sudo su'
@@ -103,7 +102,10 @@ elif command -v yum >/dev/null 2>&1; then
     alias pup='sudo yum update'
 fi
 
-# less options
+## assume colors work
+export TERM=xterm-256color
+
+## less options
 export LESS='-g -i -M -R -S -w -z-4'
 
 ## GitHub API
