@@ -15,12 +15,16 @@ source ~/.shell/aliases.sh
 ## local settings
 [[ -e ~/.shell/local.sh ]] && source ~/.shell/local.sh
 
-## pyenv
-command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
-command -v pyenv-virtualenv-init >/dev/null 2>&1 && eval "$(pyenv virtualenv-init -)"
+## skip complicated setup for dumb shells
+if [[ "$TERM" != "dumb" ]]
+then
+    ## pyenv
+    command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
+    command -v pyenv-virtualenv-init >/dev/null 2>&1 && eval "$(pyenv virtualenv-init -)"
 
-## rbenv
-[[ -e ~/.rbenv ]] && eval "$(rbenv init -)"
+    ## rbenv
+    [[ -e ~/.rbenv ]] && eval "$(rbenv init -)"
 
-## prompt
-[[ -e ~/.liquidprompt/ ]] && source ~/.liquidprompt/liquidprompt
+    ## prompt
+    [[ -e ~/.liquidprompt/ ]] && source ~/.liquidprompt/liquidprompt
+fi
