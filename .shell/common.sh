@@ -117,7 +117,7 @@ homebrew_token="$HOME/.homebrew"
 [[ -e $homebrew_token ]] && source $homebrew_token
 
 ## path
-source ~/.path_edit.sh
+source ~/.shell/path-edit.sh
 path_front "bin" "$HOME/bin" "/usr/local/bin" "$HOME/.rbenv/bin"
 path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "$HOME/.cask/bin"
 
