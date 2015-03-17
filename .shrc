@@ -128,13 +128,7 @@ command -v pyenv-virtualenv-init >/dev/null 2>&1 && eval "$(pyenv virtualenv-ini
 ## local settings
 [[ -e ~/.localrc ]] && source ~/.localrc
 
-## gpg-agent
-if [ -f "$HOME/.gpg-agent-info" ]; then
-    source "$HOME/.gpg-agent-info"
-    export GPG_AGENT_INFO
-    export SSH_AUTH_SOCK
-fi
-export GPG_TTY=$(tty)
+## use http://www.funtoo.org/Keychain
 
 ## rbenv
 [[ -e ~/.rbenv ]] && eval "$(rbenv init -)"
