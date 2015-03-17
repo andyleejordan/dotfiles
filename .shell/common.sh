@@ -1,19 +1,13 @@
-## assume colors work
-export TERM=xterm-256color
-
-## less options
-export LESS='-g -i -M -R -S -w -z-4'
-
 ## path
 source ~/.shell/path-edit.sh
 path_front "bin" "$HOME/bin" "/usr/local/bin" "$HOME/.rbenv/bin"
 path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "$HOME/.cask/bin"
 
-## aliases
-source ~/.shell/aliases.sh
-
 ## local settings
 [[ -e ~/.shell/local.sh ]] && source ~/.shell/local.sh
+
+## aliases
+source ~/.shell/aliases.sh
 
 ## skip complicated setup for dumb shells
 if [[ "$TERM" != "dumb" ]]
@@ -28,3 +22,9 @@ then
     ## prompt
     [[ -e ~/.liquidprompt/ ]] && source ~/.liquidprompt/liquidprompt
 fi
+
+## assume colors work
+export TERM=xterm-256color
+
+## less options
+export LESS='-g -i -M -R -S -w -z-4'
