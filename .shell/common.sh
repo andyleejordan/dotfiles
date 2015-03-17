@@ -20,14 +20,12 @@ path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "$HOME/.cask/bin"
 ## aliases
 source ~/.shell/aliases.sh
 
-## pyenv
-command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
-command -v pyenv-virtualenv-init >/dev/null 2>&1 && eval "$(pyenv virtualenv-init -)"
-
 ## local settings
 [[ -e ~/.localrc ]] && source ~/.localrc
 
-## use http://www.funtoo.org/Keychain
+## pyenv
+command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
+command -v pyenv-virtualenv-init >/dev/null 2>&1 && eval "$(pyenv virtualenv-init -)"
 
 ## rbenv
 [[ -e ~/.rbenv ]] && eval "$(rbenv init -)"
