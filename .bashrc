@@ -1,2 +1,2 @@
 # source common configuration
-source ~/.shrc
+source ~/.shell/common.sh
