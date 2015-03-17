@@ -4,14 +4,6 @@ export TERM=xterm-256color
 ## less options
 export LESS='-g -i -M -R -S -w -z-4'
 
-## GitHub API
-github_token="$HOME/.github"
-[[ -e $github_token ]] && source $github_token
-
-## homebrew GitHub API
-homebrew_token="$HOME/.homebrew"
-[[ -e $homebrew_token ]] && source $homebrew_token
-
 ## path
 source ~/.shell/path-edit.sh
 path_front "bin" "$HOME/bin" "/usr/local/bin" "$HOME/.rbenv/bin"
