@@ -86,7 +86,7 @@ then
     alias unlock_files='chflags -R nouchg *'
 
     ## editor
-    EDITOR='ec -n "$@"'
+    EDITOR='ec "$@"'
 elif [[ $OSTYPE == linux-gnu ]]
 then
     # power
@@ -96,9 +96,10 @@ then
 
     ## editor
     ALTERNATE_EDITOR='nano'
-    EDITOR="emacsclient -n"
+    EDITOR="emacsclient"
 fi
-alias e=$EDITOR
+
+alias e="$EDITOR -n"
 
 # miscellaneous
 alias ping='ping -c 8'
