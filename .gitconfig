@@ -17,13 +17,21 @@
 	ff = true
 [push]
 	default = simple
-[merge]
-	tool = emerge
 [rerere]
 	enabled = true
 [color]
 	ui = true
 [alias]
         backup = push --mirror backup
+[merge]
+	tool = ediff
+[mergetool.ediff]
+        cmd = ediff $LOCAL $REMOTE $MERGED $BASE
+        trustExitCode = true
+[diff]
+        tool = ediff
+        guitool = ediff
+[difftool.ediff]
+        cmd = ediff $LOCAL $REMOTE $MERGED
 [include]
 	path = ~/.gitconfig_local
