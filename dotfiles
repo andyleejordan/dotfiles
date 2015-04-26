@@ -27,6 +27,6 @@ echo "Pulling in dotfiles..."
 # Note that vcsh and mr are in ~/bin
 [[ -d ".mr" ]] || git clone git@suchcodemuchlove.com:dotfiles/mr.git '.mr'
 ln -s .mr/mrconfig .mrconfig
-mr update
+mr checkout
 
 echo "Dotfiles setup! Reload session to contine..."
