@@ -23,7 +23,7 @@ if command -v brew >/dev/null 2>&1; then
     alias pr='brew uninstall'
     alias pre='brew reinstall'
     alias pu='brew update && brew outdated'
-    alias pup='brew update && brew upgrade'
+    alias pup='brew update && brew upgrade --all'
 elif command -v aptitude >/dev/null 2>&1; then
     alias pag='aptitude search'
     alias par='sudo apt-get autoremove'
