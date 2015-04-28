@@ -105,3 +105,4 @@ alias e="$EDITOR -n"
 alias ping='ping -c 8'
 alias root='sudo su'
 alias cppc='cppcheck --std=c++11 --enable=all --suppress=missingIncludeSystem .'
+alias octave='octave --quiet'
