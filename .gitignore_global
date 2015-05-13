@@ -37,7 +37,6 @@
 # Emacs
 \#*#
 .#*
-.dir-locals.el
 
 # Vim
 tags
