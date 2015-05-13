@@ -86,7 +86,7 @@ then
     alias unlock_files='chflags -R nouchg *'
 
     ## editor
-    EDITOR='ec "$@"'
+    EDITOR=ec
 elif [[ $OSTYPE == linux-gnu ]]
 then
     # power
