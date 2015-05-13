@@ -8,6 +8,8 @@ then
     unfunction preexec
     PS1='$ '
 else
+    # set Tmux theme, launched by prezto
+    export TMUX_THEME=dark
     # prezto
     prezto_init="${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
     [[ -s $prezto_init ]] && source $prezto_init
