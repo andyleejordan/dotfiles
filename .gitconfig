@@ -39,3 +39,6 @@
 	path = ~/.gitconfig_local
 [help]
 	autoCorrect = -1
+[rebase]
+	autoSquash = true
+	autoStash = true
