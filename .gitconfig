@@ -23,7 +23,8 @@
 [color]
 	ui = true
 [alias]
-        backup = push --mirror backup
+	backup = push --mirror backup
+	lol = log --graph --pretty=oneline
 [merge]
 	tool = ediff
 [mergetool.ediff]
