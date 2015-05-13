@@ -19,6 +19,7 @@
 	default = simple
 [rerere]
 	enabled = true
+	autoUpdate = true
 [color]
 	ui = true
 [alias]
