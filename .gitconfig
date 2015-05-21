@@ -36,10 +36,10 @@
 	guitool = ediff
 [difftool.ediff]
 	cmd = ediff $LOCAL $REMOTE $MERGED
-[include]
-	path = ~/.gitconfig_local
 [help]
 	autoCorrect = -1
 [rebase]
 	autoSquash = true
 	autoStash = true
+[include]
+	path = ~/.gitconfig_local
