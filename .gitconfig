@@ -4,6 +4,7 @@
 [credential]
 	helper = cache --timeout 30000 # seconds
 [core]
+	editor = emacsclient
 	excludesfile = ~/.gitignore_global
 	abbrev = 12
 [commit]
