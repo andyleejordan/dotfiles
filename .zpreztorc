@@ -16,6 +16,7 @@ zstyle ':prezto:load' pmodule \
     'directory' \
     'utility' \
     'completion' \
+    'command-not-found' \
     'syntax-highlighting' \
     'history-substring-search'
 
