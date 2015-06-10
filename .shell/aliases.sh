@@ -27,6 +27,7 @@ if command -v brew >/dev/null 2>&1; then
 elif command -v aptitude >/dev/null 2>&1; then
     alias pag='aptitude search'
     alias par='sudo apt-get autoremove'
+    alias pbd='sudo aptitude build-dep'
     alias pcl='sudo aptitude clean'
     alias pdep='pin'
     alias pi='sudo aptitude install'
@@ -39,6 +40,7 @@ elif command -v aptitude >/dev/null 2>&1; then
 elif command -v apt-get >/dev/null 2>&1; then
     alias pag='apt-cache search'
     alias par='sudo apt-get autoremove'
+    alias pbd='sudo apt-get build-dep'
     alias pcl='sudo apt-get clean'
     alias pdep='pin'
     alias pi='sudo apt-get install'
@@ -60,6 +62,7 @@ elif command -v pacman >/dev/null 2>&1; then
 elif command -v yum >/dev/null 2>&1; then
     alias pag='yum search'
     alias par='sudo yum autoremove'
+    alias pbd='sudo yum-builddep'
     alias pcl='sudo yum clean'
     alias pdep='yum deplist'
     alias pi='sudo yum install'
