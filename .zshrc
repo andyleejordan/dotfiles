@@ -1,3 +1,7 @@
+# Uses 'thefuck' to fix common command mistakes
+# https://github.com/nvbn/thefuck
+alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
+
 # allow Emacs Tramp to work
 if [[ "$TERM" == "dumb" ]]
 then
