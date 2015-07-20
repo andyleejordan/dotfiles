@@ -10,7 +10,6 @@ zstyle ':prezto:load' pmodule \
     'archive' \
     'editor' \
     'osx' \
-    'tmux' \
     'history' \
     'directory' \
     'utility' \
@@ -24,7 +23,3 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 
 # Expand .... to ../..
 zstyle ':prezto:module:editor' dot-expansion 'yes'
-
-# Auto-start tmux for local shells
-zstyle ':prezto:module:tmux:auto-start' local 'yes'
-zstyle ':prezto:module:tmux:auto-start' remote 'yes'
