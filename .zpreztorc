@@ -14,6 +14,7 @@ zstyle ':prezto:load' pmodule \
     'directory' \
     'utility' \
     'fasd' \
+    'gpg' \
     'completion' \
     'command-not-found' \
     'syntax-highlighting' \
