@@ -1,7 +1,7 @@
 ## path
 source ~/.shell/path-edit.sh
-path_front "bin" "$HOME/bin" "/usr/local/bin" "$HOME/.rbenv/bin"
-path_back "/sbin" "/bin" "/usr/sbin" "/usr/bin" "$HOME/.cask/bin"
+path_front ~/bin /usr/local/bin
+path_back /sbin /bin /usr/sbin /usr/bin
 
 ## local settings
 [[ -e ~/.shell/local.sh ]] && source ~/.shell/local.sh
