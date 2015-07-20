@@ -13,6 +13,7 @@ zstyle ':prezto:load' pmodule \
     'history' \
     'directory' \
     'utility' \
+    'fasd' \
     'completion' \
     'command-not-found' \
     'syntax-highlighting' \
