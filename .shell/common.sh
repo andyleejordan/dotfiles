@@ -9,19 +9,8 @@ path_back /sbin /bin /usr/sbin /usr/bin
 ## aliases
 source ~/.shell/aliases.sh
 
-## skip complicated setup for dumb shells
-if [[ "$TERM" != "dumb" ]]
-then
-    ## pyenv
-    command -v pyenv >/dev/null 2>&1 && eval "$(pyenv init -)"
-    command -v pyenv-virtualenv-init >/dev/null 2>&1 && eval "$(pyenv virtualenv-init -)"
-
-    ## rbenv
-    [[ -e ~/.rbenv ]] && eval "$(rbenv init -)"
-
-    ## prompt
-    [[ -e ~/.liquidprompt/ ]] && source ~/.liquidprompt/liquidprompt
-fi
+## liquidprompt
+[[ ( -e ~/.liquidprompt/ ) && ( $- = *i* ) ]] && source ~/.liquidprompt/liquidprompt
 
 ## assume colors work
 export TERM=xterm-256color
