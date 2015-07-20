@@ -23,3 +23,10 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 
 # Expand .... to ../..
 zstyle ':prezto:module:editor' dot-expansion 'yes'
+
+# Enable more Zsh highlighting
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'cursor' \
+  'root'
