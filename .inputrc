@@ -1,0 +1,7 @@
+$include /etc/inputrc
+
+set echo-control-characters off
+
+"\e[A":history-search-backward
+"\e[B":history-search-forward
+"\es":"\C-asudo \C-e"
