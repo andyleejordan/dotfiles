@@ -70,9 +70,18 @@ set_prompt () {
 }
 PROMPT_COMMAND='set_prompt'
 
-# Uses 'thefuck' to fix common command mistakes
+# uses 'thefuck' to fix common command mistakes
 # https://github.com/nvbn/thefuck
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
 # source common configuration
 source ~/.shell/common.sh
