@@ -1,16 +1,33 @@
-# Completions
+# completions
 source ~/.shell/git-completion.bash
 
-export HISTCONTROL=ignoreboth
+# cd options
+shopt -s autocd cdspell dirspell
 
-# Prompt setup
-export PROMPT_DIRTRIM=2
+# glob options
+shopt -s dotglob extglob globstar nocaseglob
+
+# job options
+shopt -s checkjobs huponexit
+
+# shell options
+shopt -s checkhash checkwinsize
+
+# history
+shopt -s cmdhist histappend histverify
+
+HISTCONTROL=ignoreboth
+HISTSIZE=10000
+HISTFILESIZE=2000
+
+# prompt setup
+PROMPT_DIRTRIM=2
 
 source ~/.shell/git-prompt.sh
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1
-export GIT_PS1_SHOWCOLORHINTS=1
-export GIT_PS1_SHOWUPSTREAM=auto
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWCOLORHINTS=1
+GIT_PS1_SHOWUPSTREAM=auto
 
 set_prompt () {
     local last_command=$?
