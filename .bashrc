@@ -1,3 +1,5 @@
+# this file is sourced by non-login interactive shells and ~/.bash_profile
+
 # completions
 source ~/.shell/git-completion.bash
 
@@ -66,7 +68,8 @@ set_prompt () {
     fi
 
     # end of prompt
-    PS1+='\$ '; PS1+=$color_off
+    PS1+='\$ '
+    PS1+=$color_off
 }
 PROMPT_COMMAND='set_prompt'
 
@@ -83,8 +86,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# source common configuration
-source ~/.shell/common.sh
-
 # disable flow control
 stty -ixon
+
+# source everything else
+[[ -e ~/.shell/common.sh ]] && source ~/.shell/common.sh
