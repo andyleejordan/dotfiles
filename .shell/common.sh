@@ -8,9 +8,6 @@ path_back /sbin /bin /usr/sbin /usr/bin
 # aliases
 source ~/.shell/aliases.sh
 
-## disable flow control
-stty -ixon
-
 # liquidprompt
 [[ ( -e ~/.liquidprompt/ ) && ( $- = *i* ) ]] && source ~/.liquidprompt/liquidprompt
 

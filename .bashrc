@@ -85,3 +85,6 @@ fi
 
 # source common configuration
 source ~/.shell/common.sh
+
+# disable flow control
+stty -ixon
