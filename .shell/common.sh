@@ -9,10 +9,13 @@ path_back /sbin /bin /usr/sbin /usr/bin
 source ~/.shell/aliases.sh
 
 # liquidprompt
-[[ ( -e ~/.liquidprompt/ ) && ( $- = *i* ) ]] && source ~/.liquidprompt/liquidprompt
+[[ -e ~/.liquidprompt/ && $- = *i* ]] && source ~/.liquidprompt/liquidprompt
 
 # assume colors work
 export TERM=xterm-256color
+
+# set Tmux theme
+export TMUX_THEME=dark
 
 # less options
 export LESS='-g -i -M -R -S -w -z-4'
