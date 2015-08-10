@@ -9,7 +9,7 @@ path_back /sbin /bin /usr/sbin /usr/bin
 source ~/.shell/aliases.sh
 
 # enable ls colors
-if ls --color=auto 2> /dev/null; then
+if ls --color=auto &> /dev/null; then
     alias ls="ls --color=auto"
 else
     export CLICOLOR=1
