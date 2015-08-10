@@ -27,4 +27,4 @@ else
 fi
 
 # source everything else
-[[ -e ~/.shell/local.sh ]] && source ~/.shell/local.sh
+source ~/.shell/local.sh
