@@ -93,4 +93,4 @@ man() {
 stty -ixon
 
 # source everything else
-[[ -e ~/.shell/common.sh ]] && source ~/.shell/common.sh
+source ~/.shell/common.sh
