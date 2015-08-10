@@ -19,6 +19,12 @@ export TMUX_THEME=dark
 
 # less options
 export LESS='-g -i -M -R -S -w -z-4'
+# enable ls colors
+if ls --color=auto 2> /dev/null; then
+    alias ls="ls --color=auto"
+else
+    export CLICOLOR=1
+fi
 
 # source everything else
 [[ -e ~/.shell/local.sh ]] && source ~/.shell/local.sh
