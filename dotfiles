@@ -1,32 +1,40 @@
-#!/bin/bash
-# Copyright 2014 Andrew Schwartzmeyer
-set -u
+#!/usr/bin/env bash
+# Copyright 2015 Andrew Schwartzmeyer
+set -eu
 
+cwd=$(pwd)
 cd ~
-if [[ ! -e ~/.ssh/id_rsa.pub ]]; then
-    hash ssh-keygen >/dev/null 2>&1 || { echo >&2 "Please install ssh-keygen"; exit 1; }
-    ssh-keygen
-    cat .ssh/id_rsa.pub
-    read -s -p "Add SSH key to GitLab then press enter to continue... "
-else
-    echo "SSH key already exists, continuing..."
+
+if ! hash git 2> /dev/null; then
+    echo >&2 "Please install git" & exit 1
 fi
 
-hash git >/dev/null 2>&1 || { echo >&2 "Please install git"; exit 1; }
 echo "Pulling in ~/bin..."
-[[ -d "bin" ]] || git clone git@suchcodemuchlove.com:dotfiles/bin.git
+if [[ ! -d bin ]]; then
+    git clone git@suchcodemuchlove.com:dotfiles/bin.git bin
+fi
+
 PATH="$PATH:$HOME/bin"
 
 echo "Backing up potentially conflicting files..."
-CONFLICTS=".bashrc .gitconfig .gitignore_global .mackup.cfg .mrconfig .offlineimaprc .path_edit.sh .shrc .tmux.conf .zpreztorc .zprofile .zshrc"
+CONFLICTS=".bash_profile .bash_logout .bashrc .gitconfig .gitignore_global .mrconfig .tmux.conf .zprofile .zshrc"
 for file in $CONFLICTS; do
-    [[ ( -e "${file}" ) && ( ! -e "${file}.orig" ) ]] && mv "${file}" "${file}.orig"
+    if [[ ( -e $file ) && ( ! -e ${file}.orig ) ]]; then
+	 mv $file ${file}.orig
+    fi
 done
 
 echo "Pulling in dotfiles..."
-# Note that vcsh and mr are in ~/bin
-[[ -d ".mr" ]] || git clone git@suchcodemuchlove.com:dotfiles/mr.git '.mr'
-ln -s .mr/mrconfig .mrconfig
+# Note that vcsh and mr are in bin
+if [[ ! -d .mr ]]; then
+    git clone git@suchcodemuchlove.com:dotfiles/mr.git .mr
+fi
+
+if [[ ! -L .mrconfig ]]; then
+    ln -s .mr/mrconfig .mrconfig
+fi
+
 mr checkout
 
-echo "Dotfiles setup! Reload session to contine..."
+cd $cwd
+echo "Dotfiles bootstrapping complete! Reload session..."
