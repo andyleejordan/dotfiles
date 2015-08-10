@@ -10,8 +10,9 @@
 [commit]
 	verbose = true
 [log]
-	decorate = true
 	abbrevCommit = true
+	date = relative
+	decorate = full
 [format]
 	pretty = oneline
 [pull]
