@@ -12,7 +12,7 @@
 [log]
 	abbrevCommit = true
 	date = relative
-	decorate = full
+	decorate = short
 [format]
 	pretty = oneline
 [pull]
