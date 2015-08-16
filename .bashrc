@@ -60,11 +60,11 @@ set_prompt () {
     # add Git status with color hints
     PS1+="$(__git_ps1 "%s ")"
 
-    # red for root, blue for user
+    # red for root, green for user
     if [[ $EUID == 0 ]]; then
 	PS1+=$color_red
     else
-	PS1+=$color_blue
+	PS1+=$color_green
     fi
 
     # end of prompt
