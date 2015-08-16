@@ -15,5 +15,12 @@ else
     export CLICOLOR=1
 fi
 
+# attach or start Tmux
+if hash tmux 2> /dev/null; then
+    if [[ -z $TMUX && -z $EMACS ]]; then
+	tmux attach || tmux new
+    fi
+fi
+
 # source everything else
 source ~/.shell/local.sh
