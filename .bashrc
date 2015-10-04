@@ -2,6 +2,7 @@
 
 # completions
 source ~/.shell/git-completion.bash
+__git_complete g _git
 
 # cd options
 shopt -s autocd cdspell dirspell
