@@ -6,14 +6,33 @@
 	excludesfile = ~/.gitignore_global
 	abbrev = 9
 [alias]
-	backup = push --mirror backup
+	a = add
+	b = branch
+	c = commit --verbose
+	co = checkout
+	d = diff
+	ds = diff --staged
+	f = fetch
+	h = help
+	hc = help config
+	l = log
 	lol = log --graph --pretty=oneline
+	m = merge
+	p = pull
+	ps = push
+	r = reset
+	rb = rebase
+	redo = commit --amend --no-edit
+	s = status --short --branch
+	sh = show
+	st = stash
+	stat = status
+	sub = submodule
+	y = cherry-pick
 [am]
 	threeWay = true
 [apply]
 	ignoreWhitespace = change
-[commit]
-	verbose = true
 [credential]
 	helper = cache --timeout 30000 # seconds
 [diff]
@@ -44,8 +63,5 @@
 [rerere]
 	enabled = true
 	autoUpdate = true
-[status]
-	short = true
-	branch = true
 [include]
 	path = ~/.gitconfig_local
