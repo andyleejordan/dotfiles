@@ -105,6 +105,7 @@ fi
 alias e="$EDITOR -n"
 
 # miscellaneous
+alias g='git'
 alias ping='ping -c 8'
 alias root='sudo su'
 alias cppc='cppcheck --std=c++11 --enable=all --suppress=missingIncludeSystem .'
