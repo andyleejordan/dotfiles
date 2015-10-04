@@ -1,46 +1,51 @@
 [user]
 	email = andrew@schwartzmeyer.com
 	name = Andrew Schwartzmeyer
-[credential]
-	helper = cache --timeout 30000 # seconds
 [core]
 	editor = emacsclient
 	excludesfile = ~/.gitignore_global
-	abbrev = 12
-[commit]
-	verbose = true
-[log]
-	abbrevCommit = true
-	date = relative
-	decorate = short
-[format]
-	pretty = oneline
-[pull]
-	ff = true
-[push]
-	default = simple
-[rerere]
-	enabled = true
-	autoUpdate = true
-[color]
-	ui = true
+	abbrev = 9
 [alias]
 	backup = push --mirror backup
 	lol = log --graph --pretty=oneline
-[merge]
-	tool = ediff
-[mergetool.ediff]
-	cmd = ediff $LOCAL $REMOTE $MERGED $BASE
-	trustExitCode = true
+[am]
+	threeWay = true
+[apply]
+	ignoreWhitespace = change
+[commit]
+	verbose = true
+[credential]
+	helper = cache --timeout 30000 # seconds
 [diff]
 	tool = ediff
 	guitool = ediff
 [difftool.ediff]
 	cmd = ediff $LOCAL $REMOTE $MERGED
+[format]
+	pretty = medium
 [help]
 	autoCorrect = -1
+[log]
+	abbrevCommit = true
+	decorate = short
+[merge]
+	tool = ediff
+[mergetool.ediff]
+	cmd = ediff $LOCAL $REMOTE $MERGED $BASE
+	trustExitCode = true
+[pull]
+	ff = only
+[push]
+	default = current
 [rebase]
+	stat = true
 	autoSquash = true
 	autoStash = true
+[rerere]
+	enabled = true
+	autoUpdate = true
+[status]
+	short = true
+	branch = true
 [include]
 	path = ~/.gitconfig_local
