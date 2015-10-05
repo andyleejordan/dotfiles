@@ -74,9 +74,6 @@ elif command -v yum >/dev/null 2>&1; then
     alias pup='sudo yum update'
 fi
 
-# Emacs package update
-alias pem='pushd ~/.emacs.d && cask update && popd'
-
 # system dependent
 if [[ $OSTYPE == darwin* ]]
 then
