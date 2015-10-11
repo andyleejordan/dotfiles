@@ -12,6 +12,7 @@
 	co = checkout
 	d = diff
 	ds = diff --staged
+	du = count-objects --verbose --human-readable
 	f = fetch
 	h = help
 	hc = help config
