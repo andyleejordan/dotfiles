@@ -34,6 +34,8 @@
 	threeWay = true
 [apply]
 	ignoreWhitespace = change
+[color]
+	ui = auto
 [credential]
 	helper = cache --timeout 30000 # seconds
 [diff]
