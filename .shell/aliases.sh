@@ -103,6 +103,7 @@ alias e="$EDITOR -n"
 
 # miscellaneous
 alias g='git'
+complete -o default -o nospace -F _git g
 alias ping='ping -c 8'
 alias root='sudo su'
 alias cppc='cppcheck --std=c++11 --enable=all --suppress=missingIncludeSystem .'
