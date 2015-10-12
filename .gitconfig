@@ -3,7 +3,7 @@
 	name = Andrew Schwartzmeyer
 [core]
 	editor = emacsclient
-	excludesfile = ~/.gitignore_global
+	excludesFile = ~/.gitignore
 	abbrev = 9
 [alias]
 	a = add
