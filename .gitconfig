@@ -41,6 +41,7 @@
 [diff]
 	tool = ediff
 	guitool = ediff
+	mnemonicPrefix = true
 [difftool.ediff]
 	cmd = ediff $LOCAL $REMOTE $MERGED
 [format]
