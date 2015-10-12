@@ -52,6 +52,7 @@
 	abbrevCommit = true
 	decorate = short
 [merge]
+	stat = true
 	tool = ediff
 [mergetool.ediff]
 	cmd = ediff $LOCAL $REMOTE $MERGED $BASE
