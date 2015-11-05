@@ -19,6 +19,7 @@
 	l = log
 	lol = log --graph --pretty=oneline
 	m = merge
+	nuke = !git clean -fdx && git submodule foreach git clean -fdx
 	p = pull
 	ps = push
 	r = reset
