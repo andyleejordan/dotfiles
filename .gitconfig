@@ -43,6 +43,7 @@
 	tool = ediff
 	guitool = ediff
 	mnemonicPrefix = true
+	algorithm = patience
 [difftool.ediff]
 	cmd = ediff $LOCAL $REMOTE $MERGED
 [format]
