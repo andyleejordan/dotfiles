@@ -5,6 +5,9 @@ source ~/.shell/path-edit.sh
 path_front ~/bin /usr/local/sbin /usr/local/bin
 path_back /sbin /bin /usr/sbin /usr/bin
 
+# show a fortune
+source ~/.shell/fortune.sh
+
 # aliases
 source ~/.shell/aliases.sh
 
