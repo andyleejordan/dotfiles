@@ -28,6 +28,7 @@ fi
 alias e="$EDITOR -n"
 
 # miscellaneous
+alias sudo='sudo ' # enable alias expansion for sudo
 alias g='git'
 complete -o default -o nospace -F _git g
 alias make='make --debug=b'
