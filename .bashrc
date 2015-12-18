@@ -19,8 +19,11 @@ shopt -s checkhash checkwinsize
 shopt -s cmdhist histappend histverify
 
 HISTCONTROL=ignoreboth
-HISTSIZE=10000
-HISTFILESIZE=2000
+# Unset for unlimited history
+HISTSIZE=
+HISTFILESIZE=
+# Use separate history file to avoid truncation
+HISTFILE=~/.bash_history_file
 
 # prompt setup
 PROMPT_DIRTRIM=2
