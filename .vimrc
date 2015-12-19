@@ -70,3 +70,6 @@ augroup reload_vimrc " {
   autocmd!
   autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
+
+" Load local configurations if available
+:silent! source ~/.vim/local.vim
