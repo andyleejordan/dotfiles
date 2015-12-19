@@ -13,6 +13,7 @@ endif
 """ Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'                 " Best colors ever
+Plug 'bling/vim-airline'                                " Status line
 Plug 'ctrlpvim/ctrlp.vim'                               " Fuzzy finder
 Plug 'easymotion/vim-easymotion'                        " Movements
 Plug 'jlanzarotta/bufexplorer'                          " Better buffers
