@@ -2,7 +2,7 @@
 	email = andrew@schwartzmeyer.com
 	name = Andrew Schwartzmeyer
 [core]
-	editor = emacsclient
+	editor = vim
 	excludesFile = ~/.gitignore
 	abbrev = 9
 [alias]
