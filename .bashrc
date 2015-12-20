@@ -1,8 +1,5 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
-# completions
-source ~/.shell/git-completion.bash
-
 # cd options
 shopt -s autocd cdspell dirspell
 
@@ -28,7 +25,6 @@ HISTFILE=~/.bash_history_file
 # prompt setup
 PROMPT_DIRTRIM=2
 
-source ~/.shell/git-prompt.sh
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWCOLORHINTS=1
