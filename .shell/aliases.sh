@@ -1,5 +1,9 @@
 source ~/.shell/packages.sh
 
+EDITOR=vim
+alias v="$EDITOR"
+alias e=v # redirect old Emacs alias
+
 # system dependent
 if [[ $OSTYPE == darwin* ]]
 then
@@ -10,22 +14,13 @@ then
 
     # misc
     alias unlock_files='chflags -R nouchg *'
-
-    ## editor
-    EDITOR=ec
 elif [[ $OSTYPE == linux-gnu ]]
 then
     # power
     alias shutdown='sudo shutdown -P now'
     alias reboot='sudo shutdown -r now'
     alias halt='sudo halt -P'
-
-    ## editor
-    ALTERNATE_EDITOR='nano'
-    EDITOR="emacsclient"
 fi
-
-alias e="$EDITOR -n"
 
 # miscellaneous
 alias sudo='sudo ' # enable alias expansion for sudo
