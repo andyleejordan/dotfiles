@@ -20,6 +20,7 @@ Plug 'jlanzarotta/bufexplorer'                          " Better buffers
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File explorer
+Plug 'scrooloose/nerdcommenter'                         " Commenter
 Plug 'rking/ag.vim', { 'on': 'Ag' }                     " The Silver Searcher
 Plug 'tpope/vim-fugitive'                               " Git interface
 Plug 'tpope/vim-sensible'                               " Sensible defaults
