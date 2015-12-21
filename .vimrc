@@ -17,6 +17,7 @@ Plug 'bling/vim-airline'                                " Status line
 Plug 'ctrlpvim/ctrlp.vim'                               " Fuzzy finder
 Plug 'easymotion/vim-easymotion'                        " Movements
 Plug 'jlanzarotta/bufexplorer'                          " Better buffers
+Plug 'ledger/vim-ledger'                                " Ledger
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File explorer
