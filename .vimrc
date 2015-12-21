@@ -48,6 +48,8 @@ set title       " terminal title
 set hidden      " multiple buffers
 set ignorecase  " ignore case in searches
 set smartcase   " match case once specified
+set smarttab    " delete tabs
+set visualbell  " no sound
 
 " spell check commits
 autocmd FileType gitcommit setlocal spell
