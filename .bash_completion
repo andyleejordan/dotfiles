@@ -1,3 +1,3 @@
-for i in ~/.bash_completion.d/*.sh; do
+for i in ~/.bash_completion.d/*.{sh,bash}; do
     . "$i"
 done
