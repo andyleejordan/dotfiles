@@ -54,6 +54,7 @@ set ignorecase  " ignore case in searches
 set smartcase   " match case once specified
 set smarttab    " delete tabs
 set visualbell  " no sound
+set lazyredraw  " better performance
 
 " spell check commits
 autocmd FileType gitcommit setlocal spell
