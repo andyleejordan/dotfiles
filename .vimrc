@@ -32,8 +32,9 @@ Plug 'tpope/vim-surround'                               " Surrounding
 call plug#end()
 
 """ Plugin configurations
+" appearance
+silent! colorscheme solarized
 set background=dark
-:silent! colorscheme solarized
 
 " Use ag for CtrlP searching if available
 if executable('ag')
@@ -43,7 +44,7 @@ endif
 """ Other configurations
 if has("persistent_undo")
   set undodir=~/.vim/undodir/
-  :silent call system('mkdir -p ' . &undodir)
+  silent call system('mkdir -p ' . &undodir)
   set undofile
 endif
 
@@ -80,10 +81,7 @@ if has('mouse')
 endif
 
 " Reload vimrc on save
-augroup reload_vimrc " {
-  autocmd!
-  autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END " }
+autocmd BufWritePost $MYVIMRC source %
 
 " Load local configurations if available
-:silent! source ~/.vim/local.vim
+silent! source ~/.vim/local.vim
