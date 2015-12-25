@@ -21,8 +21,8 @@ Plug 'jlanzarotta/bufexplorer'                          " Better buffers
 Plug 'andschwa/vim-ledger', { 'branch': 'fix-entry' }   " Ledger
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File explorer
 Plug 'rking/ag.vim', { 'on': 'Ag' }                     " The Silver Searcher
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File explorer
 Plug 'scrooloose/syntastic'                             " Syntax checker
 Plug 'tpope/vim-commentary'                             " Comments
 Plug 'tpope/vim-fugitive'                               " Git interface
