@@ -37,6 +37,7 @@ set background=dark
 """ Other configurations
 if has("persistent_undo")
   set undodir=~/.vim/undodir/
+  :silent call system('mkdir -p ' . &undodir)
   set undofile
 endif
 
