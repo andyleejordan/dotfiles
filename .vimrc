@@ -22,13 +22,13 @@ Plug 'andschwa/vim-ledger', { 'branch': 'fix-entry' }   " Ledger
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
 Plug 'rking/ag.vim', { 'on': 'Ag' }                     " The Silver Searcher
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File explorer
 Plug 'scrooloose/syntastic'                             " Syntax checker
 Plug 'tpope/vim-commentary'                             " Comments
 Plug 'tpope/vim-fugitive'                               " Git interface
 Plug 'tpope/vim-sensible'                               " Sensible defaults
 Plug 'tpope/vim-sleuth'                                 " Adaptive indentation
 Plug 'tpope/vim-surround'                               " Surrounding
+Plug 'tpope/vim-vinegar'                                " File explorer
 call plug#end()
 
 """ Plugin configurations
