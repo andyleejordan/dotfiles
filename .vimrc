@@ -34,6 +34,11 @@ call plug#end()
 set background=dark
 :silent! colorscheme solarized
 
+" Use ag for CtrlP searching if available
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+endif
+
 """ Other configurations
 if has("persistent_undo")
   set undodir=~/.vim/undodir/
