@@ -35,6 +35,7 @@ call plug#end()
 " appearance
 silent! colorscheme solarized
 set background=dark
+let g:gitgutter_override_sign_column_highlight = 0
 
 " Use ag for CtrlP searching if available
 if executable('ag')
