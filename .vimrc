@@ -81,8 +81,5 @@ if has('mouse')
   set mouse=a
 endif
 
-" Reload vimrc on save
-autocmd BufWritePost $MYVIMRC source %
-
 " Load local configurations if available
 silent! source ~/.vim/local.vim
