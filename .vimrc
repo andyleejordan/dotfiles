@@ -31,16 +31,14 @@ Plug 'tpope/vim-surround'                               " Surrounding
 call plug#end()
 
 """ Plugin configurations
-
 set background=dark
 :silent! colorscheme solarized
 
+""" Other configurations
 if has("persistent_undo")
   set undodir=~/.vim/undodir/
   set undofile
 endif
-
-""" Other configurations
 
 let mapleader = " "
 
