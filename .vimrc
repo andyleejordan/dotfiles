@@ -12,6 +12,7 @@ endif
 
 """ Plugins
 call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-gitgutter'                           " Git hunks
 Plug 'altercation/vim-colors-solarized'                 " Best colors ever
 Plug 'bling/vim-airline'                                " Status line
 Plug 'ctrlpvim/ctrlp.vim'                               " Fuzzy finder
