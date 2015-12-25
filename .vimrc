@@ -56,6 +56,9 @@ set smarttab    " delete tabs
 set visualbell  " no sound
 set lazyredraw  " better performance
 
+" bindings
+nnoremap <silent> <Leader>ev :split $MYVIMRC<CR>
+
 " spell check commits
 autocmd FileType gitcommit setlocal spell
 
