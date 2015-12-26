@@ -17,7 +17,6 @@ Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
 Plug 'bling/vim-airline'                                " Status line
 Plug 'ctrlpvim/ctrlp.vim'                               " Fuzzy finder
 Plug 'easymotion/vim-easymotion'                        " Movements
-Plug 'jlanzarotta/bufexplorer'                          " Better buffers
 Plug 'andschwa/vim-ledger', { 'branch': 'fix-entry' }   " Ledger
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
