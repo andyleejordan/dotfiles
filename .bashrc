@@ -1,5 +1,15 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
+EDITOR=vi
+
+# path setup
+source ~/.shell/path-edit.sh
+path_front ~/bin /usr/local/sbin /usr/local/bin
+path_back /sbin /bin /usr/sbin /usr/bin
+
+# show a fortune
+source ~/.shell/fortune.sh
+
 # cd options
 shopt -s autocd cdspell dirspell
 
@@ -74,6 +84,35 @@ set_prompt () {
 }
 PROMPT_COMMAND='set_prompt'
 
+# aliases
+source ~/.shell/aliases.sh
+
+# fasd (with cache)
+fasd_cache="$HOME/.fasd-init-bash"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+  fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
+
+# alias v for editor if f(asd) is defined
+if alias f &>/dev/null; then
+  alias v="f -e $EDITOR"
+  _fasd_bash_hook_cmd_complete v
+else
+  alias v="$EDITOR"
+fi
+
+# redirect old Emacs alias
+alias e=v
+
+# enable ls colors
+if ls --color=auto &> /dev/null; then
+    alias ls="ls --color=auto"
+else
+    export CLICOLOR=1
+fi
+
 # uses 'thefuck' to fix common command mistakes
 # https://github.com/nvbn/thefuck
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
@@ -93,13 +132,7 @@ man() {
 # disable flow control
 stty -ixon
 
-# fasd (with cache)
-fasd_cache="$HOME/.fasd-init-bash"
-if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-  fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
+# source local configurations
+if [ -f ~/.shell/local.sh ]; then
+    source ~/.shell/local.sh
 fi
-source "$fasd_cache"
-unset fasd_cache
-
-# source everything else
-source ~/.shell/common.sh
