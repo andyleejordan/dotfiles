@@ -37,10 +37,8 @@ silent! colorscheme solarized
 set background=dark
 let g:gitgutter_override_sign_column_highlight = 0
 
-" Use ag for CtrlP searching if available
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-endif
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_clear_cache_on_exit = 0
 
 """ Other configurations
 if has("persistent_undo")
