@@ -1,8 +1,5 @@
+# p: a common package manager interface
 source ~/.shell/packages.sh
-
-EDITOR=vim
-alias v="$EDITOR"
-alias e=v # redirect old Emacs alias
 
 # system dependent
 if [[ $OSTYPE == darwin* ]]
