@@ -20,6 +20,7 @@ Plug 'easymotion/vim-easymotion'                        " Movements
 Plug 'ledger/vim-ledger'                                " Ledger
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
+Plug 'PProvost/vim-ps1'                                 " PowerShell
 Plug 'rking/ag.vim', { 'on': 'Ag' }                     " The Silver Searcher
 Plug 'scrooloose/syntastic'                             " Syntax checker
 Plug 'tpope/vim-commentary'                             " Comments
