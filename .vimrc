@@ -25,6 +25,7 @@ Plug 'scrooloose/syntastic'                             " Syntax checker
 Plug 'tpope/vim-commentary'                             " Comments
 Plug 'tpope/vim-eunuch'                                 " UNIX commands
 Plug 'tpope/vim-fugitive'                               " Git interface
+Plug 'tpope/vim-scriptease'                             " VimL REPL
 Plug 'tpope/vim-sensible'                               " Sensible defaults
 Plug 'tpope/vim-sleuth'                                 " Adaptive indentation
 Plug 'tpope/vim-surround'                               " Surrounding
