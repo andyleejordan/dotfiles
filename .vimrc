@@ -41,6 +41,9 @@ let g:gitgutter_override_sign_column_highlight = 0
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_clear_cache_on_exit = 0
 
+" just use :StripWhitespace
+let g:better_whitespace_enabled = 0
+
 """ Other configurations
 if has("persistent_undo")
   set undodir=~/.vim/undodir/
