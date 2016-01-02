@@ -45,14 +45,6 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:better_whitespace_enabled = 0
 
 """ Other configurations
-if has("persistent_undo")
-  set undodir=~/.vim/undodir/
-  silent call system('mkdir -p ' . &undodir)
-  set undofile
-endif
-
-let mapleader = " "
-
 set title       " terminal title
 set hidden      " multiple buffers
 set ignorecase  " ignore case in searches
@@ -61,14 +53,27 @@ set smarttab    " delete tabs
 set visualbell  " no sound
 set lazyredraw  " better performance
 
-" bindings
-nnoremap <silent> <Leader>ev :split $MYVIMRC<CR>
+if has("persistent_undo")
+  set undodir=~/.vim/undodir/
+  silent call system('mkdir -p ' . &undodir)
+  set undofile
+endif
 
-" spell check commits
-autocmd FileType gitcommit setlocal spell
+if has('mouse')
+  set mouse=a
+endif
+
+""" Bindings
+let mapleader = " "
+
+nnoremap <silent> <Leader>ev :split $MYVIMRC<CR>
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
+
+""" Auto-commands
+" spell check commits
+autocmd FileType gitcommit setlocal spell
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -77,11 +82,6 @@ autocmd BufReadPost *
   \ if line("'\"") >= 1 && line("'\"") <= line("$") |
   \   exe "normal! g`\"" |
   \ endif
-
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
 
 " Load local configurations if available
 silent! source ~/.vim/local.vim
