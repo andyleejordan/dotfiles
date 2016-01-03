@@ -25,6 +25,7 @@ Plug 'scrooloose/syntastic'                             " Syntax checker
 Plug 'tpope/vim-commentary'                             " Comments
 Plug 'tpope/vim-eunuch'                                 " UNIX commands
 Plug 'tpope/vim-fugitive'                               " Git interface
+Plug 'tpope/vim-repeat'                                 " Repeat for plugins
 Plug 'tpope/vim-rsi'                                    " Readline bindings
 Plug 'tpope/vim-scriptease'                             " VimL REPL
 Plug 'tpope/vim-sensible'                               " Sensible defaults
