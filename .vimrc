@@ -78,6 +78,9 @@ map Q gq
 " spell check commits
 autocmd FileType gitcommit setlocal spell
 
+" recognize all Markdown files
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
