@@ -41,6 +41,7 @@ silent! colorscheme solarized
 set background=dark
 let g:gitgutter_override_sign_column_highlight = 0
 
+" cached fuzzy finding
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_clear_cache_on_exit = 0
 
@@ -80,6 +81,8 @@ autocmd FileType gitcommit setlocal spell
 
 " recognize all Markdown files
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+autocmd FileType markdown setlocal spell
+let g:markdown_fenced_languages = ['c', 'cpp', 'csharp=cs', 'bash=sh', 'json']
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
