@@ -14,7 +14,6 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'                           " Git hunks
 Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
-Plug 'bling/vim-airline'                                " Status line
 Plug 'ctrlpvim/ctrlp.vim'                               " Fuzzy finder
 Plug 'easymotion/vim-easymotion'                        " Movements
 Plug 'ledger/vim-ledger'                                " Ledger
@@ -33,6 +32,7 @@ Plug 'tpope/vim-sensible'                               " Sensible defaults
 Plug 'tpope/vim-sleuth'                                 " Adaptive indentation
 Plug 'tpope/vim-surround'                               " Surrounding
 Plug 'tpope/vim-vinegar'                                " File explorer
+Plug 'vim-airline/vim-airline'                          " Status line
 call plug#end()
 
 """ Plugin configurations
