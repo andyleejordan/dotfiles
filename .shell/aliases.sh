@@ -25,6 +25,7 @@ alias g='git'
 complete -o default -o nospace -F _git g
 alias make='make --debug=b'
 alias ping='ping -c 8'
+alias r='run'
 alias root='sudo su'
 alias cppc='cppcheck --std=c++11 --enable=all --suppress=missingIncludeSystem .'
 alias octave='octave --quiet'
