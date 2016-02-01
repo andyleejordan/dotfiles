@@ -32,6 +32,7 @@ Plug 'tpope/vim-scriptease'                             " VimL REPL
 Plug 'tpope/vim-sensible'                               " Sensible defaults
 Plug 'tpope/vim-sleuth'                                 " Adaptive indentation
 Plug 'tpope/vim-surround'                               " Surrounding
+Plug 'tpope/vim-unimpaired'                             " ][ mappings
 Plug 'tpope/vim-vinegar'                                " File explorer
 Plug 'vim-airline/vim-airline'                          " Status line
 call plug#end()
