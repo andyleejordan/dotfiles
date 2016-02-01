@@ -17,6 +17,7 @@ Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
 Plug 'ctrlpvim/ctrlp.vim'                               " Fuzzy finder
 Plug 'easymotion/vim-easymotion'                        " Movements
 Plug 'ledger/vim-ledger'                                " Ledger
+Plug 'majutsushi/tagbar'                                " Tagbar
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
 Plug 'PProvost/vim-ps1'                                 " PowerShell
