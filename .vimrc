@@ -16,6 +16,7 @@ Plug 'airblade/vim-gitgutter'                           " Git hunks
 Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
 Plug 'ctrlpvim/ctrlp.vim'                               " Fuzzy finder
 Plug 'easymotion/vim-easymotion'                        " Movements
+Plug 'elzr/vim-json'                                    " Better JSON
 Plug 'ledger/vim-ledger'                                " Ledger
 Plug 'majutsushi/tagbar'                                " Tagbar
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
