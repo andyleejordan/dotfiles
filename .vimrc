@@ -59,6 +59,7 @@ set smartcase   " match case once specified
 set smarttab    " delete tabs
 set visualbell  " no sound
 set lazyredraw  " better performance
+set linebreak   " wrap after words
 
 if has("persistent_undo")
   set undodir=~/.vim/undodir/
