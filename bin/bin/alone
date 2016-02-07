@@ -1,0 +1,17 @@
+#!/bin/bash
+# Copyright 2014 Andrew Schwartzmeyer
+set -eu
+
+hash=$(echo "$@" | sha1sum | awk '{print $1}')
+lockfile="/tmp/$hash.lock"
+
+if [ ! -e $lockfile ]; then
+    trap "rm -f $lockfile; exit" INT TERM EXIT ERR
+    touch $lockfile
+    eval "$@"
+    rm $lockfile
+    trap - INT TERM EXIT ERR
+else
+    echo "$@ is already running"
+    exit
+fi
