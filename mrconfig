@@ -1,2 +1,0 @@
-[DEFAULT]
-include = cat ~/.mr/repos-enabled/*
