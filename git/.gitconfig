@@ -1,0 +1,74 @@
+[user]
+	email = andrew@schwartzmeyer.com
+	name = Andrew Schwartzmeyer
+[core]
+	editor = vim
+	excludesFile = ~/.gitignore
+	abbrev = 9
+[alias]
+	a = add
+	b = branch
+	c = commit --verbose
+	co = checkout
+	d = diff
+	ds = diff --staged
+	du = count-objects --verbose --human-readable
+	f = fetch
+	h = help
+	hc = help config
+	l = log
+	lol = log --graph --pretty=oneline
+	m = merge
+	nuke = !git clean -fdx && git submodule foreach git clean -fdx
+	p = pull
+	ps = push
+	r = reset
+	rb = rebase
+	redo = commit --amend --no-edit
+	s = status --short --branch
+	sh = show
+	st = stash
+	stat = status
+	sub = submodule
+	y = cherry-pick
+[am]
+	threeWay = true
+[apply]
+	ignoreWhitespace = change
+[color]
+	ui = auto
+[credential]
+	helper = cache --timeout 30000 # seconds
+[diff]
+	tool = ediff
+	guitool = ediff
+	mnemonicPrefix = true
+	algorithm = patience
+[difftool.ediff]
+	cmd = ediff $LOCAL $REMOTE $MERGED
+[format]
+	pretty = medium
+[help]
+	autoCorrect = -1
+[log]
+	abbrevCommit = true
+	decorate = short
+[merge]
+	stat = true
+	tool = ediff
+[mergetool.ediff]
+	cmd = ediff $LOCAL $REMOTE $MERGED $BASE
+	trustExitCode = true
+[pull]
+	ff = only
+[push]
+	default = current
+[rebase]
+	stat = true
+	autoSquash = true
+	autoStash = true
+[rerere]
+	enabled = true
+	autoUpdate = true
+[include]
+	path = ~/.gitconfig_local
