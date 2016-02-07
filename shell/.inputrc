@@ -1,0 +1,12 @@
+$include /etc/inputrc
+
+set colored-stats on
+set completion-ignore-case on
+set completion-map-case on
+set echo-control-characters off
+set mark-symlinked-directories on
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+
+"\e[A":history-search-backward
+"\e[B":history-search-forward
