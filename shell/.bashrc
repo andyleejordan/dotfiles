@@ -136,6 +136,6 @@ man() {
 stty -ixon
 
 # source local configurations
-if [ -f ~/.shell/local.sh ]; then
-    source ~/.shell/local.sh
+if [[ -r ~/.shell_local.sh ]]; then
+    source ~/.shell_local.sh
 fi
