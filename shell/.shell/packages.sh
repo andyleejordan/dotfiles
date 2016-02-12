@@ -16,35 +16,37 @@
 # pug:	install upgrades
 # puu:	update repositories and upgrade
 
+# TODO: set PSUDO only if not set.
+PSUDO='sudo '
 if command -v aptitude >/dev/null 2>&1; then
     alias p='aptitude'
     alias pag='p search'
-    alias par='apt-get autoremove'
-    alias pbd='p build-dep'
-    alias pcl='p clean'
+    alias par="$PSUDO apt-get autoremove"
+    alias pbd="$PSUDO p build-dep"
+    alias pcl="$PSUDO p clean"
     alias pdep='pin'
-    alias pi='p install'
+    alias pi="$PSUDO p install"
     alias pin='p show'
-    alias pif='dpkg -i'
-    alias pr='p purge'
-    alias pre='p reinstall'
-    alias pup='p update'
-    alias pug='p upgrade'
+    alias pif="$PSUDO dpkg -i"
+    alias pr="$PSUDO p purge"
+    alias pre="$PSUDO p reinstall"
+    alias pup="$PSUDO p update"
+    alias pug="$PSUDO p upgrade"
     alias puu='pup && pug'
 elif command -v apt-get >/dev/null 2>&1; then
     alias p='apt-get'
     alias pag='apt-cache search'
-    alias par='p autoremove'
-    alias pbd='p build-dep'
-    alias pcl='p clean'
+    alias par="$PSUDO p autoremove"
+    alias pbd="$PSUDO p build-dep"
+    alias pcl="$PSUDO p clean"
     alias pdep='pin'
-    alias pi='p install'
+    alias pi="$PSUDO p install"
     alias pin='apt-cache show'
-    alias pif='dpkg -i'
-    alias pr='p purge'
-    alias pre='p install --reinstall'
-    alias pup='p update'
-    alias pug='p upgrade'
+    alias pif="$PSUDO dpkg -i"
+    alias pr="$PSUDO p purge"
+    alias pre="$PSUDO p install --reinstall"
+    alias pup="$PSUDO p update"
+    alias pug="$PSUDO p upgrade"
     alias puu='pup && pug'
 elif command -v brew >/dev/null 2>&1; then
     alias p='brew'
@@ -64,30 +66,30 @@ elif command -v brew >/dev/null 2>&1; then
 elif command -v pacman >/dev/null 2>&1; then
     alias p='pacman'
     alias pag='p -S --search'
-    alias par='p -Q --deps --unrequired'
-    alias pcl='p -S --clean'
-    alias pdep='p -Q --deps'
-    alias pi='p -S'
+    alias par="$PSUDO p -Q --deps --unrequired"
+    alias pcl="$PSUDO p -S --clean"
+    alias pdep="$PSUDO p -Q --deps"
+    alias pi="$PSUDO p -S"
     alias pin='p -S --info'
-    alias pif='p -U'
-    alias pr='p -R --recursive'
+    alias pif="$PSUDO p -U"
+    alias pr="$PSUDO p -R --recursive"
     alias pre='pi'
-    alias pup='p -S --refresh --sysupgrade'
-    alias pug='p -S --sysupgrade'
+    alias pup="$PSUDO p -S --refresh --sysupgrade"
+    alias pug="$PSUDO p -S --sysupgrade"
     alias puu='pup --noconfirm'
 elif command -v yum >/dev/null 2>&1; then
     alias p='yum'
     alias pag='p search'
-    alias par='p autoremove'
-    alias pbd='p-builddep'
-    alias pcl='p clean'
-    alias pdep='p deplist'
-    alias pi='p install'
+    alias par="$PSUDO p autoremove"
+    alias pbd="$PSUDO p builddep"
+    alias pcl="$PSUDO p clean"
+    alias pdep="$PSUDO p deplist"
+    alias pi="$PSUDO p install"
     alias pin='p info'
-    alias pif='rpm -i'
-    alias pr='p remove'
-    alias pre='p reinstall'
-    alias pup='p update-to'
-    alias pug='p update'
+    alias pif="$PSUDO rpm -i"
+    alias pr="$PSUDO p remove"
+    alias pre="$PSUDO p reinstall"
+    alias pup="$PSUDO p update-to"
+    alias pug="$PSUDO p update"
     alias puu='pug'
 fi
