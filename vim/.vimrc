@@ -52,7 +52,6 @@ let g:ctrlp_clear_cache_on_exit = 0
 let g:better_whitespace_enabled = 0
 
 """ Other configurations
-set title       " terminal title
 set hidden      " multiple buffers
 set ignorecase  " ignore case in searches
 set smartcase   " match case once specified
