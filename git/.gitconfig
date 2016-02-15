@@ -40,12 +40,9 @@
 [credential]
 	helper = cache --timeout 30000 # seconds
 [diff]
-	tool = ediff
-	guitool = ediff
+	tool = vimdiff
 	mnemonicPrefix = true
 	algorithm = patience
-[difftool.ediff]
-	cmd = ediff $LOCAL $REMOTE $MERGED
 [format]
 	pretty = medium
 [help]
@@ -55,10 +52,7 @@
 	decorate = short
 [merge]
 	stat = true
-	tool = ediff
-[mergetool.ediff]
-	cmd = ediff $LOCAL $REMOTE $MERGED $BASE
-	trustExitCode = true
+	tool = vimdiff
 [pull]
 	ff = only
 [push]
