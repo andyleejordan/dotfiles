@@ -51,6 +51,10 @@ let g:ctrlp_clear_cache_on_exit = 0
 " just use :StripWhitespace
 let g:better_whitespace_enabled = 0
 
+" recognize all Markdown files
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+let g:markdown_fenced_languages = ['c', 'cpp', 'csharp=cs', 'bash=sh', 'json']
+
 """ Other configurations
 set hidden      " multiple buffers
 set ignorecase  " ignore case in searches
@@ -69,13 +73,7 @@ if has('mouse')
   set mouse=a
 endif
 
-""" Bindings
 let mapleader = " "
-
-""" Auto-commands
-" recognize all Markdown files
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-let g:markdown_fenced_languages = ['c', 'cpp', 'csharp=cs', 'bash=sh', 'json']
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
