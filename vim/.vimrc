@@ -56,6 +56,7 @@ set hidden      " multiple buffers
 set ignorecase  " ignore case in searches
 set smartcase   " match case once specified
 set smarttab    " delete tabs
+set spell       " always spell check
 set visualbell  " no sound
 set lazyredraw  " better performance
 set linebreak   " wrap after words
@@ -79,12 +80,8 @@ nnoremap <silent> <Leader>ev :split $MYVIMRC<CR>
 map Q gq
 
 """ Auto-commands
-" spell check commits
-autocmd FileType gitcommit setlocal spell
-
 " recognize all Markdown files
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-autocmd FileType markdown setlocal spell
 let g:markdown_fenced_languages = ['c', 'cpp', 'csharp=cs', 'bash=sh', 'json']
 
 " When editing a file, always jump to the last known cursor position.
