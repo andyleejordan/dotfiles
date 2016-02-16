@@ -74,9 +74,6 @@ endif
 """ Bindings
 let mapleader = " "
 
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
 """ Auto-commands
 " recognize all Markdown files
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
