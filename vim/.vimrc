@@ -36,6 +36,7 @@ Plug 'tpope/vim-surround'                               " Surrounding
 Plug 'tpope/vim-unimpaired'                             " ][ mappings
 Plug 'tpope/vim-vinegar'                                " File explorer
 Plug 'vim-airline/vim-airline'                          " Status line
+Plug 'vim-airline/vim-airline-themes'                   " Status line themes
 call plug#end()
 
 """ Plugin configurations
