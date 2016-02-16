@@ -65,6 +65,9 @@ set smartcase   " match case once specified
 set spell       " always spell check
 set visualbell  " no sound
 
+" configure wildmenu tab completion
+set wildmode=list:longest,full
+
 if has("persistent_undo")
   set undodir=~/.vim/undodir/
   silent call system('mkdir -p ' . &undodir)
