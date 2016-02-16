@@ -54,12 +54,10 @@ let g:better_whitespace_enabled = 0
 """ Other configurations
 set hidden      " multiple buffers
 set ignorecase  " ignore case in searches
+set linebreak   " wrap after words
 set smartcase   " match case once specified
-set smarttab    " delete tabs
 set spell       " always spell check
 set visualbell  " no sound
-set lazyredraw  " better performance
-set linebreak   " wrap after words
 
 if has("persistent_undo")
   set undodir=~/.vim/undodir/
