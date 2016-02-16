@@ -11,6 +11,7 @@
 	c = commit --verbose
 	co = checkout
 	d = diff
+	dn = diff --name-only
 	ds = diff --staged
 	du = count-objects --verbose --human-readable
 	f = fetch
