@@ -74,8 +74,6 @@ endif
 """ Bindings
 let mapleader = " "
 
-nnoremap <silent> <Leader>ev :split $MYVIMRC<CR>
-
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
