@@ -14,16 +14,16 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'                           " Git hunks
 Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
-Plug 'ctrlpvim/ctrlp.vim'                               " Fuzzy finder
 Plug 'easymotion/vim-easymotion'                        " Movements
 Plug 'EinfachToll/DidYouMean'                           " File guessing
 Plug 'elzr/vim-json'                                    " Better JSON
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'                                 " FZF
 Plug 'ledger/vim-ledger'                                " Ledger
 Plug 'majutsushi/tagbar'                                " Tagbar
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
 Plug 'PProvost/vim-ps1'                                 " PowerShell
-Plug 'rking/ag.vim', { 'on': 'Ag' }                     " The Silver Searcher
 Plug 'scrooloose/syntastic'                             " Syntax checker
 Plug 'tpope/vim-commentary'                             " Comments
 Plug 'tpope/vim-eunuch'                                 " UNIX commands
