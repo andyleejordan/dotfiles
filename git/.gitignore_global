@@ -22,6 +22,7 @@
 *.iso
 *.tar
 *.dmg
+*.pkg
 *.xpi
 *.gem
 *.egg
@@ -54,6 +55,10 @@ Icon
 .Spotlight-V100
 .Trashes
 
+# Shell
+.ruby-version
+
+# Tags
 TAGS
 GPATH
 GRTAGS
