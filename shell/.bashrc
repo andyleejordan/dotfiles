@@ -90,14 +90,6 @@ PROMPT_COMMAND='set_prompt'
 # aliases
 source ~/.shell/aliases.sh
 
-# fasd (with cache)
-fasd_cache="$HOME/.fasd-init-bash"
-if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-  fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
-fi
-source "$fasd_cache"
-unset fasd_cache
-
 # alias v for editor if f(asd) is defined
 if alias f &>/dev/null; then
   alias v="f -e $EDITOR"
