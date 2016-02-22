@@ -120,6 +120,11 @@ fi
 # https://github.com/nvbn/thefuck
 alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 
+# add FZF completions
+if [[ -r ~/.fzf.bash ]]; then
+    source ~/.fzf.bash
+fi
+
 # colored man pages
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
