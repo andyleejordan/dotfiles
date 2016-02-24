@@ -47,10 +47,6 @@ silent! colorscheme solarized
 set background=dark
 let g:gitgutter_override_sign_column_highlight = 0
 
-" cached fuzzy finding
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_clear_cache_on_exit = 0
-
 " just use :StripWhitespace
 let g:better_whitespace_enabled = 0
 
