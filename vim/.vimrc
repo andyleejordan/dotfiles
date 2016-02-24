@@ -25,6 +25,7 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
 Plug 'PProvost/vim-ps1'                                 " PowerShell
 Plug 'scrooloose/syntastic'                             " Syntax checker
+Plug 'tmux-plugins/vim-tmux'
 Plug 'tpope/vim-commentary'                             " Comments
 Plug 'tpope/vim-eunuch'                                 " UNIX commands
 Plug 'tpope/vim-fugitive'                               " Git interface
