@@ -67,6 +67,7 @@ set visualbell  " no sound
 
 " configure wildmenu tab completion
 set wildmode=list:longest,full
+set wildignorecase
 
 if has("persistent_undo")
   set undodir=~/.vim/undodir/
