@@ -47,6 +47,9 @@ silent! colorscheme solarized
 set background=dark
 let g:gitgutter_override_sign_column_highlight = 0
 
+" disable concealing in JSON
+let g:vim_json_syntax_conceal = 0
+
 " just use :StripWhitespace
 let g:better_whitespace_enabled = 0
 
