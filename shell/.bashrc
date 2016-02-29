@@ -1,6 +1,11 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
-EDITOR=vi
+# use vim for programs opening an editor
+EDITOR='vim'
+alias v='vim'
+
+# launch emacs --daemon if emacsclient is used
+alias e='emacsclient --alternate-editor="" --create-frame'
 
 # path setup
 source ~/.shell/path-edit.sh
@@ -89,17 +94,6 @@ PROMPT_COMMAND='set_prompt'
 
 # aliases
 source ~/.shell/aliases.sh
-
-# alias v for editor if f(asd) is defined
-if alias f &>/dev/null; then
-  alias v="f -e $EDITOR"
-  _fasd_bash_hook_cmd_complete v
-else
-  alias v="$EDITOR"
-fi
-
-# redirect old Emacs alias
-alias e=v
 
 # enable ls colors
 if ls --color=auto &> /dev/null; then
