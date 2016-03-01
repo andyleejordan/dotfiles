@@ -1,7 +1,7 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
 # use vim for programs opening an editor
-EDITOR='vim'
+EDITOR='e'
 alias v='vim'
 
 # launch emacs --daemon if emacsclient is used
