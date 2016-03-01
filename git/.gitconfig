@@ -23,6 +23,7 @@
 	nuke = !git clean -fdx && git submodule foreach git clean -fdx
 	p = pull
 	ps = push
+	pr = pull-request
 	r = reset
 	rb = rebase
 	redo = commit --amend --no-edit
