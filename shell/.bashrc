@@ -1,11 +1,10 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
-# use vim for programs opening an editor
-EDITOR='e'
-alias v='vim'
-alias vim='e'
+# use emacsclient for programs opening an editor
+VISUAL='e'
+EDITOR="$VISUAL"
 
-# launch emacs --daemon if emacsclient is used
+# launch emacs --daemon and a new frame
 alias e='emacsclient --alternate-editor="" --create-frame'
 
 # path setup
