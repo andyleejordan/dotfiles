@@ -3,6 +3,7 @@
 # use vim for programs opening an editor
 EDITOR='e'
 alias v='vim'
+alias vim='e'
 
 # launch emacs --daemon if emacsclient is used
 alias e='emacsclient --alternate-editor="" --create-frame'
