@@ -43,7 +43,6 @@
 [diff]
 	tool = vimdiff
 	mnemonicPrefix = true
-	algorithm = patience
 [format]
 	pretty = medium
 [help]
