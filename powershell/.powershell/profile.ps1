@@ -8,3 +8,6 @@ Set-Alias g git
 function e {
     emacsclient --alternate-editor="" --create-frame $Args
 }
+
+$local = "$PSScriptRoot/profile_local.ps1"
+(Test-Path $local) -And (. $local) > $null
