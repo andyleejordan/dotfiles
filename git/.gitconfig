@@ -7,6 +7,8 @@
 [alias]
 	a = add
 	b = branch
+	bm = branch --merged
+	bnm = branch --no-merged
 	c = commit --verbose
 	co = checkout
 	d = diff
