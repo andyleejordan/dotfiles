@@ -53,6 +53,7 @@ values."
      (git :variables
           git-magit-status-fullscreen t)
      github
+     gtags
      markdown
      org
      osx
