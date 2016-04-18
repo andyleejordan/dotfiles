@@ -48,6 +48,7 @@ values."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      emoji
+     evil-cleverparens
      evil-commentary
      finance
      (git :variables
@@ -279,6 +280,8 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  ;; evil-cleverparens
+  (spacemacs/toggle-evil-cleverparens-on)
   ;; finance
   (setq ledger-post-amount-alignment-at :decimal
         ledger-post-amount-alignment-column 49
