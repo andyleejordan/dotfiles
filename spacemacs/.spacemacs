@@ -47,6 +47,7 @@ values."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
+     emoji
      (git :variables
           git-magit-status-fullscreen t)
      github
