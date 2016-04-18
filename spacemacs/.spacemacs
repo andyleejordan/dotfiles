@@ -44,7 +44,6 @@ values."
      csharp
      dash
      emacs-lisp
-     ;; markdown
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -55,6 +54,7 @@ values."
      (git :variables
           git-magit-status-fullscreen t)
      github
+     markdown
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
