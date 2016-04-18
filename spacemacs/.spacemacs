@@ -66,7 +66,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(
+     (dtrt-indent)
+     )
    ;; A list of packages that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -289,6 +292,8 @@ you should place your code here."
   ;; version-control
   (global-git-commit-mode t)
   (setq vc-follow-symlinks t)
+  ;; additional
+  (dtrt-indent-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
