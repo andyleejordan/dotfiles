@@ -49,6 +49,7 @@ values."
      ;;        shell-default-position 'bottom)
      emoji
      evil-commentary
+     finance
      (git :variables
           git-magit-status-fullscreen t)
      github
@@ -282,6 +283,10 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  ;; finance
+  (setq ledger-post-amount-alignment-at :decimal
+        ledger-post-amount-alignment-column 49
+        ledger-clear-whole-transactions t)
   ;; version-control
   (global-git-commit-mode t)
   (setq vc-follow-symlinks t)
