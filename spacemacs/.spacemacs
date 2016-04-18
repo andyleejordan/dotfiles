@@ -41,6 +41,7 @@ values."
      auto-completion
      (c-c++ :variables
             c-c++-enable-clang-support t)
+     csharp
      emacs-lisp
      ;; git
      ;; markdown
