@@ -48,6 +48,7 @@ values."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      emoji
+     evil-commentary
      (git :variables
           git-magit-status-fullscreen t)
      github
