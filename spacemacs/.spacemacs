@@ -44,7 +44,6 @@ values."
      csharp
      dash
      emacs-lisp
-     ;; git
      ;; markdown
      ;; org
      ;; (shell :variables
@@ -53,6 +52,8 @@ values."
      ;; spell-checking
      ;; syntax-checking
      ;; version-control
+     (git :variables
+          git-magit-status-fullscreen t)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
