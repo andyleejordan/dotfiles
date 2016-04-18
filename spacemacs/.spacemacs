@@ -39,6 +39,8 @@ values."
      ;; ----------------------------------------------------------------
      spacemacs-helm
      auto-completion
+     (c-c++ :variables
+            c-c++-enable-clang-support t)
      emacs-lisp
      ;; git
      ;; markdown
