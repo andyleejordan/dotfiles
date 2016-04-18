@@ -38,7 +38,6 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      spacemacs-helm
-     ;; better-defaults
      auto-completion
      emacs-lisp
      ;; git
