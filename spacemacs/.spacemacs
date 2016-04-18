@@ -42,6 +42,7 @@ values."
      (c-c++ :variables
             c-c++-enable-clang-support t)
      csharp
+     dash
      emacs-lisp
      ;; git
      ;; markdown
