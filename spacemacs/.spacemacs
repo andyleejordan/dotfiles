@@ -296,6 +296,9 @@ you should place your code here."
   (setq vc-follow-symlinks t)
   ;; additional
   (dtrt-indent-mode)
+  (setq undo-tree-auto-save-history t
+        undo-tree-history-directory-alist
+        `(("." . ,(concat spacemacs-cache-directory "undo"))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
