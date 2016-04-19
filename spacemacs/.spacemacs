@@ -62,6 +62,7 @@ values."
      spell-checking
      syntax-checking
      version-control
+     windows-scripts
      yaml
      )
    ;; List of additional packages that will be installed without being
