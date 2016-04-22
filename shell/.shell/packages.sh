@@ -77,8 +77,8 @@ elif command -v pacman >/dev/null 2>&1; then
     alias pup="$PSUDO p -S --refresh --sysupgrade"
     alias pug="$PSUDO p -S --sysupgrade"
     alias puu='pup --noconfirm'
-elif command -v dnf >/dev/null 2>&1; then
-    alias p='dnf'
+elif command -v yum >/dev/null 2>&1; then
+    alias p='yum'
     alias pag='p search'
     alias par="$PSUDO p autoremove"
     alias pbd="$PSUDO p builddep || echo Install dnf-plugins-core"
@@ -92,6 +92,4 @@ elif command -v dnf >/dev/null 2>&1; then
     alias pup="$PSUDO p update-to"
     alias pug="$PSUDO p update"
     alias puu='pug'
-elif command -v yum >/dev/null 2>&1; then
-    alias p='echo No dnf'
 fi
