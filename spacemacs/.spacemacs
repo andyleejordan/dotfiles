@@ -302,6 +302,8 @@ you should place your code here."
   (setq undo-tree-auto-save-history t
         undo-tree-history-directory-alist
         `(("." . ,(concat spacemacs-cache-directory "undo"))))
+  (setq compilation-ask-about-save nil
+        compilation-always-kill t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
