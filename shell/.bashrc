@@ -79,7 +79,7 @@ set_prompt () {
     PS1+='\w '
 
     # add Git status with color hints
-    PS1+="$(__git_ps1 "%s ")"
+    PS1+="$(__git_ps1 '%s ')"
 
     # red for root, off for user
     if [[ $EUID == 0 ]]; then
