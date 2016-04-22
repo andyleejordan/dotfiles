@@ -29,7 +29,7 @@
 	r = reset
 	rb = rebase
 	redo = commit --amend --no-edit
-	s = status --short --branch
+	s = status
 	sh = show
 	st = stash
 	stat = status
