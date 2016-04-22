@@ -41,6 +41,7 @@ HISTFILESIZE=
 HISTFILE=~/.bash_history_file
 
 # prompt setup
+source ~/.shell/git-prompt.sh
 PROMPT_DIRTRIM=2
 
 GIT_PS1_SHOWDIRTYSTATE=1
