@@ -5,7 +5,8 @@ VISUAL='e'
 EDITOR="$VISUAL"
 
 # launch emacs --daemon and a new frame
-alias e='emacsclient --alternate-editor="" --create-frame'
+alias e='emacsclient --alternate-editor="" --no-wait --create-frame'
+alias et='emacsclient --alternate-editor="" --tty --create-frame'
 
 # path setup
 source ~/.shell/path-edit.sh
