@@ -12,6 +12,9 @@ source ~/.shell/path-edit.sh
 path_front ~/bin /usr/local/sbin /usr/local/bin
 path_back /sbin /bin /usr/sbin /usr/bin
 
+# completion setup
+source ~/.shell/git-completion.bash
+
 # run setup
 source ~/.shell/run.sh
 
