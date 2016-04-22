@@ -27,6 +27,7 @@
 	psf = push --force-with-lease
 	pr = pull-request
 	r = reset
+	ru = reset @{u}
 	rb = rebase
 	redo = commit --amend --no-edit
 	s = status
