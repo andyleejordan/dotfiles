@@ -24,6 +24,7 @@
 	nuke = !git clean -fdx && git submodule foreach git clean -fdx
 	p = pull
 	ps = push
+	psf = push --force-with-lease
 	pr = pull-request
 	r = reset
 	rb = rebase
