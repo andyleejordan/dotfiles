@@ -56,6 +56,7 @@ values."
           git-magit-status-fullscreen t)
      github
      gtags
+     html
      javascript
      markdown
      org
