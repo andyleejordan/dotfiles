@@ -62,6 +62,7 @@ values."
      osx
      (ranger :variables
              ranger-show-literal nil)
+     semantic
      spell-checking
      syntax-checking
      version-control
