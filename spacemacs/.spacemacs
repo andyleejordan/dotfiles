@@ -60,6 +60,8 @@ values."
      markdown
      org
      osx
+     (ranger :variables
+             ranger-show-literal nil)
      spell-checking
      syntax-checking
      version-control
