@@ -45,9 +45,6 @@ values."
      csv
      dash
      emacs-lisp
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
      emoji
      evil-cleverparens
      evil-commentary
@@ -64,6 +61,8 @@ values."
      (ranger :variables
              ranger-show-literal nil)
      semantic
+     (shell :variables
+            shell-default-shell 'multi-term)
      spell-checking
      syntax-checking
      version-control
