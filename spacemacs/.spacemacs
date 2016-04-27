@@ -299,6 +299,8 @@ you should place your code here."
   (setq ledger-post-amount-alignment-at :decimal
         ledger-post-amount-alignment-column 49
         ledger-clear-whole-transactions t)
+  ;; org
+  (setq org-adapt-indentation nil)
   ;; version-control
   (global-git-commit-mode t)
   (setq vc-follow-symlinks t)
