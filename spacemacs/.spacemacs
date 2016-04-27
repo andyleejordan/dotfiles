@@ -48,6 +48,7 @@ values."
      emoji
      evil-cleverparens
      evil-commentary
+     deft
      finance
      (git :variables
           git-magit-status-fullscreen t)
