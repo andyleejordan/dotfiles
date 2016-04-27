@@ -306,6 +306,7 @@ you should place your code here."
   (setq vc-follow-symlinks t)
   ;; additional
   (dtrt-indent-mode)
+  (global-hl-line-mode -1)
   (setq undo-tree-auto-save-history t
         undo-tree-history-directory-alist
         `(("." . ,(concat spacemacs-cache-directory "undo"))))
