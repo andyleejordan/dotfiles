@@ -6,7 +6,7 @@ function prompt {
 Set-Alias g git
 
 function e {
-    emacsclient --alternate-editor="" --create-frame $Args
+    emacsclient --alternate-editor="" $Args
 }
 
 $local = "$PSScriptRoot/profile_local.ps1"

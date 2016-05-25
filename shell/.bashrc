@@ -1,12 +1,15 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
-# use emacsclient for programs opening an editor
-VISUAL='e'
-EDITOR="$VISUAL"
+# launch emacs --daemon
+alias e='emacsclient --alternate-editor="" --no-wait'
+# and open a new frame
+alias ec='e --create-frame'
+# in the terminal
+alias et='e --tty'
 
-# launch emacs --daemon and a new frame
-alias e='emacsclient --alternate-editor="" --no-wait --create-frame'
-alias et='emacsclient --alternate-editor="" --tty --create-frame'
+# create a frame when programs invoke the editor
+VISUAL='ec'
+EDITOR="$VISUAL"
 
 # path setup
 source ~/.shell/path-edit.sh
