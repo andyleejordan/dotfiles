@@ -2,7 +2,6 @@
 	email = andrew@schwartzmeyer.com
 	name = Andrew Schwartzmeyer
 [core]
-	excludesFile = ~/.gitignore_global
 	abbrev = 9
 [alias]
 	a = add
