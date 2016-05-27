@@ -1,3 +1,7 @@
+if (Get-Module PSReadLine) {
+    Set-PSReadLineOption -EditMode Emacs
+}
+
 function prompt {
     $location = ([string]$(get-location)).Replace($HOME, '~')
    "$location |-/ "
