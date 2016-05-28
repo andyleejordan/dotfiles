@@ -134,6 +134,11 @@ man() {
 # disable flow control
 stty -ixon
 
+# source tokens
+if [[ -r ~/.config/shell/tokens.sh ]]; then
+    source ~/.config/shell/tokens.sh
+fi
+
 # source local configurations
 if [[ -r ~/.config/shell/local.sh ]]; then
     source ~/.config/shell/local.sh
