@@ -70,4 +70,4 @@
 	enabled = true
 	autoUpdate = true
 [include]
-	path = ~/.gitconfig_local
+	path = ./local
