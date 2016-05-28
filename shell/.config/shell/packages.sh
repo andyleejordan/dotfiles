@@ -1,5 +1,5 @@
 ## p: a common package manager interface
-## https://github.com/andschwa/shell/blob/master/.shell/packages.sh
+## https://github.com/andschwa/shell/blob/master/.config/shell/packages.sh
 
 # p:	the package manager
 # pag:	search packages

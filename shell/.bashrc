@@ -12,18 +12,18 @@ VISUAL='ec'
 EDITOR="$VISUAL"
 
 # path setup
-source ~/.shell/path-edit.sh
+source ~/.config/shell/path-edit.sh
 path_front ~/bin /usr/local/sbin /usr/local/bin
 path_back /sbin /bin /usr/sbin /usr/bin
 
 # completion setup
-source ~/.shell/git-completion.bash
+source ~/.config/shell/git-completion.bash
 
 # run setup
-source ~/.shell/run.sh
+source ~/.config/shell/run.sh
 
 # show a fortune
-source ~/.shell/fortune.sh
+source ~/.config/shell/fortune.sh
 
 # cd options
 shopt -s autocd cdspell dirspell
@@ -48,7 +48,7 @@ HISTFILESIZE=
 HISTFILE=~/.bash_history_file
 
 # prompt setup
-source ~/.shell/git-prompt.sh
+source ~/.config/shell/git-prompt.sh
 PROMPT_DIRTRIM=2
 
 GIT_PS1_SHOWDIRTYSTATE=1
@@ -101,7 +101,7 @@ set_prompt () {
 PROMPT_COMMAND='set_prompt'
 
 # aliases
-source ~/.shell/aliases.sh
+source ~/.config/shell/aliases.sh
 
 # enable ls colors
 if ls --color=auto &> /dev/null; then
@@ -135,6 +135,6 @@ man() {
 stty -ixon
 
 # source local configurations
-if [[ -r ~/.shell_local.sh ]]; then
-    source ~/.shell_local.sh
+if [[ -r ~/.config/shell/local.sh ]]; then
+    source ~/.config/shell/local.sh
 fi

@@ -1,5 +1,5 @@
 # p: a common package manager interface
-source ~/.shell/packages.sh
+source ~/.config/shell/packages.sh
 
 # system dependent
 if [[ $OSTYPE == darwin* ]]
