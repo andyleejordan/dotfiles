@@ -317,6 +317,7 @@ you should place your code here."
   (setq org-adapt-indentation nil)
   ;; version-control
   (global-git-commit-mode t)
+  (setq magit-repository-directories '("~/src"))
   (setq vc-follow-symlinks t)
   ;; additional
   (dtrt-indent-mode)
