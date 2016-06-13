@@ -1,16 +1,5 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
-# launch emacs --daemon
-alias e='emacsclient --alternate-editor="" --no-wait'
-# and open a new frame
-alias ec='e --create-frame'
-# in the terminal
-alias et='e --tty'
-
-# create a frame when programs invoke the editor
-VISUAL='ec'
-EDITOR="$VISUAL"
-
 # path setup
 source ~/.config/shell/path-edit.sh
 path_front ~/bin /usr/local/sbin /usr/local/bin

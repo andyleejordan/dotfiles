@@ -1,3 +1,14 @@
+# Emacs as editor
+alias e='emacsclient --alternate-editor="" --no-wait'
+# and open a new frame
+alias ec='e --create-frame'
+# in the terminal
+alias et='e --tty'
+
+# create a frame when programs invoke the editor
+VISUAL='ec'
+EDITOR="$VISUAL"
+
 # p: a common package manager interface
 source ~/.config/shell/packages.sh
 
