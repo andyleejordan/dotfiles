@@ -94,9 +94,18 @@ source ~/.config/shell/aliases.sh
 
 # enable ls colors
 if ls --color=auto &> /dev/null; then
-    alias ls="ls --color=auto"
+    alias ls='ls --color=auto'
 else
     export CLICOLOR=1
+fi
+
+# tag ag's matches
+if hash tag 2>/dev/null; then
+    tag() {
+        TAG_CMD_FMT_STRING='e +{{.LineNumber}} {{.Filename}}' command tag "$@"
+        source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null
+    }
+    alias ag='tag'
 fi
 
 # uses 'thefuck' to fix common command mistakes
