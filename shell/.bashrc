@@ -45,7 +45,7 @@ HISTCONTROL=ignoreboth
 HISTSIZE=
 HISTFILESIZE=
 # Use separate history file to avoid truncation
-HISTFILE=~/.bash_history_file
+HISTFILE=~/.local/shell/bash_history
 
 # prompt setup
 source ~/.config/shell/git-prompt.sh
