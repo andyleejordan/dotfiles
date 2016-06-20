@@ -1,18 +1,42 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
+# XDG setup
+
+## XDG config
+if [[ ! -x "$XDG_CONFIG_HOME" ]]; then
+    shell_config="$HOME/.config/shell"
+else
+    shell_config="$XDG_CONFIG_HOME/shell"
+fi
+
+if [[ ! -x "$shell_config" ]]; then
+    mkdir -p "$shell_config"
+fi
+
+## XDG data
+if [[ ! -x "$XDG_DATA_HOME" ]]; then
+    shell_data="$HOME/.local/share/shell"
+else
+    shell_data="$XDG_DATA_HOME/shell"
+fi
+
+if [[ ! -x "$shell_data" ]]; then
+    mkdir -p "$shell_data"
+fi
+
 # path setup
-source ~/.config/shell/path-edit.sh
+source "$shell_config/path-edit.sh"
 path_front ~/bin /usr/local/sbin /usr/local/bin
 path_back /sbin /bin /usr/sbin /usr/bin
 
 # completion setup
-source ~/.config/shell/git-completion.bash
+source "$shell_config/git-completion.bash"
 
 # run setup
-source ~/.config/shell/run.sh
+source "$shell_config/run.sh"
 
 # show a fortune
-source ~/.config/shell/fortune.sh
+source "$shell_config/fortune.sh"
 
 # cd options
 shopt -s autocd cdspell dirspell
@@ -34,10 +58,10 @@ HISTCONTROL=ignoreboth
 HISTSIZE=
 HISTFILESIZE=
 # Use separate history file to avoid truncation
-HISTFILE=~/.local/shell/bash_history
+HISTFILE="$shell_data/bash_history"
 
 # prompt setup
-source ~/.config/shell/git-prompt.sh
+source "$shell_config/git-prompt.sh"
 PROMPT_DIRTRIM=2
 
 GIT_PS1_SHOWDIRTYSTATE=1
@@ -90,7 +114,7 @@ set_prompt () {
 PROMPT_COMMAND='set_prompt'
 
 # aliases
-source ~/.config/shell/aliases.sh
+source "$shell_config/aliases.sh"
 
 # enable ls colors
 if ls --color=auto &> /dev/null; then
@@ -133,11 +157,11 @@ man() {
 stty -ixon
 
 # source tokens
-if [[ -r ~/.config/shell/tokens.sh ]]; then
-    source ~/.config/shell/tokens.sh
+if [[ -r "$shell_config/tokens.sh" ]]; then
+    source "$shell_config/tokens.sh"
 fi
 
 # source local configurations
-if [[ -r ~/.config/shell/local.sh ]]; then
-    source ~/.config/shell/local.sh
+if [[ -r "$shell_config/local.sh" ]]; then
+    source "$shell_config/local.sh"
 fi
