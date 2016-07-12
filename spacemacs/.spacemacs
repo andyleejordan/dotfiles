@@ -303,10 +303,6 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; spacemacs
   (setq powerline-default-separator nil)
-  ;; csharp
-  (setq omnisharp-server-executable-path "/Users/andrew/src/omnisharp-emacs/travis-stuff/omnisharp-roslyn/OmniSharp"
-        omnisharp-debug t
-        omnisharp-imenu-support t)
   ;; evil-cleverparens
   (spacemacs/toggle-evil-cleverparens-on)
   ;; finance
