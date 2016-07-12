@@ -80,7 +80,7 @@ values."
      (omnisharp :location
                 (recipe :repo "OmniSharp/omnisharp-emacs"
                         :fetcher github
-                        :commit "feature-omnisharp-roslyn-support"
+                        :commit "efa92c644489cd0b1a557ea16b08776b4023c34b"
                         :files ("*.el"
                                 "src/*.el"
                                 "src/actions/*.el")))
