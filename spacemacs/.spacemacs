@@ -303,6 +303,16 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   ;; spacemacs
   (setq powerline-default-separator nil)
+  ;; C styles
+  (c-add-style "c-work"
+               '("bsd"
+                 (c-basic-offset . 4)
+                 (c-offsets-alist . ((arglist-intro . +)))))
+  (c-add-style "c#-work"
+               '("c#" (c-offsets-alist . ((cpp-macro . (lambda (x) (- (current-column))))))))
+  (add-to-list 'c-default-style '(c-mode . "c-work"))
+  (add-to-list 'c-default-style '(c++-mode . "c-work"))
+  (add-to-list 'c-default-style '(csharp-mode . "c#-work"))
   ;; evil-cleverparens
   (spacemacs/toggle-evil-cleverparens-on)
   ;; finance
