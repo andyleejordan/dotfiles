@@ -42,6 +42,8 @@
 	threeWay = true
 [apply]
 	ignoreWhitespace = change
+[branch]
+	autoSetupRebase = local
 [color]
 	ui = auto
 [credential]
