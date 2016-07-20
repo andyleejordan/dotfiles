@@ -23,6 +23,7 @@
 	m = merge
 	nuke = !git clean -fdx && git submodule foreach git clean -fdx
 	p = pull
+	pm = fetch origin master:master
 	ps = push
 	psf = push --force-with-lease
 	pr = pull-request
