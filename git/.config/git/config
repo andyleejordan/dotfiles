@@ -6,7 +6,7 @@
 	editor = emacsclient --create-frame
 [alias]
 	a = add
-	b = branch
+	b = branch --sort=-committerdate
 	bm = branch --merged
 	bnm = branch --no-merged
 	c = commit --verbose
