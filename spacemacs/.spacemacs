@@ -313,6 +313,8 @@ you should place your code here."
   (add-to-list 'c-default-style '(c-mode . "c-work"))
   (add-to-list 'c-default-style '(c++-mode . "c-work"))
   (add-to-list 'c-default-style '(csharp-mode . "c#-work"))
+  ;; evil
+  (setq evil-want-fine-undo nil)
   ;; evil-cleverparens
   (spacemacs/toggle-evil-cleverparens-on)
   ;; finance
