@@ -44,6 +44,7 @@ values."
      csharp
      csv
      dash
+     docker
      emacs-lisp
      emoji
      evil-cleverparens
