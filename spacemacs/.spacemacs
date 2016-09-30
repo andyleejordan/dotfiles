@@ -78,6 +78,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     (dash)
      (dtrt-indent)
      (omnisharp :location
                 (recipe :repo "OmniSharp/omnisharp-emacs"
