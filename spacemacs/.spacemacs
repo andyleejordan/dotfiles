@@ -62,6 +62,7 @@ values."
      osx
      (ranger :variables
              ranger-show-literal nil)
+     rust
      semantic
      (shell :variables
             shell-default-shell 'multi-term)
