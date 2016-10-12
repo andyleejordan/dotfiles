@@ -64,6 +64,8 @@ values."
      rust
      semantic
      (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom
             shell-default-shell 'multi-term)
      spell-checking
      syntax-checking
