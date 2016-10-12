@@ -40,15 +40,14 @@ values."
      auto-completion
      (c-c++ :variables
             c-c++-enable-clang-support t)
-     csharp
      csv
      dash
+     deft
      docker
      emacs-lisp
      emoji
      evil-cleverparens
      evil-commentary
-     deft
      finance
      (git :variables
           git-magit-status-fullscreen t)
@@ -77,6 +76,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
+     (csharp-mode)
      (dash)
      (dtrt-indent)
      (omnisharp :location
