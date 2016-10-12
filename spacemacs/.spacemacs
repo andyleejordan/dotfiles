@@ -60,12 +60,14 @@ values."
      osx
      (ranger :variables
              ranger-show-literal nil)
+     ruby
      rust
      semantic
      (shell :variables
             shell-default-shell 'multi-term)
      spell-checking
      syntax-checking
+     vagrant
      version-control
      windows-scripts
      yaml
