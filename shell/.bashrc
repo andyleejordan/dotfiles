@@ -26,8 +26,8 @@ fi
 
 # path setup
 source "$shell_config/path-edit.sh"
-path_front ~/bin /usr/local/sbin /usr/local/bin
-path_back /sbin /bin /usr/sbin /usr/bin ~/.cargo/bin
+path_front /sbin /usr/sbin /usr/local/sbin /usr/local/bin /usr/bin /bin ~/bin
+path_back  ~/.cargo/bin /usr/local/go/bin
 
 # completion setup
 source "$shell_config/git-completion.bash"
@@ -153,7 +153,7 @@ man() {
         man "$@"
 }
 
-# disable flow control
+# disable flow control so C-s works
 stty -ixon
 
 # source tokens
