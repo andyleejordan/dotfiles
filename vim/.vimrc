@@ -24,6 +24,7 @@ Plug 'majutsushi/tagbar'                                " Tagbar
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
 Plug 'PProvost/vim-ps1'                                 " PowerShell
+Plug 'rust-lang/rust.vim'                               " Rust
 Plug 'scrooloose/syntastic'                             " Syntax checker
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tpope/vim-commentary'                             " Comments
