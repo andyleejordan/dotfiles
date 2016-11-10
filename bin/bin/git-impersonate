@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 if [ "$#" -lt "3" ]; then
-    echo 'Usage: "<Matching Name>" "<New Email>" <rev-list>'
+    echo 'Usage: "<old email>" "<new email>" <rev-list>'
     exit 1
 fi
 
-export NAME=$1
+export OLDEMAIL=$1
 shift
 
-export EMAIL=$1
+export NEWEMAIL=$1
 shift
 
-git filter-branch -f --env-filter 'if [ "$GIT_AUTHOR_NAME" = "$NAME" ]; then export GIT_AUTHOR_EMAIL="$EMAIL" GIT_COMMITTER_EMAIL="$EMAIL"; fi' -- $@
+git filter-branch -f --env-filter 'if [ "$GIT_AUTHOR_EMAIL" = "$OLDEMAIL" ]; then export GIT_AUTHOR_EMAIL="$NEWEMAIL" GIT_COMMITTER_EMAIL="$NEWEMAIL"; fi' -- $@
