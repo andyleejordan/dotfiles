@@ -75,6 +75,7 @@ set linebreak   " wrap after words
 set smartcase   " match case once specified
 set spell       " always spell check
 set visualbell  " no sound
+set autowrite   " write files when leaving
 
 " configure wildmenu tab completion
 set wildmode=list:longest,full
