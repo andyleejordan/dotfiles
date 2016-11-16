@@ -52,6 +52,7 @@ values."
      (git :variables
           git-magit-status-fullscreen t)
      github
+     go
      gtags
      html
      javascript

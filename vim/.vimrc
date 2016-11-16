@@ -17,6 +17,7 @@ Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
 Plug 'easymotion/vim-easymotion'                        " Movements
 Plug 'EinfachToll/DidYouMean'                           " File guessing
 Plug 'elzr/vim-json'                                    " Better JSON
+Plug 'fatih/vim-go'                                     " Go lang support
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                                 " FZF
 Plug 'ledger/vim-ledger'                                " Ledger
