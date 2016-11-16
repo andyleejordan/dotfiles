@@ -44,6 +44,15 @@ Plug 'vim-airline/vim-airline-themes'                   " Status line themes
 call plug#end()
 
 """ Plugin configurations
+" GUI
+if has('gui_running')
+  if has('gui_gtk')
+    set guifont=Hack\ 11
+  elseif has('gui_win32')
+    set guifont=Hack:h11:cANSI
+  endif
+endif
+
 " appearance
 silent! colorscheme solarized
 set background=dark
@@ -71,7 +80,7 @@ set visualbell  " no sound
 set wildmode=list:longest,full
 set wildignorecase
 
-if has("persistent_undo")
+if has('persistent_undo')
   set undodir=~/.vim/undodir/
   silent call system('mkdir -p ' . &undodir)
   set undofile
