@@ -1,15 +1,76 @@
 #!/usr/bin/env bash
-if [[ $# -lt 2 ]]; then
-    echo "Usage: git pull-request <remote> <ID> <branch>"
-    exit 1
-fi
+set -e
 
-if [[ $# -eq 3 ]]; then
-    remote=$1
+SUBDIRECTORY_OK=Yes
+OPTIONS_KEEPDASHDASH=
+OPTIONS_STUCKLONG=t
+OPTIONS_SPEC="\
+git-pull-request [options] <GitHub pull request ID>
+
+Fetch and checkout a GitHub pull request by ID
+
+--
+b,branch=branch    specify new <branch> name instead of pull/ID
+r,remote=remote    specify <remote> to fetch instead of origin
+q,quiet            be quiet
+"
+test $# -gt 0 && args="$*"
+. git-sh-setup
+. git-parse-remote
+require_work_tree_exists
+
+id=
+newbranch=
+remote=
+quiet=
+v=-v
+
+while test $# != 0; do
+    case "$1" in
+        -b|--branch=*)
+            shift
+            newbranch="$1"
+            [ -z "$newbranch" ] &&
+                die "git pull-request: -b needs a branch name"
+            git show-ref --verify --quiet -- "refs/heads/$newbranch" &&
+                die "git pull-request: branch $newbranch already exists"
+            git check-ref-format "heads/$newbranch" ||
+                die "git pull-request: we do not like '$newbranch' as a branch name."
+            ;;
+        -r|--remote=*)
+            shift
+            remote="$1"
+            [ -z "$remote" ] &&
+                die "git pull-request: -r needs a remote name"
+            ;;
+        -q|--quiet)
+            quiet=1
+            v=
+            ;;
+        -h|--help)
+            usage
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            break
+            ;;
+    esac
     shift
-else
-    remote=origin
-fi
+done
 
-git fetch $remote "pull/$1/head:$2"
-git checkout $2
+id="$1"
+[ -z "$id" ] &&
+    usage
+
+[ -z "$newbranch" ] &&
+    newbranch=pull/$id
+
+[ -z "$remote" ] &&
+    remote=$(get_default_remote)
+
+echo $remote $id $newbranch
+# git fetch $remote pull/$id/head:$newbranch
+# git checkout $newbranch
