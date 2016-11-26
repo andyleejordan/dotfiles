@@ -27,6 +27,7 @@ Plug 'fatih/vim-go'                                     " Go lang support
 Plug 'ledger/vim-ledger'                                " Ledger
 Plug 'majutsushi/tagbar'                                " Tagbar
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
+Plug 'mhinz/vim-grepper'                                " Better :grep
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
 Plug 'PProvost/vim-ps1'                                 " PowerShell
 Plug 'rizzatti/dash.vim'                                " Dash integration
@@ -68,6 +69,9 @@ let g:vim_json_syntax_conceal = 0
 
 " just use :StripWhitespace
 let g:better_whitespace_enabled = 0
+
+" use ripgrep first
+let g:grepper = {'tools': ['rg', 'ag', 'git', 'grep']}
 
 " recognize all Markdown files
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
