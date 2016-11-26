@@ -6,8 +6,7 @@ alias ec='e --create-frame'
 alias et='e --tty'
 
 # create a frame when programs invoke the editor
-VISUAL='ec'
-EDITOR="$VISUAL"
+export VISUAL=ec EDITOR=ec
 
 # p: a common package manager interface
 source ~/.config/shell/packages.sh
