@@ -24,6 +24,9 @@ Plug 'easymotion/vim-easymotion'                        " Movements
 Plug 'EinfachToll/DidYouMean'                           " File guessing
 Plug 'elzr/vim-json'                                    " Better JSON
 Plug 'fatih/vim-go'                                     " Go lang support
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/gv.vim'
 Plug 'ledger/vim-ledger'                                " Ledger
 Plug 'majutsushi/tagbar'                                " Tagbar
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
