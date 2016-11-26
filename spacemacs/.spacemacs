@@ -84,13 +84,6 @@ values."
      (csharp-mode)
      (dash)
      (dtrt-indent)
-     (omnisharp :location
-                (recipe :repo "OmniSharp/omnisharp-emacs"
-                        :fetcher github
-                        :commit "efa92c644489cd0b1a557ea16b08776b4023c34b"
-                        :files ("*.el"
-                                "src/*.el"
-                                "src/actions/*.el")))
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
