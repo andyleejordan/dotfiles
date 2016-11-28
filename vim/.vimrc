@@ -29,6 +29,7 @@ Plug 'majutsushi/tagbar'                                " Tagbar
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'mhinz/vim-grepper'                                " Better :grep
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
+Plug 'pearofducks/ansible-vim'                          " Ansible
 Plug 'PProvost/vim-ps1'                                 " PowerShell
 Plug 'rizzatti/dash.vim'                                " Dash integration
 Plug 'rust-lang/rust.vim'                               " Rust
