@@ -40,6 +40,7 @@ values."
      auto-completion
      (c-c++ :variables
             c-c++-enable-clang-support t)
+     clojure
      csv
      dash
      deft
