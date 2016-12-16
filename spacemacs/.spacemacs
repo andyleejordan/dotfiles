@@ -61,6 +61,7 @@ values."
      markdown
      org
      osx
+     python
      (ranger :variables
              ranger-show-literal nil)
      ruby
