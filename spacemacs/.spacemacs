@@ -56,6 +56,7 @@ values."
      go
      gtags
      html
+     java
      javascript
      markdown
      org
