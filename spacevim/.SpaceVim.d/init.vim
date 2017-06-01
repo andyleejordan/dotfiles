@@ -31,3 +31,7 @@ if has('python3')
 endif
 let g:clang2_placeholder_next = ''
 let g:clang2_placeholder_prev = ''
+let g:spacevim_custom_plugins = [
+    \ ['iCyMind/NeoSolarized'],
+    \ ]
+let g:spacevim_colorscheme = 'NeoSolarized'
