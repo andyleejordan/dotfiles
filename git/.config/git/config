@@ -10,6 +10,8 @@
 	bm = branch --merged
 	bnm = branch --no-merged
 	c = commit --verbose
+	ca = commit --verbose --amend
+	can = commit --verbose --amend --no-edit
 	co = checkout
 	d = diff
 	dn = diff --name-only
@@ -19,6 +21,8 @@
 	h = help
 	hc = help config
 	l = log
+	lo = log --pretty=oneline
+	lof = log --pretty=fuller
 	lol = log --graph --pretty=oneline
 	m = merge
 	nuke = !git clean -fdx && git submodule foreach git clean -fdx
@@ -32,11 +36,9 @@
 	ru = reset @{u}
 	ruh = reset --hard @{u}
 	rb = rebase
-	redo = commit --amend --no-edit
 	s = status
 	sh = show
 	st = stash
-	stat = status
 	sub = submodule
 	y = cherry-pick
 [am]
