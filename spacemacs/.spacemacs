@@ -369,6 +369,7 @@ you should place your code here."
   (setq org-adapt-indentation nil)
   ;; version-control
   (global-git-commit-mode t)
+  (setq git-commit-fill-column 72)
   (setq magit-repository-directories '("~/src"))
   (setq vc-follow-symlinks t)
   ;; additional
