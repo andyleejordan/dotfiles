@@ -358,6 +358,9 @@ you should place your code here."
   (setq evil-want-fine-undo nil)
   ;; evil-cleverparens
   (spacemacs/toggle-evil-cleverparens-on)
+  ;; evil-surround - map back to S for consistency with other editors
+  (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
+  (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
   ;; finance
   (setq ledger-post-amount-alignment-at :decimal
         ledger-post-amount-alignment-column 49
