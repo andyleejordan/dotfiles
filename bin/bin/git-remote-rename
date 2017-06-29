@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Copyright 2017 Andrew Schwartzmeyer
+set -eu
+
+if [[ $# -lt 2 ]]; then
+    echo "Usage: git remote-rename [<remote>] <old_name> <new_name>"
+    exit 1
+fi
+
+if [[ $# -eq 3 ]]; then
+    remote=$1
+    shift
+else
+    remote=origin
+fi
+
+old_name=$1
+new_name=$2
+
+git show-ref --quiet --verify -- "refs/heads/$new_name" &&
+		{ echo >&2 "Error: $new_name already exists"; exit 2; }
+
+git show-ref --quiet --verify -- "refs/remotes/$remote/$old_name" ||
+		{ echo >&2 "Error: $old_name does not exist"; exit 3; }
+
+git push "$remote" "$remote/$old_name:refs/heads/$new_name" ":$old_name"
