@@ -1,0 +1,5 @@
+#!/bin/bash
+# Copyright 2017 Andrew Schwartzmeyer
+set -eu
+
+git remote-rename "$1" "archive/$1"
