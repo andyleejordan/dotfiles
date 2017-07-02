@@ -85,6 +85,11 @@ set_prompt () {
     local color_purple='\[\e[0;35m\]'
     local color_cyan='\[\e[0;36m\]'
 
+    # hostname
+    PS1+=$color_blue
+    PS1+="@\h "
+    PS1+=$color_off
+
     # add purple exit code if non-zero
     if [[ $last_command != 0 ]]; then
         PS1+=$color_purple
