@@ -2,4 +2,9 @@
 # Copyright 2017 Andrew Schwartzmeyer
 set -eu
 
+if [[ ! $# -eq 1 ]]; then
+    echo "Usage: git archive-branch <branch>"
+    exit 1
+fi
+
 git remote-rename "$1" "archive/$1"
