@@ -23,14 +23,16 @@ function extract
       return 1
     end
 
-    if test -r $file".sig"
-      if not command -sq gpg
-        echo "$name was signed but gpg was not found" 1>&2
-        return 1
-      end
-      echo "Verifying signature for:" $name 1>&2
-      if not gpg --verify $file".sig"
-        return $status
+    for ext in sig asc
+      if test -r "$file.$ext"
+        if not command -sq gpg
+          echo "$name was signed but gpg was not found" 1>&2
+          return 1
+        end
+        echo "Verifying signature for:" $name 1>&2
+        if not gpg --verify "$file.$ext"
+          return $status
+        end
       end
     end
 
