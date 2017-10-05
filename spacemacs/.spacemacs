@@ -60,6 +60,7 @@ This function should only modify configuration layer settings."
      markdown
      org
      osx
+     protobuf
      python
      (ranger :variables
              ranger-show-literal nil)
