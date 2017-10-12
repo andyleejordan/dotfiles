@@ -406,6 +406,8 @@ before packages are loaded."
         gdb-many-windows t)
   ;; org
   (setq org-adapt-indentation nil)
+  ;; spell-checking
+  (setq ispell-program-name "aspell")
   ;; version-control
   (global-git-commit-mode t)
   (setq git-commit-fill-column 72)
