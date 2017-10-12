@@ -390,6 +390,9 @@ before packages are loaded."
   (add-to-list 'c-default-style '(c-mode . "c-work"))
   (add-to-list 'c-default-style '(c++-mode . "c-work"))
   (add-to-list 'c-default-style '(csharp-mode . "c#-work"))
+  ;; CMake
+  (setq cmake-ide-header-search-other-file nil
+        cmake-ide-header-search-first-including nil)
   ;; evil
   (setq evil-want-fine-undo nil)
   ;; evil-cleverparens
