@@ -72,7 +72,7 @@ This function should only modify configuration layer settings."
             shell-default-position 'bottom
             shell-default-shell 'multi-term)
      shell-scripts
-     spell-checking
+     ;; spell-checking
      syntax-checking
      vagrant
      version-control
@@ -92,7 +92,9 @@ This function should only modify configuration layer settings."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(evil-search-highlight-persist
+   dotspacemacs-excluded-packages '(cmake-ide
+                                    evil-search-highlight-persist
+                                    flyspell
                                     magithub
                                     tern)
    ;; Defines the behaviour of Spacemacs when installing packages.
