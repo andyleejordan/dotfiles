@@ -44,6 +44,7 @@ This function should only modify configuration layer settings."
      dash
      deft
      docker
+     editorconfig
      emacs-lisp
      emoji
      evil-cleverparens
