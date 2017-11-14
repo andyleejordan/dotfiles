@@ -383,6 +383,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   ;; spacemacs
+  (setq-default evil-escape-key-sequence "jk")
   (setq powerline-default-separator nil)
   ;; C styles
   (c-add-style "c-work"
