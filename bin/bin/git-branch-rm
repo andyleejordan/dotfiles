@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Copyright 2017 Andrew Schwartzmeyer
+set -u
+
+if [[ $# -lt 1 ]]; then
+    echo "Usage: git branch-rm [<remote>] <name>"
+    exit 1
+fi
+
+if [[ $# -eq 2 ]]; then
+    remote=$1
+    shift
+else
+    remote=origin
+fi
+
+name=$1
+
+if git show-ref --quiet --verify -- "refs/heads/$name"; then
+    git branch -D "$name"
+else
+		echo >&2 "Error: $name does not exist"
+fi
+
+if git show-ref --quiet --verify -- "refs/remotes/$remote/$name"; then
+    git push "$remote" ":$name"
+else
+		echo >&2 "Error: $remote/$name does not exist"
+fi
