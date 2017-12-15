@@ -37,8 +37,6 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      (c-c++ :variables
             c-c++-enable-clang-support t)
-     dash
-     deft
      docker
      editorconfig
      helm
@@ -50,15 +48,11 @@ This function should only modify configuration layer settings."
      evil-commentary
      (git :variables
           git-magit-status-fullscreen t)
-     github
-     gtags
      markdown
      org
      osx
      protobuf
      python
-     (ranger :variables
-             ranger-show-literal nil)
      rust
      semantic
      (shell :variables
