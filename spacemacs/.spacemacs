@@ -71,10 +71,7 @@ This function should only modify configuration layer settings."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages
    '(
-     (csharp-mode)
-     (dash)
      (dtrt-indent)
-     (protobuf-mode)
      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
