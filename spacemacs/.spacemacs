@@ -37,8 +37,6 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      (c-c++ :variables
             c-c++-enable-clang-support t)
-     clojure
-     csv
      dash
      deft
      docker
@@ -53,11 +51,7 @@ This function should only modify configuration layer settings."
      (git :variables
           git-magit-status-fullscreen t)
      github
-     go
      gtags
-     html
-     java
-     javascript
      markdown
      org
      osx
@@ -65,7 +59,6 @@ This function should only modify configuration layer settings."
      python
      (ranger :variables
              ranger-show-literal nil)
-     ruby
      rust
      semantic
      (shell :variables
@@ -75,7 +68,6 @@ This function should only modify configuration layer settings."
      shell-scripts
      ;; spell-checking
      syntax-checking
-     vagrant
      version-control
      windows-scripts
      yaml
