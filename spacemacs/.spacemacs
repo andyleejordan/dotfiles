@@ -59,7 +59,7 @@ This function should only modify configuration layer settings."
             shell-default-position 'bottom
             shell-default-shell 'multi-term)
      shell-scripts
-     ;; spell-checking
+     spell-checking
      syntax-checking
      version-control
      windows-scripts
