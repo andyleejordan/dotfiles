@@ -54,7 +54,6 @@ This function should only modify configuration layer settings."
      protobuf
      python
      rust
-     semantic
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
