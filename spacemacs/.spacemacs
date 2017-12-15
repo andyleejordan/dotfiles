@@ -35,29 +35,32 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (c-c++ :variables
-            c-c++-enable-clang-support t)
-     docker
-     editorconfig
      helm
      (auto-completion
       :variables
       auto-completion-enable-sort-by-usage t)
+     (c-c++
+      :variables
+      c-c++-enable-clang-support t)
+     docker
+     editorconfig
      emacs-lisp
      evil-cleverparens
      evil-commentary
-     (git :variables
-          git-magit-status-fullscreen t)
+     (git
+      :variables
+      git-magit-status-fullscreen t)
      markdown
      org
      osx
      protobuf
      python
      rust
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom
-            shell-default-shell 'multi-term)
+     (shell
+      :variables
+      shell-default-height 30
+      shell-default-position 'bottom
+      shell-default-shell 'multi-term)
      shell-scripts
      spell-checking
      syntax-checking
