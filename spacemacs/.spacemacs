@@ -49,7 +49,6 @@ This function should only modify configuration layer settings."
      emoji
      evil-cleverparens
      evil-commentary
-     finance
      (git :variables
           git-magit-status-fullscreen t)
      github
@@ -405,10 +404,6 @@ before packages are loaded."
   ;; evil-surround - map back to S for consistency with other editors
   (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
   (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
-  ;; finance
-  (setq ledger-post-amount-alignment-at :decimal
-        ledger-post-amount-alignment-column 49
-        ledger-clear-whole-transactions t)
   ;; gdb
   (setq gdb-show-main t
         gdb-many-windows t)
