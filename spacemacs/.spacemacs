@@ -389,7 +389,7 @@ before packages are loaded."
   (setq ispell-program-name "aspell")
   ;; version-control
   (global-git-commit-mode t)
-  (setq git-commit-fill-column 80)
+  (setq git-commit-fill-column 72)
   (setq magit-repository-directories '("~/src"))
   (setq vc-follow-symlinks t)
   ;; additional
