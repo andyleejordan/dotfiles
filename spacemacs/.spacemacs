@@ -45,7 +45,6 @@ This function should only modify configuration layer settings."
      docker
      editorconfig
      emacs-lisp
-     evil-cleverparens
      evil-commentary
      (git
       :variables
@@ -376,7 +375,7 @@ before packages are loaded."
   ;; evil
   (setq evil-want-fine-undo nil)
   ;; evil-cleverparens
-  (spacemacs/toggle-evil-cleverparens-on)
+  (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
   ;; evil-surround - map back to S for consistency with other editors
   (evil-define-key 'visual evil-surround-mode-map "s" 'evil-substitute)
   (evil-define-key 'visual evil-surround-mode-map "S" 'evil-surround-region)
