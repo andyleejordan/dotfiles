@@ -42,8 +42,8 @@ This function should only modify configuration layer settings."
      (c-c++
       :variables
       c-c++-enable-clang-support t)
+     cmake
      docker
-     editorconfig
      emacs-lisp
      evil-commentary
      (git
