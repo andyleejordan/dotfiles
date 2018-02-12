@@ -36,9 +36,12 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
+     html
      (auto-completion
       :variables
-      auto-completion-enable-sort-by-usage t)
+      auto-completion-enable-sort-by-usage t
+      auto-completion-complete-with-key-sequence-delay 0.01
+      )
      (c-c++
       :variables
       c-c++-enable-clang-support t)
@@ -78,11 +81,81 @@ This function should only modify configuration layer settings."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(cmake-ide
+   dotspacemacs-excluded-packages '(
+                                    ac-complete-yasnippet
+                                    ace-jump-helm-line
+                                    ace-link
+                                    ace-window
+                                    ;; adaptive-wrap
+                                    aggressive-indent
+                                    anzu
+                                    ;; auto-highlight-symbol
+                                    auto-compile
+                                    auto-yasnippet
+                                    avy
+                                    bracketed-paste
+                                    ;; buffer-move
+                                    centered-cursor-mode
+                                    clean-aindent-mode
+                                    cmake-ide
+                                    company-yasnippet
+                                    define-word
+                                    evil-anzu
+                                    ;; evil-args
+                                    ;; evil-exchange
+                                    ;; evil-iedit-state
+                                    evil-indent-plus
+                                    evil-lisp-state
+                                    ;; evil-matchit
+                                    evil-mc
+                                    evil-nerd-commenter
+                                    ;; evil-numbers
                                     evil-search-highlight-persist
-                                    flyspell
+                                    evil-tutor
+                                    ;; expand-region
+                                    eyebrowse
+                                    fancy-battery
+                                    flx-ido
+                                    golden-ratio
+                                    google-translate
+                                    ;; helm-ag
+                                    helm-c-yasnippet
+                                    helm-make
+                                    helm-mode-manager
+                                    ;; helm-swoop
+                                    helm-themes
+                                    highlight-indentation
+                                    highlight-numbers
+                                    ;; highlight-parentheses
+                                    ;; hungry-delete
+                                    ;; iedit
+                                    indent-guide
+                                    info+
+                                    linum-relative
+                                    lorem-ipsum
+                                    magit-gitflow
                                     magithub
-                                    tern)
+                                    move-text
+                                    nameless
+                                    neotree
+                                    ;; open-junk-file
+                                    overseer
+                                    paradox
+                                    password-generator
+                                    ;; pcre2el
+                                    persp-mode
+                                    ;; powerline
+                                    rainbow-delimiters
+                                    ;; smartparens
+                                    smooth-scrolling
+                                    tern
+                                    ;; spaceline
+                                    vi-tilde-fringe
+                                    volatile-highlights
+                                    ;; window-numbering
+                                    yasnippet
+                                    yasnippet-snippets
+                                    )
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and deletes any unused
