@@ -17,6 +17,10 @@ alias unzip Expand-Archive
 function which { (Get-Command @args).Source }
 function find { rg -i -uuu -l @args }
 function rg { rg.exe -i --colors 'path:bg:white' @args }
+function ln {
+    param([switch]$s, [string]$target, [string]$link)
+    New-Item -ItemType SymbolicLink -Target $target -Name $link
+}
 
 function path_pop([string]$path) {
   $env:PATH = ($env:PATH.split(';') | ?{ $_ -notmatch [regex]::escape($path) }) -join ';'
