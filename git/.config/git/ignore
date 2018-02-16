@@ -7,7 +7,7 @@
 *.exe
 *.o
 *.so
-.build/*
+.?build/*
 
 # Packages
 *.7z
@@ -63,6 +63,7 @@ TAGS
 GPATH
 GRTAGS
 GTAGS
+compile_commands.json
 
 # Windows
 Desktop.ini
@@ -72,4 +73,3 @@ Desktop.ini
 .vscode/*
 vs-build/*
 CMakeSettings.json
-build/*
