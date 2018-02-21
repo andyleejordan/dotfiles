@@ -64,6 +64,7 @@ GPATH
 GRTAGS
 GTAGS
 compile_commands.json
+.cquery_cached_index/
 
 # Windows
 Desktop.ini
