@@ -24,8 +24,10 @@ user_pref("geo.enabled", false);
 user_pref("media.navigator.enabled", false);
 user_pref("media.peerconnection.enabled", false);
 user_pref("media.video_stats.enabled", false);
-user_pref("privacy.resistFingerprinting", true);
 user_pref("toolkit.telemetry.enabled", false);
+
+// Breaks too many things
+user_pref("privacy.resistFingerprinting", false);
 
 // Cookies
 // https://feeding.cloud.geek.nz/posts/tweaking-cookies-for-privacy-in-firefox/
