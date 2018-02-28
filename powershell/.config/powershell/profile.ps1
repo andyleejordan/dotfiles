@@ -14,6 +14,7 @@ alias less more
 alias zip Compress-Archive
 alias unzip Expand-Archive
 
+function e { emacsclient -n @args }
 function which { (Get-Command @args).Source }
 function find { rg -i -uuu -l @args }
 function rg { rg.exe -i --colors 'path:bg:white' @args }
