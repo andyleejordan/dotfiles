@@ -17,9 +17,19 @@ alias unzip Expand-Archive
 function which { (Get-Command @args).Source }
 function find { rg -i -uuu -l @args }
 function rg { rg.exe -i --colors 'path:bg:white' @args }
+
 function ln {
     param([switch]$s, [string]$target, [string]$link)
     New-Item -ItemType SymbolicLink -Target $target -Name $link
+}
+
+function Show-Colors() {
+  $colors = [Enum]::GetValues([ConsoleColor])
+  $max = ($colors | foreach { "$_ ".Length } | Measure-Object -Maximum).Maximum
+  foreach ($color in $colors) {
+    Write-Host (" {0,2} {1,$max} " -f [int]$color,$color) -NoNewline
+    Write-Host "$color" -Foreground $color
+  }
 }
 
 function path_pop([string]$path) {
