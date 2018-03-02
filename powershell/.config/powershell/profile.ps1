@@ -10,6 +10,17 @@ if (Get-Module posh-git) {
   $GitPromptSettings.DefaultPromptSuffix = '`n$(''>'' * ($nestedPromptLevel + 1)) '
 }
 
+$solarized = "$PSScriptRoot/Set-SolarizedDarkColorDefaults.ps1"
+if (Test-Path $solarized) {
+  . $solarized
+  # Fish-like colors
+  $options.CommandForegroundColor = 'DarkBlue'
+  $options.ContinuationPromptForegroundColor = 'Blue'
+  $options.DefaultTokenForegroundColor = 'Cyan'
+  $options.EmphasisForegroundColor = 'Cyan'
+  $options.StringForegroundColor = 'Yellow'
+}
+
 Set-Alias alias Set-Alias
 alias g git
 alias grep Select-String
