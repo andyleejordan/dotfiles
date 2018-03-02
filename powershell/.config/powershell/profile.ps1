@@ -22,7 +22,13 @@ if (Test-Path $solarized) {
 }
 
 Set-Alias alias Set-Alias
-alias g git
+
+if (Get-Command -Name hub -ErrorAction SilentlyContinue) {
+    alias g hub
+} else {
+    alias g git
+}
+
 alias grep Select-String
 alias less more
 alias zip Compress-Archive
