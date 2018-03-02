@@ -4,7 +4,10 @@ if (Get-Module PSReadLine) {
 
 Import-Module posh-git -ErrorAction SilentlyContinue
 if (Get-Module posh-git) {
+  # TODO: Make '@' blue, if possible. Also switch directory and Git info.
   $GitPromptSettings.DefaultPromptAbbreviateHomeDirectory = $true
+  $GitPromptSettings.DefaultPromptPrefix = '${env:USERNAME}@$(hostname) '
+  $GitPromptSettings.DefaultPromptSuffix = '`n$(''>'' * ($nestedPromptLevel + 1)) '
 }
 
 Set-Alias alias Set-Alias
