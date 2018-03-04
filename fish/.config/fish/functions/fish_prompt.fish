@@ -7,17 +7,15 @@ function fish_prompt
     set status_code (set_color magenta) $last_status (set_color normal) ' '
   end
 
-
-  # red root user
+  # red @ for root, otherwise blue
   if test (id -u) -eq 0
-    set user_color red
+    set at_color red
   else
-    set user_color normal
+    set at_color blue
   end
-  set user (set_color $user_color) (whoami) (set_color normal)
 
   # this uses a cached hostname to avoid DNS hiccups
-  set host (set_color blue) '@' (set_color normal) (prompt_hostname)
+  set host (set_color $at_color) '@' (set_color normal) (prompt_hostname)
 
   # configure git info
   set -g __fish_git_prompt_showdirtystate true
