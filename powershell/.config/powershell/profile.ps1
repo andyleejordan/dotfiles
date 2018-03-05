@@ -3,11 +3,51 @@ if (Get-Module PSReadLine) {
 }
 
 Import-Module posh-git -ErrorAction SilentlyContinue
-if (Get-Module posh-git) {
-  # TODO: Make '@' blue, if possible. Also switch directory and Git info.
-  $GitPromptSettings.DefaultPromptAbbreviateHomeDirectory = $true
-  $GitPromptSettings.DefaultPromptPrefix = '${env:USERNAME}@$(hostname) '
-  $GitPromptSettings.DefaultPromptSuffix = '`n$(''>'' * ($nestedPromptLevel + 1)) '
+function prompt {
+  # save the status before overwriting it
+  $last_status = $LASTEXITCODE
+
+  if (Test-Path variable:/PSDebugContext) {
+    Write-Host "[DBG] " -ForegroundColor Yellow -NoNewLine
+  }
+
+  # only print non-zero exit codes
+  if ($last_status -ne 0) {
+    Write-Host "$last_status " -ForegroundColor Magenta -NoNewLine
+  }
+
+  # red @ for root, otherwise blue
+  $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+  $principal = [Security.Principal.WindowsPrincipal] $identity
+  if ($principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    $at_color = "Red"
+  } else {
+    $at_color = "Blue"
+  }
+
+  Write-Host "@" -ForegroundColor $at_color -NoNewLine
+  Write-Host "$(hostname)" -NoNewLine
+
+  # print git info if available
+  if (Get-Module posh-git) {
+    $GitPromptSettings.BeforeText = ' ('
+    $GitPromptSettings.BeforeForegroundColor = [ConsoleColor]::DarkBlue
+    $GitPromptSettings.AfterText = ')'
+    $GitPromptSettings.AfterForegroundColor = [ConsoleColor]::DarkBlue
+    $GitPromptSettings.BranchForegroundColor = [ConsoleColor]::Green
+    $GitPromptSettings.BranchGoneStatusForegroundColor = [ConsoleColor]::Red
+    $GitPromptSettings.BranchIdenticalStatusToForegroundColor = [ConsoleColor]::Green
+    $GitPromptSettings.BranchAheadStatusForegroundColor = [ConsoleColor]::Green
+    $GitPromptSettings.BranchBehindStatusForegroundColor = [ConsoleColor]::Green
+    $GitPromptSettings.BranchBehindAndAheadStatusForegroundColor = [ConsoleColor]::DarkRed
+
+    Write-VcsStatus
+  }
+
+  Write-Host " $(Get-Location)" -ForegroundColor Blue # NewLine
+  Write-Host ">" -ForegroundColor Cyan -NoNewLine
+  $LASTEXITCODE = $last_status
+  return " " # satisfy the `prompt` function
 }
 
 $solarized = "$PSScriptRoot/Set-SolarizedDarkColorDefaults.ps1"
