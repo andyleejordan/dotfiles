@@ -44,7 +44,10 @@ function prompt {
     Write-VcsStatus
   }
 
-  Write-Host " $(Get-Location)" -ForegroundColor Blue # NewLine
+  $regex = [regex]::Escape($HOME) + "(\\.*)*$"
+  $path = $executionContext.SessionState.Path.CurrentLocation.Path -replace $regex, '~$1'
+  $path = $path.Replace('\', '/')
+  Write-Host " $path" -ForegroundColor Blue # NewLine
   Write-Host ">" -ForegroundColor Cyan -NoNewLine
   $LASTEXITCODE = $last_status
   return " " # satisfy the `prompt` function
