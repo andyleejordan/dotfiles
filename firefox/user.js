@@ -45,6 +45,10 @@ user_pref("network.http.referer.XOriginPolicy", 1);
 // https://www.reddit.com/r/firefox/wiki/aboutconfig
 user_pref("browser.fixup.alternate.enabled", false);
 user_pref("browser.newtabpage.introShown", true);
+user_pref("browser.newtabpage.activity-stream.telemetry", false);
+user_pref("browser.newtabpage.activity-stream.showSponsored", false);
+user_pref("browser.newtabpage.activity-stream.default.sites", "https://www.wikipedia.org/,https://duckduckgo.com/")
+user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
 user_pref("browser.onboarding.notification.finished", true);
 user_pref("browser.tabs.closeWindowWithLastTab", false);
