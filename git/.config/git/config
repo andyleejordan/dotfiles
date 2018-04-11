@@ -64,6 +64,7 @@
 [merge]
 	stat = true
 	tool = vimdiff
+	conflictstyle = diff3
 [pull]
 	ff = only
 [push]
