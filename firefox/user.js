@@ -34,12 +34,13 @@ user_pref("privacy.resistFingerprinting", false);
 user_pref("privacy.firstparty.isolate", true);
 user_pref("network.cookie.cookieBehavior", 3);
 user_pref("network.cookie.lifetimePolicy", 3);
-user_pref("network.cookie.lifetime.days", 21);
+user_pref("network.cookie.lifetime.days", 28);
 user_pref("network.cookie.thirdparty.sessionOnly", true);
 
 // Referer Headers
 // https://feeding.cloud.geek.nz/posts/tweaking-referrer-for-privacy-in-firefox/
 user_pref("network.http.referer.XOriginPolicy", 1);
+user_pref("network.http.referer.spoofSource", true);
 
 // Behavior
 // https://www.reddit.com/r/firefox/wiki/aboutconfig
