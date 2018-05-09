@@ -55,6 +55,7 @@ user_pref("browser.onboarding.notification.finished", true);
 user_pref("browser.tabs.closeWindowWithLastTab", false);
 user_pref("browser.urlbar.trimURLs", false);
 user_pref("general.warnOnAboutConfig", false);
+user_pref("media.autoplay.enabled", false);
 user_pref("signon.rememberSignons", false);
 user_pref("security.webauth.u2f", true);
 
