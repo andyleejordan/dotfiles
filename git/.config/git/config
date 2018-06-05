@@ -11,13 +11,13 @@
 	bnm = branch --no-merged
 	c = commit --verbose
 	ca = commit --verbose --amend
-	can = commit --verbose --amend --no-edit
+	ce = commit --verbose --amend --no-edit
 	co = checkout
 	d = diff
 	dn = diff --name-only
 	ds = diff --staged
 	du = count-objects --verbose --human-readable
-	f = fetch
+	f = fetch --all
 	h = help
 	hc = help config
 	l = log
@@ -27,20 +27,20 @@
 	m = merge
 	nuke = !git clean -fdx && git submodule foreach git clean -fdx
 	p = pull
-	pm = fetch origin master:master
 	ps = push
 	psf = push --force-with-lease
-	pr = pull-request
 	r = reset
 	rh = reset --hard
 	ru = reset @{u}
-	ruh = reset --hard @{u}
+	rhu = reset --hard @{u}
 	rb = rebase
+	rbi = rebase --interactive
 	s = status
 	sh = show
-	st = stash
+	shepherd = lol --perl-regexp --committer=\"Andrew Schwartzmeyer\" --author=\"^(?!Andrew Schwartzmeyer).*$\"
 	sub = submodule
 	y = cherry-pick
+	z = stash
 [am]
 	threeWay = true
 [apply]
