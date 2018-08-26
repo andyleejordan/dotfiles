@@ -32,9 +32,9 @@ user_pref("privacy.resistFingerprinting", false);
 // Cookies
 // https://feeding.cloud.geek.nz/posts/tweaking-cookies-for-privacy-in-firefox/
 user_pref("privacy.firstparty.isolate", true);
-user_pref("network.cookie.cookieBehavior", 3);
+user_pref("network.cookie.cookieBehavior", 0);
 user_pref("network.cookie.lifetimePolicy", 3);
-user_pref("network.cookie.lifetime.days", 28);
+user_pref("network.cookie.lifetime.days", 90);
 user_pref("network.cookie.thirdparty.sessionOnly", true);
 
 // Referer Headers
