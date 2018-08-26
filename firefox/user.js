@@ -1,8 +1,8 @@
 // Prefetching
-user_pref("browser.urlbar.speculativeConnect.enabled", false);
-user_pref("network.dns.disablePrefetch", true);
-user_pref("network.prefetch-next", false);
-user_pref("network.predictor.enabled", false);
+user_pref("browser.urlbar.speculativeConnect.enabled", true);
+user_pref("network.dns.disablePrefetch", false);
+user_pref("network.prefetch-next", true);
+user_pref("network.predictor.enabled", true);
 
 // Tracking
 user_pref("app.shield.optoutstudies.enabled", false);
