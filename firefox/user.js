@@ -39,7 +39,7 @@ user_pref("network.cookie.thirdparty.sessionOnly", true);
 
 // Referer Headers
 // https://feeding.cloud.geek.nz/posts/tweaking-referrer-for-privacy-in-firefox/
-user_pref("network.http.referer.XOriginTrimmingPolicy", 2);
+user_pref("network.http.referer.XOriginPolicy", 1);
 
 // Behavior
 // https://www.reddit.com/r/firefox/wiki/aboutconfig
