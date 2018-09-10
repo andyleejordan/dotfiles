@@ -1,5 +1,5 @@
 function package -d "Manages packages agnostically"
-  # ag:	search packages
+  # rg:	search packages
   # ar:	auto-remove unused dependencies
   # bd:	list build dependencies
   # cl:	clean caches
@@ -30,7 +30,7 @@ end
 function package_apt -w apt-get -a cmd
   set --erase argv[1]
   switch $cmd
-    case ag
+    case rg
       apt-cache search $argv
     case ar
       sudo apt-get autoremove $argv
@@ -63,7 +63,7 @@ end
 function package_yum -w yum -a cmd
   set --erase argv[1]
   switch $cmd
-    case ag
+    case rg
       yum search $argv
     case ar p
       sudo yum autoremove $argv
@@ -94,7 +94,7 @@ end
 function package_brew -w brew -a cmd
   set --erase argv[1]
   switch $cmd
-    case ag
+    case rg
       brew search $argv
     case ar
       echo "brew cannot auto-remove unused dependencies" 1>&2
@@ -127,7 +127,7 @@ end
 function package_pacman -w pacman -a cmd
   set --erase argv[1]
   switch $cmd
-    case ag
+    case rg
       pacman --sync --search $argv
     case ar
       sudo pacman --remove --unneeded $argv
