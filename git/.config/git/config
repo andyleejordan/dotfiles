@@ -75,5 +75,7 @@
 [rerere]
 	enabled = true
 	autoUpdate = true
+[transfer]
+	fsckObjects = true
 [include]
 	path = ./local
