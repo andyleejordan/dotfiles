@@ -35,6 +35,7 @@
 	rhu = reset --hard @{u}
 	rb = rebase
 	rbi = rebase --interactive
+	root = rev-list --max-parents=0 HEAD
 	s = status
 	sh = show
 	shepherd = lol --perl-regexp --committer=\"Andrew Schwartzmeyer\" --author=\"^(?!Andrew Schwartzmeyer).*$\"
