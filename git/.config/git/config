@@ -52,7 +52,8 @@
 [apply]
 	ignoreWhitespace = change
 [branch]
-	autoSetupRebase = local
+	autoSetupRebase = always
+	autosetupmerge = always
 [color]
 	ui = auto
 [credential]
