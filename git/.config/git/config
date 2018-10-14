@@ -4,6 +4,11 @@
 [core]
 	abbrev = 9
 	editor = emacsclient --create-frame
+[advice]
+	statusHints = false
+	commitBeforeMerge = false
+	detachedHead = false
+	waitingForEditor = false
 [alias]
 	a = add
 	b = branch --sort=-committerdate
