@@ -59,7 +59,6 @@
 [credential]
 	helper = cache --timeout 30000 # seconds
 [diff]
-	tool = vimdiff
 	mnemonicPrefix = true
 	renames = copies
 [format]
@@ -71,7 +70,6 @@
 	decorate = short
 [merge]
 	stat = true
-	tool = vimdiff
 [pull]
 	ff = only
 [push]
