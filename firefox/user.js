@@ -1,17 +1,9 @@
-// Prefetching
-user_pref("browser.urlbar.speculativeConnect.enabled", true);
-user_pref("network.dns.disablePrefetch", false);
-user_pref("network.prefetch-next", true);
-user_pref("network.predictor.enabled", true);
-
 // Tracking
 user_pref("app.shield.optoutstudies.enabled", false);
 user_pref("beacon.enabled", false);
-user_pref("browser.safebrowsing.appRepURL", "");
 user_pref("browser.safebrowsing.enabled", false);
 user_pref("browser.safebrowsing.malware.enabled", false);
 user_pref("browser.safebrowsing.phishing.enabled", false);
-user_pref("browser.selfsupport.url", "");
 user_pref("browser.send_pings", false);
 user_pref("datareporting.healthreport.service.enabled", false);
 user_pref("datareporting.healthreport.uploadEnabled", false);
@@ -51,12 +43,11 @@ user_pref("browser.newtabpage.activity-stream.default.sites", "https://www.wikip
 user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
 user_pref("browser.onboarding.notification.finished", true);
-user_pref("browser.tabs.closeWindowWithLastTab", false);
-user_pref("browser.urlbar.trimURLs", false);
 user_pref("general.warnOnAboutConfig", false);
-user_pref("media.autoplay.enabled", false);
 user_pref("signon.rememberSignons", false);
-user_pref("security.webauth.u2f", true);
+
+// Breaks Google Play Music
+user_pref("media.autoplay.enabled", true);
 
 // Superfluous with uBlock Origin
 user_pref("privacy.trackingprotection.enabled", false);
