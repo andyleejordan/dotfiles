@@ -67,6 +67,7 @@
 	autoCorrect = -1
 [log]
 	abbrevCommit = true
+	date = local
 	decorate = short
 [merge]
 	stat = true
