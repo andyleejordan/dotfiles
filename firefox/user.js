@@ -1,65 +1,41 @@
-// Tracking
-user_pref("app.shield.optoutstudies.enabled", false);
-user_pref("beacon.enabled", false);
-user_pref("browser.safebrowsing.enabled", false);
-user_pref("browser.safebrowsing.malware.enabled", false);
-user_pref("browser.safebrowsing.phishing.enabled", false);
-user_pref("browser.send_pings", false);
-user_pref("datareporting.healthreport.service.enabled", false);
-user_pref("datareporting.healthreport.uploadEnabled", false);
-user_pref("datareporting.policy.dataSubmissionEnabled", false);
-user_pref("dom.battery.enabled", false);
-user_pref("extensions.getAddons.cache.enabled", false);
-user_pref("extensions.getAddons.showPane", false);
-user_pref("extensions.webservice.discoverURL", "");
-user_pref("geo.enabled", false);
-user_pref("media.navigator.enabled", false);
-user_pref("media.peerconnection.enabled", false);
-user_pref("media.video_stats.enabled", false);
-user_pref("toolkit.telemetry.enabled", false);
-
-// Breaks too many things
-user_pref("privacy.resistFingerprinting", false);
-
-// Cookies
+// Isolate and limit cookies
 // https://feeding.cloud.geek.nz/posts/tweaking-cookies-for-privacy-in-firefox/
 user_pref("privacy.firstparty.isolate", true);
 user_pref("network.cookie.cookieBehavior", 0);
 user_pref("network.cookie.lifetimePolicy", 3);
-user_pref("network.cookie.lifetime.days", 90);
-user_pref("network.cookie.thirdparty.sessionOnly", true);
+user_pref("network.cookie.lifetime.days", 28);
+// user_pref("network.cookie.thirdparty.sessionOnly", true);
 
-// Referer Headers
+// Trim Referer Headers
 // https://feeding.cloud.geek.nz/posts/tweaking-referrer-for-privacy-in-firefox/
 user_pref("network.http.referer.XOriginPolicy", 1);
-
-// Behavior
-// https://www.reddit.com/r/firefox/wiki/aboutconfig
-user_pref("browser.fixup.alternate.enabled", false);
-user_pref("browser.newtabpage.introShown", true);
-user_pref("browser.newtabpage.activity-stream.telemetry", false);
-user_pref("browser.newtabpage.activity-stream.showSponsored", false);
-user_pref("browser.newtabpage.activity-stream.default.sites", "https://www.wikipedia.org/,https://duckduckgo.com/")
-user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
-user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
-user_pref("browser.onboarding.notification.finished", true);
-user_pref("general.warnOnAboutConfig", false);
-user_pref("signon.rememberSignons", false);
-
-// Breaks Google Play Music
-user_pref("media.autoplay.enabled", true);
 
 // Superfluous with uBlock Origin
 user_pref("privacy.trackingprotection.enabled", false);
 
-// uBlock Origin fixes the leaks
-user_pref("webgl.disabled", false);
+// Superfluous with password managers
+user_pref("signon.rememberSignons", false);
 
-// Breaks GitHub Gist
-user_pref("dom.event.clipboardevents.enabled", true);
+// Disable pings
+user_pref("browser.send_pings", false);
 
-// Breaks AMO
-user_pref("dom.storage.enabled", true);
+// Don't try to fix DNS issues
+user_pref("browser.fixup.alternate.enabled", false);
 
-// Breaks Twitter
-user_pref("dom.indexedDB.enabled", true);
+// Disable new tab telemetry and ads
+user_pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
+user_pref("browser.newtabpage.activity-stream.telemetry", false);
+user_pref("browser.newtabpage.activity-stream.showSponsored", false);
+user_pref("browser.newtabpage.activity-stream.disableSnippets", true);
+user_pref("browser.newtabpage.activity-stream.feeds.snippets", false);
+user_pref("browser.newtabpage.pinned", []);
+
+// Disable opt-out Mozilla studies
+user_pref("app.normandy.enabled", false);
+user_pref("app.shield.optoutstudies.enabled", false);
+
+// Disable about:config warning
+user_pref("general.warnOnAboutConfig", false);
+
+// Just close
+user_pref("browser.tabs.warnOnClose", false);
