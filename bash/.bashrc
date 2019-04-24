@@ -39,13 +39,22 @@ source "$shell_config/run.sh"
 source "$shell_config/fortune.sh"
 
 # cd options
-shopt -s autocd cdspell dirspell
+shopt -s cdspell
+if ((BASH_VERSINFO >= 4)); then
+    shopt -s autocd dirspell
+fi
 
 # glob options
-shopt -s dotglob extglob globstar nocaseglob
+shopt -s dotglob extglob nocaseglob
+if ((BASH_VERSINFO >= 4)); then
+    shopt -s globstar
+fi
 
 # job options
-shopt -s checkjobs huponexit
+shopt -s huponexit
+if ((BASH_VERSINFO >= 4)); then
+    shopt -s checkjobs
+fi
 
 # shell options
 shopt -s checkhash checkwinsize
