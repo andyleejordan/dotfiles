@@ -1,6 +1,6 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
-# XDG setup
+echo \# History repeats itself: the first time as tragedy, the second time as farce.
 
 ## XDG config
 if [[ ! -x "$XDG_CONFIG_HOME" ]]; then
@@ -34,9 +34,6 @@ source "$shell_config/git-completion.bash"
 
 # run setup
 source "$shell_config/run.sh"
-
-# show a fortune
-source "$shell_config/fortune.sh"
 
 # cd options
 shopt -s cdspell
