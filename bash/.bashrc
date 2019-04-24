@@ -32,9 +32,6 @@ path_back  ~/.cargo/bin /usr/local/go/bin
 # completion setup
 source "$shell_config/git-completion.bash"
 
-# run setup
-source "$shell_config/run.sh"
-
 # cd options
 shopt -s cdspell
 if ((BASH_VERSINFO >= 4)); then
