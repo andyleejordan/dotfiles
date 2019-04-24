@@ -146,10 +146,6 @@ if hash tag 2>/dev/null; then
     alias ag='tag'
 fi
 
-# uses 'thefuck' to fix common command mistakes
-# https://github.com/nvbn/thefuck
-alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
-
 # colored man pages
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
