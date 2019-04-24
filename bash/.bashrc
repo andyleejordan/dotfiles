@@ -96,7 +96,12 @@ set_prompt () {
     fi
 
     # hostname
-    PS1+=$color_blue
+    if [[ -n $SSH_CONNECTION ]]; then
+        PS1+=$color_green
+    else
+        PS1+=$color_blue
+    fi
+
     PS1+="@"
     PS1+=$color_off
     PS1+="\h "
