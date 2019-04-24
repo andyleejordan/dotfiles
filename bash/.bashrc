@@ -88,11 +88,6 @@ set_prompt () {
     local color_purple='\[\e[0;35m\]'
     local color_cyan='\[\e[0;36m\]'
 
-    # hostname
-    PS1+=$color_blue
-    PS1+="@\h "
-    PS1+=$color_off
-
     # add purple exit code if non-zero
     if [[ $last_command != 0 ]]; then
         PS1+=$color_purple
@@ -100,23 +95,29 @@ set_prompt () {
         PS1+=$color_off
     fi
 
+    # hostname
+    PS1+=$color_blue
+    PS1+="@"
+    PS1+=$color_off
+    PS1+="\h "
+
     # shortened working directory
+    PS1+=$color_blue
     PS1+='\w '
+    PS1+=$color_off
 
     # add Git status with color hints
     PS1+="$(__git_ps1 '%s ')"
 
-    # red for root, off for user
+    # red for root, cyan for user
     if [[ $EUID == 0 ]]; then
         PS1+=$color_red
     else
-        PS1+=$color_off
+        PS1+=$color_cyan
     fi
 
     # end of prompt
-    PS1+='|-'
-    PS1+=$color_red
-    PS1+='/ '
+    PS1+='\n> '
     PS1+=$color_off
 }
 PROMPT_COMMAND='set_prompt'
