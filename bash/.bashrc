@@ -132,15 +132,6 @@ else
     export CLICOLOR=1
 fi
 
-# tag ag's matches
-if hash tag 2>/dev/null; then
-    tag() {
-        TAG_CMD_FMT_STRING='e +{{.LineNumber}} {{.Filename}}' command tag "$@"
-        source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null
-    }
-    alias ag='tag'
-fi
-
 # colored man pages
 man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
