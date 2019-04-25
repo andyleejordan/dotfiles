@@ -156,3 +156,8 @@ stty -ixon
 if [[ -r "$shell_config/local.sh" ]]; then
     source "$shell_config/local.sh"
 fi
+
+# OCaml setup
+if [[ -r ~/.opam/opam-init/init.sh ]]; then
+    source ~/.opam/opam-init/init.sh &> /dev/null
+fi
