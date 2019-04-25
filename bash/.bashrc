@@ -152,11 +152,6 @@ man() {
 # disable flow control so C-s works
 stty -ixon
 
-# source tokens
-if [[ -r "$shell_config/tokens.sh" ]]; then
-    source "$shell_config/tokens.sh"
-fi
-
 # source local configurations
 if [[ -r "$shell_config/local.sh" ]]; then
     source "$shell_config/local.sh"
