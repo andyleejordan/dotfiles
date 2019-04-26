@@ -1,6 +1,10 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
-echo \# History repeats itself: the first time as tragedy, the second time as farce.
+if [[ -t 1 ]]; then
+    echo History repeats itself:
+    echo the first time as tragedy,
+    echo the second time as farce.
+fi
 
 ## XDG config
 if [[ ! -x "$XDG_CONFIG_HOME" ]]; then
@@ -149,8 +153,10 @@ man() {
         man "$@"
 }
 
-# disable flow control so C-s works
-stty -ixon
+# disable flow control so C-s and C-q work
+if [[ -t 1 ]]; then
+    stty -ixon -ixoff
+fi
 
 # source local configurations
 if [[ -r "$shell_config/local.sh" ]]; then
