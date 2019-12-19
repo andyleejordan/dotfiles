@@ -1,6 +1,6 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
-if [[ -t 1 ]]; then
+if shopt -q login_shell; then
     echo History repeats itself:
     echo the first time as tragedy,
     echo the second time as farce.
