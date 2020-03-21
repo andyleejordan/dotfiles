@@ -1,12 +1,3 @@
 [submodule "emacs/.emacs.d"]
 	path = emacs/.emacs.d
 	url = git@github.com:andschwa/.emacs.d.git
-[submodule "powershell/.config/powershell/cmd-colors-solarized"]
-	path = powershell/.config/powershell/cmd-colors-solarized
-	url = https://github.com/andschwa/cmd-colors-solarized.git
-[submodule "notes"]
-	path = notes
-	url = git@bitbucket.org:AndSchwa/notes.git
-[submodule "work"]
-	path = work
-	url = git@bitbucket.org:AndSchwa/work-notes.git
