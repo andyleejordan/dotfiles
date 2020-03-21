@@ -1,0 +1,207 @@
+* Configuration
+** No password for sudo
+#+begin_src shell
+  sudo sed -i "s/%sudo	ALL=(ALL:ALL)/%sudo	ALL=(ALL) NOPASSWD:/g" /etc/sudoers
+#+end_src
+** Ubuntu
+*** Change LTS to Normal and upgrade
+#+begin_src shell
+  sudo sed -i "s/Prompt=lts/Prompt=normal/g" /etc/update-manager/release-upgrades
+  sudo do-release-upgrade
+#+end_src
+*** Packages
+#+begin_src shell
+  sudo add-apt-repository ppa:git-core/ppa
+  sudo apt update
+  sudo apt install git stow emacs ripgrep dos2unix
+#+end_src
+** Dotfiles
+#+begin_src shell
+  git clone git@github.com:andschwa/dotfiles.git
+  cd dotfiles
+  git submodule update --init emacs/.emacs.d
+  stow bash git emacs
+#+end_src
+** Install font
+E.g. [[https://github.com/microsoft/cascadia-code/releases][Cascadia Code]]
+#+begin_src shell
+  mkdir ~/.local/share/fonts
+  mv Cascadia.ttf ~/.local/share/fonts
+  sudo fc-cache -f -v
+#+end_src
+** Filesystem
+*** Swap file
+[[https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04][Digial Ocean Guide]]
+#+begin_src shell
+  # Swap summary
+  sudo swapon --show
+  # Create file
+  sudo fallocate -l 8G /swapfile
+  sudo chmod 600 /swapfile
+  sudo mkswap /swapfile
+  sudo swapon /swapfile
+  # Add to filesystem table
+  echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+#+end_src
+*** RAM disk
+#+begin_src sh
+  sudo mkdir /mnt/ramdisk
+  sudo mount -t tmpfs -o rw,size=8G tmpfs /mnt/ramdisk
+#+end_src
+* Git
+** Checkout original merge conflict
+Also undoes =git rerere= recorded resolution.
+#+begin_src shell
+  git checkout -m
+#+end_src
+** Grep all changes
+#+begin_src shell
+  git log -G<pattern>
+#+end_src
+** List authors
+#+begin_src shell
+  # sorted
+  git log --format='%aN' | sort -u -k 2
+  # by commit count
+  git shortlog -sne
+#+end_src
+** Push to two remote repos at once
+Just add a second URL to the desired remote in =.git/config=.
+** Ignore changes to tracked files
+#+begin_src shell
+  git update-index --assume-unchanged <file>
+#+end_src
+** Refer to commit by message
+#+begin_src shell
+  git commit --fixup :/foo
+#+end_src
+** Find common ancestor
+#+begin_src shell
+  git merge-base topic master
+  git merge-base --fork-point topic
+#+end_src
+** Replace HTTP with SSH
+#+begin_src conf
+  [url "ssh://git@github.com/"]
+      insteadOf = https://github.com/
+#+end_src
+** History manipulation
+[[https://github.com/newren/git-filter-repo][git-filter-repo]]
+* SSH
+** Port forwarding
+- -v :: verbose
+- -N :: no command
+- -T :: no TTY
+*** Local (outbound) tunnel
+Here we want to access the local port (on the client) and have the
+traffic tunneled to the remote host and port on the server's side.
+#+begin_src shell
+  ssh -v -N -T -L <local port>:<remote host>:<remote port> <server>
+#+end_src
+*** Remote (inbound) tunnel
+Here we want to access the local port (on the server) and have the
+traffic tunneled to the remote host and port on the client's side.
+#+begin_src shell
+  ssh -v -N -T -R <local port>:<remote host>:<remote port> <server>
+#+end_src
+* Debugging
+** Recovery shell
+- to TTY :: ctrl+alt+(F1|F2|F3)
+- and back :: alt+(F7|F8|F9)
+** Networking
+*** List all active ports
+#+begin_src shell
+  # New tool:
+  ss
+  # Old tool:
+  netstat -tulpn
+#+end_src
+*** Manual DNS lookup
+#+begin_src shell
+  nslookup andschwa.com
+#+end_src
+*** IRC
+=/msg nickserv identify andschwa <password>=
+=/msg nickserv release/recover andschwa <password>=
+* Scripting
+** Bash
+*** Linting
+Use =ShellCheck= or the [[https://www.shellcheck.net][website]].
+Read the [[http://mywiki.wooledge.org/BashGuide][Bash Guide]] and [[http://mywiki.wooledge.org/BashPitfalls][Bash Pitfalls]].
+*** Test for command
+#+begin_src shell
+  # POSIX-compliant
+  command -v foo >/dev/null 2>&1 || { echo >&2 "Missing foo"; exit 1; }
+  # Caches path with Bash
+  hash foo 2>/dev/null || { echo >&2 "Missing foo"; exit 1; }
+#+end_src
+*** Compound tests
+#+begin_src shell
+  [[ (-e foo) && ! (-e bar) ]] && echo "foo exists but not bar"
+#+end_src
+*** Command-line interface
+#+begin_src shell
+  while :; do
+      case $1 in
+          -h|--help)
+              cat << EOF
+  Usage:
+      foo [-f|--files] <file1,file2,...>
+      foo [-h|--help]
+          Prints this help.
+  EOF
+              exit
+              ;;
+          -f|--files)
+              if [[ -n $2 ]]; then
+                  IFS=$',' read -r -a files <<< "$2"
+                  shift
+              else
+                  exit 2
+              fi
+              ;;
+          --)
+              shift
+              break
+              ;;
+          -?*)
+              echo "Unknown option: $1"
+              exit 1
+              ;;
+          ,*)
+              break
+      esac
+      shift
+  done
+#+end_src
+*** Replace multiple pairs
+#+begin_src shell
+  while read from to; do
+      find . -name "*.cmake" -or -name "CMakeLists.txt" | xargs sed -i "s/$from/$to/g"
+  done < replacements.txt
+#+end_src
+** PowerShell
+#+begin_src powershell
+  Any-Thing | Get-Member
+  Get-Command | Select-String "Invoke*"
+  Any-Thing | where {$_.Property -gt 3}
+  ls env:
+  Remove-Module
+#+end_src
+* Build systems
+** GNU Make
+*** Automatic Variables
+- [[https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html][Manual]]
+- $@ :: The file name of the target of the rule.
+- $< :: The name of the first prerequisite.
+- $^ :: The names of all the prerequisites, with spaces between them.
+** Autotools
+*** Generate configure and build
+#+begin_src shell
+  autoconf -vfi
+  ./configure
+  make
+#+end_src
+*** Fix libraries
+Some projects will generate an =ld= configuration file in
+=/etc/ld.so.conf.d/=, so update the cache with =sudo ldconfig -v=.
