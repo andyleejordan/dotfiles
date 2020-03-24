@@ -55,7 +55,7 @@
 [color]
 	ui = auto
 [credential]
-	helper = cache --timeout 30000 # seconds
+	helper = store
 [diff]
 	mnemonicPrefix = true
 	renames = copies
