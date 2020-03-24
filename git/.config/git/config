@@ -80,5 +80,3 @@
 [rerere]
 	enabled = true
 	autoUpdate = true
-[include]
-	path = ./local
