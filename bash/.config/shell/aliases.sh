@@ -20,3 +20,6 @@ alias ping='ping -c 8'
 alias root='sudo su'
 alias cppc='cppcheck --std=c++11 --enable=all --suppress=missingIncludeSystem .'
 alias octave='octave --quiet'
+if command -v thefuck >/dev/null 2>&1; then
+    eval "$(thefuck --alias)"
+fi
