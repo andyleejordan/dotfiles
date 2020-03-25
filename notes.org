@@ -13,7 +13,7 @@
 #+begin_src shell
   sudo add-apt-repository ppa:git-core/ppa
   sudo apt update
-  sudo apt install git stow emacs ripgrep dos2unix
+  sudo apt install git stow emacs ripgrep dos2unix aspell
 #+end_src
 ** Dotfiles
 #+begin_src shell
