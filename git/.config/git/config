@@ -9,6 +9,7 @@
 	commitBeforeMerge = false
 	detachedHead = false
 	waitingForEditor = false
+	addIgnoredFile = false
 [alias]
 	a = add
 	b = branch --sort=-committerdate
