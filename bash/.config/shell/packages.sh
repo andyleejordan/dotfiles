@@ -18,6 +18,7 @@
 
 # TODO: set PSUDO only if not set.
 PSUDO='sudo '
+# TODO: Update for apt
 if command -v aptitude >/dev/null 2>&1; then
     alias p='aptitude'
     alias pag='p search'

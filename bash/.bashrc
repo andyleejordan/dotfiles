@@ -1,12 +1,18 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
+# disable everything for "dumb" terminals such as Emacs' Tramp
+if [[ "$TERM" == "dumb" ]]; then
+    return
+fi
+
+# print quote
 if shopt -q login_shell; then
     echo History repeats itself:
     echo the first time as tragedy,
     echo the second time as farce.
 fi
 
-## XDG config
+# XDG config
 if [[ ! -x "$XDG_CONFIG_HOME" ]]; then
     shell_config="$HOME/.config/shell"
 else
@@ -17,7 +23,7 @@ if [[ ! -x "$shell_config" ]]; then
     mkdir -p "$shell_config"
 fi
 
-## XDG data
+# XDG data
 if [[ ! -x "$XDG_DATA_HOME" ]]; then
     shell_data="$HOME/.local/share/shell"
 else
