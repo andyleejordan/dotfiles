@@ -132,7 +132,7 @@ set_prompt () {
     fi
 
     # end of prompt
-    PS1+='\n> '
+    PS1+='$ '
     PS1+=$color_off
 }
 PROMPT_COMMAND='set_prompt'
