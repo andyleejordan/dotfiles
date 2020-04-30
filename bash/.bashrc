@@ -36,8 +36,8 @@ fi
 
 # path setup
 source "$shell_config/path-edit.sh"
-path_front /sbin /usr/sbin /usr/local/sbin /usr/local/bin /usr/bin /bin ~/bin
-path_back ~/.poetry/bin ~/.cargo/bin /usr/local/go/bin
+path_front /sbin /usr/sbin /usr/local/sbin /usr/local/bin /usr/bin /bin
+path_back ~/bin ~/.local/bin ~/.poetry/bin ~/.cargo/bin /usr/local/go/bin
 
 # completion setup
 source "$shell_config/git-completion.bash"
