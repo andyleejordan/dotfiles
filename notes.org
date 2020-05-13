@@ -19,9 +19,9 @@
 #+end_src
 ** Dotfiles
 #+begin_src shell
-  git clone git@github.com:andschwa/dotfiles.git
+  git clone --recursive git@github.com:andschwa/dotfiles.git
   cd dotfiles
-  git submodule update --init emacs/.emacs.d
+  pushd emacs/.emacs.d && git checkout master && popd
   stow bash git emacs
 #+end_src
 ** Install font
