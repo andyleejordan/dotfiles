@@ -11,9 +11,11 @@
 #+end_src
 *** Packages
 #+begin_src shell
-  sudo add-apt-repository ppa:git-core/ppa
-  sudo apt update
-  sudo apt install git stow emacs ripgrep dos2unix aspell
+   sudo add-apt-repository ppa:git-core/ppa
+   sudo add-apt-repository ppa:ubuntu-elisp/ppa
+   sudo apt update
+   sudo apt install git emacs-snapshot stow ripgrep aspell xorg
+   sudo apt install dos2unix shellcheck ppa-purge
 #+end_src
 ** Dotfiles
 #+begin_src shell
@@ -27,7 +29,25 @@ E.g. [[https://github.com/microsoft/cascadia-code/releases][Cascadia Code]]
 #+begin_src shell
   mkdir ~/.local/share/fonts
   mv Cascadia.ttf ~/.local/share/fonts
-  sudo fc-cache -f -v
+  fc-cache -f -v
+#+end_src
+** WSL Setup
+*** Bash configuration
+#+begin_src shell
+  # Use X410 Display: https://x410.dev/cookbook/wsl/using-x410-with-wsl2/
+  export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+
+  # Scale Emacs GUI: https://www.emacswiki.org/emacs/SetFonts#toc4
+  export GDK_SCALE=1.8 GDK_DPI_SCALE=1.8 GTK_THEME=Adwaita
+
+  # Fix WSL Time: https://github.com/microsoft/WSL/issues/4245
+  sudo hwclock -s
+#+end_src
+*** X setup
+This are needed to support X apps (like Emacs) even though the X
+server is forwarded. Specifically this fixes the clipboard.
+#+begin_src shell
+  sudo apt install xorg
 #+end_src
 ** Filesystem
 *** Swap file
