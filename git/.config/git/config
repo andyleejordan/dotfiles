@@ -70,6 +70,7 @@
 	decorate = short
 [merge]
 	stat = true
+	conflictStyle = diff3
 [pull]
 	ff = only
 [push]
