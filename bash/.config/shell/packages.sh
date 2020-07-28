@@ -54,7 +54,7 @@ elif command -v brew >/dev/null 2>&1; then
     alias pag='p search'
     alias par='echo brew cannot auto-remove unused dependencies'
     alias pbd='pdep' # not exactly build dependencies
-    alias pcl='p cleanup && p prune'
+    alias pcl='p cleanup'
     alias pdep='p deps --tree'
     alias pi='p install'
     alias pin='p info'
