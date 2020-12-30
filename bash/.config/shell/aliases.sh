@@ -1,13 +1,12 @@
-# Emacs as editor
-alias __emacsclient='emacsclient --alternate-editor="" --no-wait'
-# Create a new frame
-alias e='__emacsclient --create-frame'
-# Or reuse an existing frame
-alias er='__emacsclient'
-# Or open in the terminal
-alias et='__emacsclient --tty'
-
-# create a frame when programs invoke the editor
+# Emacs as editor in server/client mode
+# Enable systemd unit with: systemctl --user enable --now emacs
+# See logs with: journalctl --user-unit emacs
+export ALTERNATE_EDITOR=""
+if [[ -n $DISPLAY ]]; then
+    alias e='emacsclient --create-frame --no-wait'
+else
+    alias e='emacsclient'
+fi
 export VISUAL=e EDITOR=e
 
 # p: a common package manager interface
