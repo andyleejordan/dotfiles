@@ -137,9 +137,6 @@ set_prompt () {
 }
 PROMPT_COMMAND='set_prompt'
 
-# aliases
-source "$shell_config/aliases.sh"
-
 # enable ls colors
 if ls --color=auto &> /dev/null; then
     alias ls='ls --color=auto'
@@ -168,6 +165,9 @@ fi
 if [[ -r "$shell_config/local.sh" ]]; then
     source "$shell_config/local.sh"
 fi
+
+# aliases
+source "$shell_config/aliases.sh"
 
 # OCaml setup
 if [[ -r ~/.opam/opam-init/init.sh ]]; then
