@@ -1,5 +1,11 @@
 # this file is sourced by non-login interactive shells and ~/.bash_profile
 
+# find SSH agent socket file
+ssh_sock_file=$(compgen -G "/tmp/ssh-*/agent.*")
+if [[ -z $SSH_AUTH_SOCK && -S $ssh_sock_file ]]; then
+    export SSH_AUTH_SOCK=$ssh_sock_file
+fi
+
 # disable everything for "dumb" terminals such as Emacs' Tramp
 if [[ "$TERM" == "dumb" ]]; then
     return
