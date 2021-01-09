@@ -1,5 +1,5 @@
 # Find SSH agent socket file
-ssh_sock_file=$(compgen -G "/tmp/ssh-*/agent.*")
+ssh_sock_file=$(compgen -G "/tmp/ssh-*/agent.*" | head -n 1)
 if [[ -z $SSH_AUTH_SOCK && -S $ssh_sock_file ]]; then
     export SSH_AUTH_SOCK=$ssh_sock_file
 fi
