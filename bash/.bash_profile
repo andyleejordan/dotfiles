@@ -1,4 +1,9 @@
-# this file is sourced by login shells only
+source ~/.config/bash/env.bash
 
-# source everything else
-[[ -e ~/.bashrc ]] && source ~/.bashrc
+BASH_ENV=
+
+source ~/.config/bash/login.bash
+
+if [[ $PS1 ]]; then
+    source ~/.config/bash/interactive.bash
+fi

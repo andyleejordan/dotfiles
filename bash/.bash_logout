@@ -1,3 +1,1 @@
-# this file is sourced on logout
-
-clear
+.config/bash/logout.bash

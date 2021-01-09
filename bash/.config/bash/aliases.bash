@@ -10,7 +10,7 @@ fi
 export VISUAL=e EDITOR=e
 
 # p: a common package manager interface
-source ~/.config/shell/packages.sh
+source ~/.config/bash/packages.bash
 
 # colored man pages
 man() {
