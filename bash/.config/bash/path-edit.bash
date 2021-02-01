@@ -8,7 +8,9 @@ path_front() {
     PATH=$(echo $PATH | sed -e "s,\(^\|:\)${dir}\(:\|$\),:,g" \
                             -e "s,\(^:\)\|\(:$\),,g")
     # adds arg to front of PATH
-    PATH="$dir:$PATH"
+    if [[ -d $dir ]]; then
+        PATH="$dir:$PATH"
+    fi
   done
 }
 
@@ -20,6 +22,8 @@ path_back() {
     PATH=$(echo $PATH | sed -e "s,\(^\|:\)${dir}\(:\|$\),:,g" \
                             -e "s,\(^:\)\|\(:$\),,g")
     # adds arg to front of PATH
-    PATH="$PATH:$dir"
+    if [[ -d $dir ]]; then
+        PATH="$PATH:$dir"
+    fi
   done
 }
