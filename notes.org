@@ -33,13 +33,24 @@ E.g. [[https://github.com/microsoft/cascadia-code/releases][Cascadia Code]]
 #+end_src
 ** WSL Setup
 *** Bash configuration
+**** ~/.local/share/bash/env.bash
 #+begin_src shell
   # Use X410 Display: https://x410.dev/cookbook/wsl/using-x410-with-wsl2/
   export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
   # Scale Emacs GUI: https://www.emacswiki.org/emacs/SetFonts#toc4
-  export GDK_SCALE=1.8 GDK_DPI_SCALE=1.8 GTK_THEME=Adwaita
+  export GDK_SCALE=2 GTK_THEME=Adwaita
 
+  # Move all Windows paths to the end of PATH
+  IFS=':' read -ra paths <<< "$PATH"
+  for dir in "${paths[@]}"; do
+      if [[ $dir == /mnt/* ]]; then
+          path_back "$dir"
+      fi
+  done
+#+end_src
+**** ~/.local/share/bash/interactive.bash
+#+begin_src bash
   # Fix WSL Time: https://github.com/microsoft/WSL/issues/4245
   sudo hwclock -s
 #+end_src
