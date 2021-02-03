@@ -1,4 +1,11 @@
 * Configuration
+** Dotfiles
+#+begin_src shell
+  sudo apt install git stow ripgrep aspell htop
+  git clone --recursive git@github.com:andschwa/dotfiles.git
+  cd dotfiles
+  ./install.sh
+#+end_src
 ** No password for sudo
 #+begin_src shell
   sudo sed -i "s/%sudo	ALL=(ALL:ALL)/%sudo	ALL=(ALL) NOPASSWD:/g" /etc/sudoers
@@ -16,13 +23,6 @@
    sudo apt update
    sudo apt install git emacs-snapshot stow ripgrep aspell xorg
    sudo apt install dos2unix shellcheck ppa-purge
-#+end_src
-** Dotfiles
-#+begin_src shell
-  git clone --recursive git@github.com:andschwa/dotfiles.git
-  cd dotfiles
-  pushd emacs/.emacs.d && git checkout master && popd
-  stow bash git emacs
 #+end_src
 ** Install font
 E.g. [[https://github.com/microsoft/cascadia-code/releases][Cascadia Code]]
@@ -64,14 +64,13 @@ server is forwarded. Specifically this fixes the clipboard.
 *** Swap file
 [[https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04][Digial Ocean Guide]]
 #+begin_src shell
-  # Swap summary
   sudo swapon --show
-  # Create file
-  sudo fallocate -l 8G /swapfile
+  sudo fallocate -l 1G /swapfile
   sudo chmod 600 /swapfile
   sudo mkswap /swapfile
   sudo swapon /swapfile
-  # Add to filesystem table
+  sudo swapon --show
+  sudo cp /etc/fstab /etc/fstab.bak
   echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 #+end_src
 *** RAM disk
@@ -134,6 +133,11 @@ Here we want to access the local port (on the server) and have the
 traffic tunneled to the remote host and port on the client's side.
 #+begin_src shell
   ssh -v -N -T -R <local port>:<remote host>:<remote port> <server>
+#+end_src
+** [[https://www.sshguard.net/][SSHGuard]]
+#+begin_src shell
+  sudo apt install sshguard
+  sudo journalctl -u sshguard
 #+end_src
 * Debugging
 ** Recovery shell
