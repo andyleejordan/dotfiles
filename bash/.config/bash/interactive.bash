@@ -32,6 +32,7 @@ HISTCONTROL=ignoreboth
 HISTSIZE=
 HISTFILESIZE=
 # Use separate history file to avoid truncation
+mkdir -p ~/.local/share/bash
 HISTFILE=$HOME/.local/share/bash/bash_history
 
 # prompt setup
