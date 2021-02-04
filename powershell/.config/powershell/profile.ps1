@@ -1,5 +1,11 @@
+# Set-PsDebug -Trace 1
+
 if (Get-Module PSReadLine) {
   Set-PSReadLineOption -EditMode Emacs
+}
+
+function Update-Profile() {
+  . $PROFILE.CurrentUserAllHosts
 }
 
 function Test-IsAdmin() {
@@ -13,43 +19,63 @@ function Test-IsAdmin() {
   }
 }
 
-Import-Module posh-git -ErrorAction SilentlyContinue
+$isAdmin = Test-IsAdmin
+$hostname = $(hostname)
+try {
+  Import-Module -Name posh-git -MinimumVersion 1.0.0 -ErrorAction Stop
+  # Use a minimalish Git status.
+  $GitPromptSettings.BeforeStatus = ""
+  $GitPromptSettings.AfterStatus = " "
+  $GitPromptSettings.PathStatusSeparator = ""
+  $GitPromptSettings.BranchColor.ForegroundColor = [ConsoleColor]::DarkGreen
+} catch {
+  Write-Warning "posh-git is not installed! Try:"
+  Write-Warning "Install-Module -Name posh-git -AllowPrerelease -Scope CurrentUser"
+}
 
 function prompt() {
-  # save the status before overwriting it
-  $last_status = $LASTEXITCODE
+  # Save the status before overwriting it.
+  $originalLastExitCode = $global:LASTEXITCODE
 
-  if (Test-Path variable:/PSDebugContext) {
-    Write-Host "[DBG] " -ForegroundColor ([ConsoleColor]::Yellow) -NoNewLine
-  }
-
-  # only print non-zero exit codes
-  if ($last_status -ne 0) {
-    Write-Host "$last_status " -ForegroundColor ([ConsoleColor]::Magenta) -NoNewLine
-  }
-
-  $at_color = if (Test-IsAdmin) { [ConsoleColor]::Red } else { [ConsoleColor]::DarkBlue }
-  Write-Host "@" -ForegroundColor $at_color -NoNewLine
-  Write-Host "$(hostname) " -NoNewLine
+  # Abbreviate home in the current path.
+  # TODO: Limit the path length displayed.
   $regex = "^" + [regex]::Escape($HOME)
   $path = $executionContext.SessionState.Path.CurrentLocation.Path -replace $regex, '~'
   $path = $path.Replace('\', '/')
-  Write-Host "$path " -ForegroundColor ([ConsoleColor]::DarkBlue) -NoNewLine
-  if (Get-Command Write-VcsStatus -ErrorAction SilentlyContinue) {
-    $GitPromptSettings.BeforeText = ''
-    $GitPromptSettings.AfterText = ' '
-    $GitPromptSettings.BranchForegroundColor = [ConsoleColor]::DarkGreen
-    $GitPromptSettings.BranchGoneStatusForegroundColor = [ConsoleColor]::DarkRed
-    $GitPromptSettings.BranchIdenticalStatusToForegroundColor = [ConsoleColor]::DarkGreen
-    $GitPromptSettings.BranchAheadStatusForegroundColor = [ConsoleColor]::DarkGreen
-    $GitPromptSettings.BranchBehindStatusForegroundColor = [ConsoleColor]::DarkGreen
-    $GitPromptSettings.BranchBehindAndAheadStatusForegroundColor = [ConsoleColor]::DarkRed
-     Write-VcsStatus
+  $pathLength = 24
+  if ($path.Length -gt $pathLength) {
+    $path = "..." + $path.Substring($path.Length - $pathLength)
   }
-  Write-Host "$" -ForegroundColor ([ConsoleColor]::DarkCyan) -NoNewLine
 
-  $LASTEXITCODE = $last_status
-  return " " # satisfy the `prompt` function
+  # Uncolored prompt string since posh-git is missing.
+  if (!(Get-Command Write-Prompt)) {
+    $global:LASTEXITCODE = $originalLastExitCode
+    return "@$hostname $path $ "
+  }
+
+  # Otherwise build a colorized prompt string.
+  $prompt = ""
+
+  if (Test-Path variable:/PSDebugContext) {
+    $prompt += Write-Prompt "[DBG] " -ForegroundColor ([ConsoleColor]::Yellow)
+  }
+
+  # Only print non-zero exit codes.
+  if ($originalLastExitCode -ne 0) {
+    $prompt += Write-Prompt "$originalLastExitCode " -ForegroundColor ([ConsoleColor]::Magenta)
+  }
+
+  $userColor = if ($isAdmin) { [ConsoleColor]::Red } else { [ConsoleColor]::DarkBlue }
+  $prompt += Write-Prompt "@" -ForegroundColor $userColor
+  $prompt += Write-Prompt "$hostname "
+  $prompt += Write-Prompt "$path " -ForegroundColor ([ConsoleColor]::DarkBlue)
+  $prompt += Write-VcsStatus
+  $prompt += Write-Prompt "$" -ForegroundColor ([ConsoleColor]::DarkCyan)
+
+  $global:LASTEXITCODE = $originalLastExitCode
+
+  # Always return a space even if Write-Prompt uses Write-Host.
+  return "$prompt "
 }
 
 Set-Alias g git
