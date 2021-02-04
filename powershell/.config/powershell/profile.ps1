@@ -2,6 +2,17 @@
 
 if (Get-Module PSReadLine) {
   Set-PSReadLineOption -EditMode Emacs
+  Set-PSReadLineOption -Colors @{
+    "Command"            = [ConsoleColor]::DarkBlue
+    "Default"            = [ConsoleColor]::Blue
+    "Member"             = [ConsoleColor]::DarkYellow
+    "Number"             = [ConsoleColor]::Magenta
+    "Operator"           = [ConsoleColor]::DarkGreen
+    "Parameter"          = [ConsoleColor]::DarkCyan
+    "Type"               = [ConsoleColor]::DarkMagenta
+    "Variable"           = [ConsoleColor]::DarkGreen
+    "ContinuationPrompt" = [ConsoleColor]::DarkGray
+  }
 }
 
 function Update-Profile() {
@@ -27,7 +38,9 @@ try {
   $GitPromptSettings.BeforeStatus = ""
   $GitPromptSettings.AfterStatus = " "
   $GitPromptSettings.PathStatusSeparator = ""
-  $GitPromptSettings.BranchColor.ForegroundColor = [ConsoleColor]::DarkGreen
+  $GitPromptSettings.BranchIdenticalStatusSymbol.ForegroundColor = [ConsoleColor]::DarkGreen
+  $GitPromptSettings.BranchAheadStatusSymbol.ForegroundColor = [ConsoleColor]::DarkYellow
+  $GitPromptSettings.BranchBehindAndAheadStatusSymbol.ForegroundColor = [ConsoleColor]::DarkMagenta
 } catch {
   Write-Warning "posh-git is not installed! Try:"
   Write-Warning "Install-Module -Name posh-git -AllowPrerelease -Scope CurrentUser"
