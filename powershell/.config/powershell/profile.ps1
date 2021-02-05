@@ -102,7 +102,13 @@ function e { emacsclient -n @args }
 function which { (Get-Command @args).Source }
 function find { rg -i -uuu -l @args }
 function rg { rg.exe -i --colors 'path:bg:white' @args }
-
+function ls {
+  if ($IsWindows) {
+    Get-ChildItem
+  } else {
+    & /bin/ls --color @args
+  }
+}
 function ln {
     param([switch]$s, [string]$target, [string]$link)
     New-Item -ItemType SymbolicLink -Target $target -Name $link
