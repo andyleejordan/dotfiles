@@ -36,7 +36,7 @@ try {
   Import-Module -Name posh-git -MinimumVersion 1.0.0 -ErrorAction Stop
   # Use a minimalish Git status.
   $GitPromptSettings.BeforeStatus = ""
-  $GitPromptSettings.AfterStatus = " "
+  $GitPromptSettings.AfterStatus = ""
   $GitPromptSettings.PathStatusSeparator = ""
   $GitPromptSettings.BranchIdenticalStatusSymbol.ForegroundColor = [ConsoleColor]::DarkGreen
   $GitPromptSettings.BranchAheadStatusSymbol.ForegroundColor = [ConsoleColor]::DarkYellow
@@ -55,7 +55,7 @@ function prompt() {
   $regex = "^" + [regex]::Escape($HOME)
   $path = $executionContext.SessionState.Path.CurrentLocation.Path -replace $regex, '~'
   $path = $path.Replace('\', '/')
-  $pathLength = 24
+  $pathLength = 32
   if ($path.Length -gt $pathLength) {
     $path = "..." + $path.Substring($path.Length - $pathLength)
   }
@@ -78,12 +78,13 @@ function prompt() {
     $prompt += Write-Prompt "$originalLastExitCode " -ForegroundColor ([ConsoleColor]::Magenta)
   }
 
-  $userColor = if ($isAdmin) { [ConsoleColor]::Red } else { [ConsoleColor]::DarkBlue }
-  $prompt += Write-Prompt "@" -ForegroundColor $userColor
+  # TODO: Use green if SSH connection.
+  $prompt += Write-Prompt "@" -ForegroundColor ([ConsoleColor]::DarkBlue)
   $prompt += Write-Prompt "$hostname "
   $prompt += Write-Prompt "$path " -ForegroundColor ([ConsoleColor]::DarkBlue)
   $prompt += Write-VcsStatus
-  $prompt += Write-Prompt "$" -ForegroundColor ([ConsoleColor]::DarkCyan)
+  $promptColor = if ($isAdmin) { [ConsoleColor]::Red } else { [ConsoleColor]::DarkCyan }
+  $prompt += Write-Prompt "`n>" -ForegroundColor $promptColor
 
   $global:LASTEXITCODE = $originalLastExitCode
 
