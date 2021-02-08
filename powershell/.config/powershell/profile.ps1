@@ -110,31 +110,42 @@ function ls {
   }
 }
 function ln {
-    param([switch]$s, [string]$target, [string]$link)
-    New-Item -ItemType SymbolicLink -Target $target -Name $link
+  param([switch]$s, [string]$target, [string]$link)
+  New-Item -ItemType SymbolicLink -Target $target -Name $link
 }
 
 function Show-Colors() {
   $colors = [Enum]::GetValues([ConsoleColor])
   $max = ($colors | ForEach-Object { "$_ ".Length } | Measure-Object -Maximum).Maximum
   foreach ($color in $colors) {
-    Write-Host (" {0,2} {1,$max} " -f [int]$color,$color) -NoNewline
+    Write-Host (" {0,2} {1,$max} " -f [int]$color, $color) -NoNewline
     Write-Host "$color" -Foreground $color
   }
 }
 
-function path_pop([string]$path) {
-  $env:PATH = ($env:PATH.split(';') | ?{ $_ -notmatch [regex]::escape($path) }) -join ';'
-}
-
-function path_front([string]$path) {
-  path_pop($path)
-  $env:PATH = $path,$env:PATH -join ';'
-}
-
-function path_back([string]$path) {
-  path_pop($path)
-  $env:PATH = $env:PATH,$path -join ';'
+function Edit-Path() {
+  [CmdletBinding(SupportsShouldProcess)]
+  param(
+    [Parameter(Mandatory, ValueFromPipeline)]
+    [ValidateScript({ Test-Path -Path $_ -IsValid })]
+    [string[]]$Path,
+    [switch]$Front = $false
+  )
+  begin { $NewPath = $env:PATH.split([IO.Path]::PathSeparator) }
+  process {
+    foreach ($p in $Path) {
+      if ($PSCmdlet.ShouldProcess($p)) {
+        if (-not (Test-Path $p)) {
+          Write-Warning "$p does not exist!"
+          continue
+        }
+        $p = [string](Resolve-Path $p)
+        $NewPath = $NewPath -ne $p
+        $NewPath = if ($Front) { @($p; $NewPath) } else { @($NewPath; $p) }
+      }
+    }
+  }
+  end { $env:PATH = $NewPath -join [IO.Path]::PathSeparator }
 }
 
 $local = "$PSScriptRoot/profile_local.ps1"
