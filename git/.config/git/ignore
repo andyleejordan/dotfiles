@@ -71,6 +71,5 @@ Desktop.ini
 *.lnk
 *.stackdump
 .vs/*
-.vscode/*
 vs-build/*
 CMakeSettings.json
