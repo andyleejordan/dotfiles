@@ -123,29 +123,37 @@ function Show-Colors() {
   }
 }
 
-function Edit-Path() {
+<#
+.SYNOPSIS
+  Idempotently add/move paths to the front/back of your PATH.
+.DESCRIPTION
+  Will only add the path if it exists (but does not error). Defaults to adding
+  to the back as this is safer. Can be called repeatedly (such as in a profile)
+  but will always result in the same output (idempotent).
+#>
+function Edit-Path {
   [CmdletBinding(SupportsShouldProcess)]
   param(
     [Parameter(Mandatory, ValueFromPipeline)]
     [ValidateScript({ Test-Path -Path $_ -IsValid })]
+    # List of paths to add.
     [string[]]$Path,
+    # Switch to add paths to the front instead of the back.
     [switch]$Front = $false
   )
-  begin { $NewPath = $env:PATH.split([IO.Path]::PathSeparator) }
+  begin { $acc = [Collections.Generic.List[string]]::new() }
   process {
-    foreach ($p in $Path) {
-      if ($PSCmdlet.ShouldProcess($p)) {
-        if (-not (Test-Path $p)) {
-          Write-Warning "$p does not exist!"
-          continue
-        }
-        $p = [string](Resolve-Path $p)
-        $NewPath = $NewPath -ne $p
-        $NewPath = if ($Front) { @($p; $NewPath) } else { @($NewPath; $p) }
-      }
+    $Path | Where-Object { Test-Path $_ } |
+      ForEach-Object { $acc.Add([string](Resolve-Path $_)) }
+  }
+  end {
+    $old = $env:PATH.split([IO.Path]::PathSeparator) | Where-Object { $_ -notin $acc }
+    $new = if ($Front) { @($acc; $old) } else { @($old; $acc) }
+    $p = $new -join [IO.Path]::PathSeparator
+    if ($PSCmdlet.ShouldProcess("Updating PATH from:`n$env:PATH`nto:`n$p", $env:PATH, $p)) {
+      $env:PATH = $p
     }
   }
-  end { $env:PATH = $NewPath -join [IO.Path]::PathSeparator }
 }
 
 $local = "$PSScriptRoot/profile_local.ps1"
