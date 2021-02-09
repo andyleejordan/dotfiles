@@ -94,7 +94,6 @@ function prompt() {
 
 Set-Alias g git
 Set-Alias grep Select-String
-Set-Alias less more
 Set-Alias zip Compress-Archive
 Set-Alias unzip Expand-Archive
 
