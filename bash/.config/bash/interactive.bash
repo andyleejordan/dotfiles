@@ -105,6 +105,8 @@ source ~/.config/bash/aliases.bash
 # enable ls colors
 if ls --color=auto &> /dev/null; then
     alias ls='ls --color=auto'
+elif gls --color &> /dev/null; then
+    alias ls='gls --color'
 else
     export CLICOLOR=1
 fi

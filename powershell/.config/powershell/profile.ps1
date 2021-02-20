@@ -104,6 +104,8 @@ function rg { rg.exe -i --colors 'path:bg:white' @args }
 function ls {
   if ($IsWindows) {
     Get-ChildItem
+  } elseif ($IsMacOS) {
+    & gls --color @args
   } else {
     & /bin/ls --color @args
   }
