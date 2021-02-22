@@ -1,4 +1,8 @@
-# Set-PsDebug -Trace 1
+# NOTE: Debug with `Set-PsDebug -Trace 1`
+
+if ($PSVersionTable.PSVersion -lt "6.0") {
+  $global:IsWindows = $true
+}
 
 if (Get-Module PSReadLine) {
   Set-PSReadLineOption -EditMode Emacs
@@ -15,11 +19,11 @@ if (Get-Module PSReadLine) {
   }
 }
 
-function Update-Profile() {
+function Update-Profile {
   . $PROFILE.CurrentUserAllHosts
 }
 
-function Test-IsAdmin() {
+function Test-IsAdmin {
   if ($IsWindows) {
     $id = [Security.Principal.WindowsIdentity]::GetCurrent()
     $principal = [Security.Principal.WindowsPrincipal] $id
@@ -46,7 +50,7 @@ try {
   Write-Warning "Install-Module -Name posh-git -AllowPrerelease -Scope CurrentUser"
 }
 
-function prompt() {
+function prompt {
   # Save the status before overwriting it.
   $originalLastExitCode = $global:LASTEXITCODE
 
@@ -115,7 +119,7 @@ function ln {
   New-Item -ItemType SymbolicLink -Target $target -Name $link
 }
 
-function Show-Colors() {
+function Show-Colors {
   $colors = [Enum]::GetValues([ConsoleColor])
   $max = ($colors | ForEach-Object { "$_ ".Length } | Measure-Object -Maximum).Maximum
   foreach ($color in $colors) {
