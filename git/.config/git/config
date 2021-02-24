@@ -3,7 +3,7 @@
 	name = Andrew Schwartzmeyer
 [core]
 	abbrev = 9
-	editor = emacsclient --create-frame
+	editor = code --wait
 [advice]
 	statusHints = false
 	commitBeforeMerge = false
