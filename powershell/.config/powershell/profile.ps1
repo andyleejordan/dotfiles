@@ -19,9 +19,10 @@ if (Get-Module PSReadLine) {
   }
 }
 
-function Update-Profile {
-  . $PROFILE.CurrentUserAllHosts
-}
+Set-Alias g git # NOTE: Must be set before importing posh-git.
+Set-Alias grep Select-String
+Set-Alias zip Compress-Archive
+Set-Alias unzip Expand-Archive
 
 function Test-IsAdmin {
   if ($IsWindows) {
@@ -96,10 +97,9 @@ function prompt {
   return "$prompt "
 }
 
-Set-Alias g git
-Set-Alias grep Select-String
-Set-Alias zip Compress-Archive
-Set-Alias unzip Expand-Archive
+function Update-Profile {
+  . $PROFILE.CurrentUserAllHosts
+}
 
 function Find-Command { (Get-Command @args).Source }
 
