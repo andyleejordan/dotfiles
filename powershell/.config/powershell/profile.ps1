@@ -161,5 +161,11 @@ function Edit-Path {
   }
 }
 
+Edit-Path -Front /sbin, /usr/sbin, /usr/local/sbin, /usr/local/bin, /usr/bin, /bin
+Edit-Path ~/bin, ~/.local/bin, ~/.poetry/bin, ~/.cargo/bin, ~/.dotnet/tools, /usr/local/share/dotnet, /usr/local/microsoft/powershell/7
+
+# macOS
+Edit-Path /opt/homebrew/bin/, "/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin"
+
 $local = "$PSScriptRoot/profile_local.ps1"
 (Test-Path $local) -And (. $local) > $null
