@@ -101,6 +101,18 @@ function Update-Profile {
   . $PROFILE.CurrentUserAllHosts
 }
 
+<#
+.SYNOPSIS
+  Initialize the 1Password CLI.
+.DESCRIPTION
+  This sets the necessary environment variable after using their CLI to
+  interactively login. Combined with
+  https://github.com/cdhunt/SecretManagement.1Password this provides secrets!
+#>
+function Initialize-1Password {
+  $env:OP_SESSION_my = op signin my --raw
+}
+
 function Find-Command { (Get-Command @args).Source }
 
 function ls {
@@ -164,7 +176,8 @@ Edit-Path -Front /sbin, /usr/sbin, /usr/local/sbin, /usr/local/bin, /usr/bin, /b
 Edit-Path ~/bin, ~/.local/bin, ~/.poetry/bin, ~/.cargo/bin, ~/.dotnet/tools, /usr/local/share/dotnet, /usr/local/microsoft/powershell/7
 
 # macOS
-Edit-Path /opt/homebrew/bin/, "/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin"
+Edit-Path -Front /opt/homebrew/bin
+Edit-Path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 $local = "$PSScriptRoot/profile_local.ps1"
 (Test-Path $local) -And (. $local) > $null
