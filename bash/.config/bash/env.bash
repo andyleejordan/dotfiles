@@ -10,7 +10,8 @@ path_front /sbin /usr/sbin /usr/local/sbin /usr/local/bin /usr/bin /bin
 path_back ~/bin ~/.local/bin ~/.poetry/bin ~/.cargo/bin ~/.dotnet/tools /usr/local/share/dotnet /usr/local/microsoft/powershell/7
 
 # macOS
-path_back /opt/homebrew/bin/ "/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin"
+path_front /opt/homebrew/bin
+path_back "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Local
 if [[ -r ~/.local/share/bash/env.bash ]]; then
