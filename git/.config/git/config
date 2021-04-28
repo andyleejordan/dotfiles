@@ -15,9 +15,11 @@
 	b = branch --sort=-committerdate
 	bm = branch --merged
 	bnm = branch --no-merged
-	c = commit --verbose
-	amend = commit --verbose --amend
-	extend = commit --verbose --amend --no-edit
+	c = commit
+	amend = commit --amend
+	extend = commit --amend --no-edit
+	fixup = commit --fixup
+	squash = commit --squash
 	co = checkout
 	d = diff
 	dn = diff --name-only
@@ -52,14 +54,19 @@
 	ignoreWhitespace = change
 [branch]
 	autoSetupRebase = always
-	autosetupmerge = always
+	autoSetupMerge = always
 [color]
 	ui = auto
+[commit]
+	verbose = true
 [credential]
 	helper = store
 [diff]
 	mnemonicPrefix = true
 	renames = copies
+	colorMoved = zebra
+[fetch]
+	prune = true
 [format]
 	pretty = medium
 [help]
