@@ -36,7 +36,8 @@ function Test-IsAdmin {
 }
 
 $isAdmin = Test-IsAdmin
-$hostname = $(hostname -s)
+$hostname = [Environment]::MachineName.ToLower()
+
 try {
   Import-Module -Name posh-git -MinimumVersion 1.0.0 -ErrorAction Stop
   # Use a minimalish Git status.
