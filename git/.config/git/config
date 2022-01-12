@@ -16,6 +16,7 @@
 	bm = branch --merged
 	bnm = branch --no-merged
 	c = commit
+	redo = commit -c ORIG_HEAD
 	amend = commit --amend
 	extend = commit --amend --no-edit
 	fixup = commit --fixup
@@ -46,6 +47,7 @@
 	sh = show
 	shepherd = lol --perl-regexp --committer=\"Andrew Schwartzmeyer\" --author=\"^(?!Andrew Schwartzmeyer).*$\"
 	sub = submodule
+	undo = reset HEAD~
 	y = cherry-pick
 	z = stash
 [am]
