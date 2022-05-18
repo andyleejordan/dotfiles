@@ -82,6 +82,7 @@
 	conflictStyle = diff3
 [pull]
 	ff = only
+	rebase = true
 [push]
 	default = current
 [rebase]
