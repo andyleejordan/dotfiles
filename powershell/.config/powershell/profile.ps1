@@ -67,7 +67,7 @@ function prompt {
   }
 
   # Uncolored prompt string since posh-git is missing.
-  if (!(Get-Command Write-Prompt)) {
+  if (!(Get-Command Write-Prompt -ErrorAction SilentlyContinue)) {
     $global:LASTEXITCODE = $originalLastExitCode
     return "@$hostname $path $ "
   }
@@ -75,7 +75,7 @@ function prompt {
   # Otherwise build a colorized prompt string.
   $prompt = ""
 
-  if (Test-Path variable:/PSDebugContext) {
+  if (Test-Path variable:/PSDebugContext -ErrorAction SilentlyContinue) {
     $prompt += Write-Prompt "[DBG] " -ForegroundColor ([ConsoleColor]::Yellow)
   }
 
