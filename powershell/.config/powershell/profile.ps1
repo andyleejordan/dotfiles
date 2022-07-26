@@ -35,21 +35,23 @@ function Test-IsAdmin {
   }
 }
 
-$isAdmin = Test-IsAdmin
+$isAdmin = $Host.Name -ne "Emacs" -and (Test-IsAdmin)
 $hostname = [Environment]::MachineName.ToLower()
 
-try {
-  Import-Module -Name posh-git -MinimumVersion 1.0.0 -ErrorAction Stop
-  # Use a minimalish Git status.
-  $GitPromptSettings.BeforeStatus = ""
-  $GitPromptSettings.AfterStatus = ""
-  $GitPromptSettings.PathStatusSeparator = ""
-  $GitPromptSettings.BranchIdenticalStatusSymbol.ForegroundColor = [ConsoleColor]::DarkGreen
-  $GitPromptSettings.BranchAheadStatusSymbol.ForegroundColor = [ConsoleColor]::DarkYellow
-  $GitPromptSettings.BranchBehindAndAheadStatusSymbol.ForegroundColor = [ConsoleColor]::DarkMagenta
-} catch {
-  Write-Warning "posh-git is not installed! Try:"
-  Write-Warning "Install-Module -Name posh-git -AllowPrerelease -Scope CurrentUser"
+if ($Host.Name -ne "Emacs") {
+  try {
+    Import-Module -Name posh-git -MinimumVersion 1.0.0 -ErrorAction Stop
+    # Use a minimalish Git status.
+    $GitPromptSettings.BeforeStatus = ""
+    $GitPromptSettings.AfterStatus = ""
+    $GitPromptSettings.PathStatusSeparator = ""
+    $GitPromptSettings.BranchIdenticalStatusSymbol.ForegroundColor = [ConsoleColor]::DarkGreen
+    $GitPromptSettings.BranchAheadStatusSymbol.ForegroundColor = [ConsoleColor]::DarkYellow
+    $GitPromptSettings.BranchBehindAndAheadStatusSymbol.ForegroundColor = [ConsoleColor]::DarkMagenta
+  } catch {
+    Write-Warning "posh-git is not installed! Try:"
+    Write-Warning "Install-Module -Name posh-git -AllowPrerelease -Scope CurrentUser"
+  }
 }
 
 function prompt {

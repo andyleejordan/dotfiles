@@ -1,6 +1,6 @@
 [user]
-	email = andrew@schwartzmeyer.com
-	name = Andrew Schwartzmeyer
+	email = andy.jordan@microsoft.com
+	name = Andy Jordan
 [core]
 	abbrev = 9
 	editor = code --wait
@@ -45,7 +45,6 @@
 	root = rev-list --max-parents=0 HEAD
 	s = status
 	sh = show
-	shepherd = lol --perl-regexp --committer=\"Andrew Schwartzmeyer\" --author=\"^(?!Andrew Schwartzmeyer).*$\"
 	sub = submodule
 	undo = reset HEAD~
 	y = cherry-pick
