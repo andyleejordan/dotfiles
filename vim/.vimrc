@@ -19,6 +19,8 @@ endif
 """ Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'                           " Git hunks
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next', 'do': 'bash install.sh', }      " LSP Client
 Plug 'aymericbeaumet/vim-symlink'                       " Follow symlinks
 Plug 'moll/vim-bbye'                                    " Dependency for above
 Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
@@ -72,6 +74,19 @@ let g:grepper = {'tools': ['rg', 'ag', 'git', 'grep']}
 " recognize all Markdown files
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:markdown_fenced_languages = ['c', 'cpp', 'csharp=cs', 'bash=sh', 'json']
+
+" LSP setup
+let s:temp_path = '/tmp/pses'
+let s:pses_path = $HOME.'/src/PowerShellEditorServices/module'
+
+let g:LanguageClient_serverCommands = {
+    \ 'ps1': ['pwsh', '-NoLogo', '-NoProfile', '-Command',
+    \   printf('%s/PowerShellEditorServices/Start-EditorServices.ps1', s:pses_path),
+    \   '-HostName', 'vim', '-HostProfileId', 'vim', '-HostVersion', '1.0.0',
+    \   '-BundledModulesPath', s:pses_path, '-Stdio',
+    \   '-LogPath', printf('%s/pses.log', s:temp_path), '-LogLevel', 'Normal',
+    \   '-SessionDetailsPath', printf('%s/pses_session.json', s:temp_path) ]
+    \ }
 
 """ Other configurations
 set hidden      " multiple buffers
