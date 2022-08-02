@@ -1,4 +1,4 @@
-" Andrew Schwartzmeyer's vimrc file.
+" Andy Jordan's vimrc file.
 
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -23,18 +23,13 @@ Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
 Plug 'easymotion/vim-easymotion'                        " Movements
 Plug 'EinfachToll/DidYouMean'                           " File guessing
 Plug 'elzr/vim-json'                                    " Better JSON
-Plug 'fatih/vim-go'                                     " Go lang support
-Plug 'ledger/vim-ledger'                                " Ledger
 Plug 'majutsushi/tagbar'                                " Tagbar
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }      " Edits graph
 Plug 'mhinz/vim-grepper'                                " Better :grep
 Plug 'ntpeters/vim-better-whitespace'                   " Whitespace
-Plug 'pearofducks/ansible-vim'                          " Ansible
 Plug 'PProvost/vim-ps1'                                 " PowerShell
-Plug 'rizzatti/dash.vim'                                " Dash integration
 Plug 'rust-lang/rust.vim'                               " Rust
 Plug 'scrooloose/syntastic'                             " Syntax checker
-Plug 'tmux-plugins/vim-tmux'
 Plug 'tpope/vim-commentary'                             " Comments
 Plug 'tpope/vim-eunuch'                                 " UNIX commands
 Plug 'tpope/vim-fugitive'                               " Git interface
