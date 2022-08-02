@@ -20,6 +20,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'                           " Git hunks
 Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
+Plug 'awvalenti/vim-simple-guifont'                     " GUI Font
 Plug 'easymotion/vim-easymotion'                        " Movements
 Plug 'EinfachToll/DidYouMean'                           " File guessing
 Plug 'elzr/vim-json'                                    " Better JSON
@@ -48,16 +49,13 @@ call plug#end()
 """ Plugin configurations
 " GUI
 if has('gui_running')
-  if has('gui_gtk')
-    set guifont=Hack\ 11
-  elseif has('gui_win32')
-    set guifont=Hack:h11:cANSI
-  endif
+  silent! call simple_guifont#Set(
+    \['Menlo', 'Monaco', 'Cascadia Code'], 'Consolas', 14)
 endif
 
 " appearance
 silent! colorscheme solarized
-set background=dark
+set background=light
 let g:gitgutter_override_sign_column_highlight = 0
 
 " disable concealing in JSON
