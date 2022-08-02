@@ -19,6 +19,8 @@ endif
 """ Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'                           " Git hunks
+Plug 'aymericbeaumet/vim-symlink'                       " Follow symlinks
+Plug 'moll/vim-bbye'                                    " Dependency for above
 Plug 'andschwa/vim-colors-solarized'                    " Best colors ever
 Plug 'awvalenti/vim-simple-guifont'                     " GUI Font
 Plug 'easymotion/vim-easymotion'                        " Movements
