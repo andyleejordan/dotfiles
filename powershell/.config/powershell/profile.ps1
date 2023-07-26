@@ -1,5 +1,7 @@
 # NOTE: Debug with `Set-PsDebug -Trace 1`
 
+$env:DOTNET_CLI_TELEMETRY_OPTOUT = "true"
+
 if ($PSVersionTable.PSVersion -lt "6.0") {
   $global:IsWindows = $true
 }
@@ -77,22 +79,28 @@ function prompt {
   # Otherwise build a colorized prompt string.
   $prompt = ""
 
-  if (Test-Path variable:/PSDebugContext -ErrorAction SilentlyContinue) {
-    $prompt += Write-Prompt "[DBG] " -ForegroundColor ([ConsoleColor]::Yellow)
-  }
-
   # Only print non-zero exit codes.
   if ($originalLastExitCode -ne 0) {
     $prompt += Write-Prompt "$originalLastExitCode " -ForegroundColor ([ConsoleColor]::Magenta)
   }
 
   # TODO: Use green if SSH connection.
+  # NOTE: For some reason most of the colors have to be the 'Dark' version.
+  if ($isAdmin)
+    { $prompt += Write-Prompt "$(whoami)" -ForegroundColor ([ConsoleColor]::Red)}
   $prompt += Write-Prompt "@" -ForegroundColor ([ConsoleColor]::DarkBlue)
   $prompt += Write-Prompt "$hostname "
   $prompt += Write-Prompt "$path " -ForegroundColor ([ConsoleColor]::DarkBlue)
   $prompt += Write-VcsStatus
-  $promptColor = if ($isAdmin) { [ConsoleColor]::Red } else { [ConsoleColor]::DarkCyan }
-  $prompt += Write-Prompt "`n>" -ForegroundColor $promptColor
+  $prompt += Write-Prompt "`n"
+  if (Test-Path variable:/PSDebugContext -ErrorAction SilentlyContinue) {
+    $prompt += Write-Prompt "[DBG] " -ForegroundColor ([ConsoleColor]::DarkGreen)
+  }
+  if ($NestedPromptLevel -gt 0)
+    { $prompt += Write-Prompt "$NestedPromptLevel " -ForegroundColor ([ConsoleColor]::DarkGreen) }
+  if ($isAdmin)
+    { $prompt += Write-Prompt "#" -ForegroundColor ([ConsoleColor]::Red) } else
+    { $prompt += Write-Prompt ">" -ForegroundColor ([ConsoleColor]::DarkCyan) }
 
   $global:LASTEXITCODE = $originalLastExitCode
 
@@ -102,18 +110,6 @@ function prompt {
 
 function Update-Profile {
   . $PROFILE.CurrentUserAllHosts
-}
-
-<#
-.SYNOPSIS
-  Initialize the 1Password CLI.
-.DESCRIPTION
-  This sets the necessary environment variable after using their CLI to
-  interactively login. Combined with
-  https://github.com/cdhunt/SecretManagement.1Password this provides secrets!
-#>
-function Initialize-1Password {
-  $env:OP_SESSION_my = op signin my --raw
 }
 
 function Find-Command { (Get-Command @args).Source }
