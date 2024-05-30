@@ -1,4 +1,4 @@
-# andschwa's dotfiles
+# Andy's dotfiles
 
 Uses Git [subtree][] and submodules to keep my dotfiles in one place
 in an elegant manner. With inspiration from [xero][], uses [GNU Stow][]
@@ -13,20 +13,39 @@ weird hobby of mine, but I am not alone! The others hang out at [vcs-home][].
 [dotfiles]: https://dotfiles.github.io/
 [vcs-home]: https://vcs-home.branchable.com/
 
-# tools
+## Tools
 
 Other tools to install:
 
 - [GNU Emacs](https://github.com/andschwa/.emacs.d): best everything
 - [ripgrep](https://github.com/BurntSushi/ripgrep): best grep
-- [fish](https://fishshell.com/): best shell
-- [Git](https://git-scm.com/) (and [hub](https://hub.github.com/)): best VCS
-- [The Fuck](https://github.com/nvbn/thefuck): best fuck-up fixer
-- [tmux](https://github.com/tmux/tmux): best terminal multiplexer
-- [Firefox](https://www.mozilla.org/en-US/firefox/): best browser
+- [Git](https://git-scm.com/)): best VCS
 - [Solarized](http://ethanschoonover.com/solarized): best color theme
 
-# deprecations
+## Windows
+
+Yes, I use much of this on Windows too (I work at Microsoft after all).
+But instead of using GNU Stow, I just load things from stubs.
+Usually I clone this repo to `~/src/dotfiles` because Windows is messy.
+
+### PowerShell
+
+In `$PROFILE.CurrentUserAllHosts`:
+
+```pwsh
+. ~/src/dotfiles/powershell/.config/powershell/profile.ps1
+```
+
+### Git
+
+In `~/.gitconfig`:
+
+```config
+[include]
+    path = src/dotfiles/git/.config/git/config
+```
+
+## Deprecations
 
 Previously I have used [freshrc][] to manage my dotfiles (the history of which
 is in the shell subtree). It was too complicated. Then I switched to a
