@@ -52,7 +52,7 @@ if ($Host.Name -ne "Emacs") {
     $GitPromptSettings.BranchBehindAndAheadStatusSymbol.ForegroundColor = [ConsoleColor]::DarkMagenta
   } catch {
     Write-Warning "posh-git is not installed! Try:"
-    Write-Warning "Install-Module -Name posh-git -AllowPrerelease -Scope CurrentUser"
+    Write-Warning "Install-PSResource -Name posh-git"
   }
 }
 
