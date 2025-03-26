@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2017 Andrew Schwartzmeyer
+# Copyright 2025 Andy Jordan
 set -eu
 
 if [[ ! $# -eq 1 ]]; then

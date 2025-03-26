@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Copyright 2017 Andrew Schwartzmeyer
+# Copyright 2025 Andy Jordan
 set -u
 
 if [[ $# -lt 1 ]]; then

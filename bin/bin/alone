@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2014 Andrew Schwartzmeyer
+# Copyright 2025 Andy Jordan
 set -eu
 
 hash=$(echo "$@" | sha1sum | awk '{print $1}')

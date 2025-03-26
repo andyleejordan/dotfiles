@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+usr/bin/env bash
 
 if [ "$#" -lt "3" ]; then
     echo 'Usage: "<old email>" "<new email>" <rev-list>'

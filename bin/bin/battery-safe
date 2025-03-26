@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright 2014 Andrew Schwartzmeyer
+# Copyright 2025 Andy Jordan
 set -eu
 
 if (hash pmset 2>/dev/null && hash caffeinate 2>/dev/null); then
