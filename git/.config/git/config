@@ -72,6 +72,8 @@
 	pretty = medium
 [help]
 	autoCorrect = -1
+[init]
+	defaultBranch = main
 [log]
 	abbrevCommit = true
 	date = local
