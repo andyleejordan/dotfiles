@@ -49,6 +49,7 @@
 	undo = reset HEAD~
 	y = cherry-pick
 	z = stash
+	update-pr = "!git push \"$(git config branch.$(git branch --show-current).remote)\" \"HEAD:$(git config branch.$(git branch --show-current).merge)\" \"$@\""
 [am]
 	threeWay = true
 [apply]
