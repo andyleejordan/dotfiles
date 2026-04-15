@@ -50,6 +50,7 @@
 	y = cherry-pick
 	z = stash
 	update-pr = "!git push \"$(git config branch.$(git branch --show-current).remote)\" \"HEAD:$(git config branch.$(git branch --show-current).merge)\" \"$@\""
+	gone = "!git fetch -p -q && for b in $(git for-each-ref --format=\"%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)\" refs/heads); do [ -n \"$b\" ] && git branch -D \"$b\"; done"
 [am]
 	threeWay = true
 [apply]
