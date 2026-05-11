@@ -2,6 +2,8 @@
 setopt AUTO_CD EXTENDED_GLOB MULTIOS CORRECT
 setopt EXTENDED_HISTORY HIST_IGNORE_DUPS HIST_REDUCE_BLANKS HIST_IGNORE_SPACE
 
+autoload -Uz compinit && compinit
+
 # aliases
 alias g=git
 
