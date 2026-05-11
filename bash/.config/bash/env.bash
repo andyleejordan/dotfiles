@@ -7,11 +7,16 @@ fi
 # Path setup
 source ~/.config/bash/path-edit.bash
 path_front /sbin /usr/sbin /usr/local/sbin /usr/local/bin /usr/bin /bin
-path_back ~/bin ~/.local/bin ~/.poetry/bin ~/.cargo/bin ~/.dotnet/tools /usr/local/share/dotnet /usr/local/microsoft/powershell/7
+path_back ~/bin ~/.local/bin ~/.poetry/bin ~/.dotnet/tools /usr/local/share/dotnet /usr/local/microsoft/powershell/7
 
 # macOS
 path_front /opt/homebrew/bin
 path_back "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
+# Rust
+if [[ -f ~/.cargo/env ]]; then
+    . ~/.cargo/env
+fi
 
 # Local
 if [[ -r ~/.local/share/bash/env.bash ]]; then
