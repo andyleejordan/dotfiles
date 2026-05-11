@@ -10,7 +10,3 @@ fi
 if [[ -f ~/.cargo/env ]]; then
   . ~/.cargo/env
 fi
-
-if command -v fnm > /dev/null; then
-  eval "$(fnm env)"
-fi
