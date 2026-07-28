@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+# Copyright 2026 Andy Jordan
+set -eu
+
+# Deletes leftover local branches, covering both of my workflows:
+#
+#   [gone]   the branch had an upstream that has since been deleted,
+#            i.e. its pull request was merged and the remote branch
+#            reaped (squash merges are not ancestors of the default
+#            branch, so these need -D)
+#   merged   the branch was merged into the default branch locally and
+#            never pushed at all, so it has no upstream to go missing
+#
+# With --worktrees, any worktree checked out on such a branch is removed
+# first. Dirty worktrees are left alone; git refuses to remove them and
+# we keep the branch so nothing is lost.
+
+worktrees=false
+dry_run=false
+remote=origin
+
+usage() {
+    echo "Usage: git prune-gone [--worktrees] [--dry-run] [<remote>]"
+}
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -w|--worktrees) worktrees=true ;;
+        -n|--dry-run) dry_run=true ;;
+        -h|--help) usage; exit 0 ;;
+        -*) usage >&2; exit 1 ;;
+        *) remote=$1 ;;
+    esac
+    shift
+done
+
+git fetch --prune --quiet "$remote"
+
+# The default branch is whatever the remote points its HEAD at.
+if default=$(git symbolic-ref --quiet --short "refs/remotes/$remote/HEAD"); then
+    default=${default#"$remote/"}
+else
+    default=$(git config init.defaultBranch || echo main)
+fi
+
+# Prefer the local default branch: a merge that has not been pushed yet
+# still counts as merged, and it matches what I would see in the log.
+if git show-ref --quiet --verify "refs/heads/$default"; then
+    base=refs/heads/$default
+elif git show-ref --quiet --verify "refs/remotes/$remote/$default"; then
+    base=refs/remotes/$remote/$default
+else
+    echo >&2 "Error: cannot find default branch $default"
+    exit 1
+fi
+
+current=$(git branch --show-current)
+seen=" "
+
+# Prints the worktree path a branch is checked out in, if any.
+worktree_for() {
+    git worktree list --porcelain |
+        awk -v want="branch refs/heads/$1" \
+            '/^worktree /{ path = substr($0, 10) } $0 == want { print path }'
+}
+
+# prune <branch> <-d|-D>
+prune() {
+    branch=$1
+    flag=$2
+
+    [[ -n $branch ]] || return 0
+    [[ $branch != "$default" ]] || return 0
+    [[ $branch != "$current" ]] || return 0
+    [[ $seen != *" $branch "* ]] || return 0
+    seen="$seen$branch "
+
+    if $worktrees; then
+        path=$(worktree_for "$branch")
+        if [[ -n $path ]]; then
+            if $dry_run; then
+                echo "Would remove worktree $path"
+            elif ! git worktree remove "$path"; then
+                return 0
+            fi
+        fi
+    fi
+
+    if $dry_run; then
+        echo "Would delete branch $branch"
+    else
+        git branch "$flag" "$branch" || true
+    fi
+}
+
+# Gone branches first, so they claim -D before the merged pass sees them.
+for branch in $(git for-each-ref refs/heads \
+    --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'); do
+    prune "$branch" -D
+done
+
+# -d here double checks the merge, so we cannot drop unmerged work.
+for branch in $(git for-each-ref refs/heads --merged "$base" \
+    --format='%(refname:short)'); do
+    prune "$branch" -d
+done
+
+$dry_run || git worktree prune

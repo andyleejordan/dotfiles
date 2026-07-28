@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Copyright 2026 Andy Jordan
+set -eu
+
+exec git prune-gone --worktrees "$@"
