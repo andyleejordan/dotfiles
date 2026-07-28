@@ -34,6 +34,8 @@
 	m = merge
 	nuke = !git clean -fdx && git submodule foreach git clean -fdx
 	p = pull
+	pg = prune-gone
+	pgw = prune-gone-worktrees
 	ps = push
 	psf = push --force-with-lease
 	r = reset
@@ -50,7 +52,8 @@
 	y = cherry-pick
 	z = stash
 	update-pr = "!git push \"$(git config branch.$(git branch --show-current).remote)\" \"HEAD:$(git config branch.$(git branch --show-current).merge)\" \"$@\""
-	gone = "!git fetch -p -q && for b in $(git for-each-ref --format=\"%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)\" refs/heads); do [ -n \"$b\" ] && git branch -D \"$b\"; done"
+	prune-gone = "!git fetch -p -q && for b in $(git for-each-ref --format=\"%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)\" refs/heads); do [ -n \"$b\" ] && git branch -D \"$b\"; done"
+	prune-gone-worktrees = "!git fetch -p -q && for b in $(git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)' refs/heads); do [ -n \"$b\" ] || continue; w=$(git worktree list --porcelain | awk -v b=\"branch refs/heads/$b\" '/^worktree /{p=substr($0,10)} $0==b{print p}'); if [ -n \"$w\" ]; then git worktree remove \"$w\" || continue; fi; git branch -D \"$b\"; done; git worktree prune"
 [am]
 	threeWay = true
 [apply]
