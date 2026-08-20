@@ -9,7 +9,7 @@ fi
 typeset -U path
 
 # prepend (front-most last)
-for dir in /opt/homebrew/bin; do
+for dir in /opt/homebrew/sbin /opt/homebrew/bin; do
   [[ -d $dir ]] && path=($dir $path)
 done
 
@@ -22,10 +22,6 @@ for dir in \
 do
   [[ -d $dir ]] && path+=($dir)
 done
-
-if command -v brew > /dev/null; then
-  eval "$(brew shellenv)"
-fi
 
 # Rust
 if [[ -f ~/.cargo/env ]]; then

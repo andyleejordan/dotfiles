@@ -1,3 +1,13 @@
+# homebrew
+if command -v brew > /dev/null; then
+  eval "$(brew shellenv)"
+fi
+
+# node
+if command -v fnm > /dev/null; then
+  eval "$(fnm env)"
+fi
+
 # options
 setopt AUTO_CD EXTENDED_GLOB MULTIOS CORRECT
 setopt EXTENDED_HISTORY HIST_IGNORE_DUPS HIST_REDUCE_BLANKS HIST_IGNORE_SPACE

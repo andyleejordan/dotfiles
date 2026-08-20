@@ -4,6 +4,9 @@ Uses Git [subtree][] and submodules to keep my dotfiles in one place
 in an elegant manner. With inspiration from [xero][], uses [GNU Stow][]
 to symlink files one folder deep to the folder above.
 
+These settings sync across machines. Some configurations guard optional tools
+that may not be installed everywhere.
+
 This is the third generation of my [dotfiles][] management system. It is a
 weird hobby of mine, but I am not alone! The others hang out at [vcs-home][].
 

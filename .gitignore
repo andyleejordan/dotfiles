@@ -1,2 +1,3 @@
 /fish/.config/fish/fishd.*
 /fish/.config/fish/functions/fzf_key_bindings.fish
+/git/.config/
