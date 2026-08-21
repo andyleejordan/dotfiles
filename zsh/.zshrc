@@ -9,7 +9,7 @@ if command -v fnm > /dev/null; then
 fi
 
 # options
-setopt AUTO_CD EXTENDED_GLOB MULTIOS CORRECT
+setopt AUTO_CD EXTENDED_GLOB MULTIOS
 setopt EXTENDED_HISTORY HIST_IGNORE_DUPS HIST_REDUCE_BLANKS HIST_IGNORE_SPACE
 
 autoload -Uz compinit && compinit
