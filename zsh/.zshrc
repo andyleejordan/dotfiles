@@ -9,7 +9,7 @@ if command -v fnm > /dev/null; then
 fi
 
 # options
-setopt AUTO_CD EXTENDED_GLOB MULTIOS
+setopt AUTO_CD EXTENDED_GLOB INTERACTIVE_COMMENTS MULTIOS NO_BEEP
 
 # history options
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
