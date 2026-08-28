@@ -6,14 +6,19 @@ set -eu
 #
 #   [gone]   the branch had an upstream that has since been deleted,
 #            i.e. its pull request was merged and the remote branch
-#            reaped (squash merges are not ancestors of the default
-#            branch, so these need -D)
+#            reaped
 #   merged   the branch was merged into the default branch locally and
 #            never pushed at all, so it has no upstream to go missing
 #
+# Both are only candidates. Nothing is deleted until we have confirmed the
+# work is in the default branch, because an upstream also goes [gone] when a
+# pull request is closed unmerged or the remote branch is deleted by hand.
+#
 # With --worktrees, any worktree checked out on such a branch is removed
 # first. Dirty worktrees are left alone; git refuses to remove them and
-# we keep the branch so nothing is lost.
+# we keep the branch so nothing is lost. Agent worktrees are left alone
+# too, because the agent host owns that lifecycle and a session whose
+# checkout disappears underneath it is broken for good.
 
 worktrees=false
 dry_run=false
@@ -64,10 +69,34 @@ worktree_for() {
             '/^worktree /{ path = substr($0, 10) } $0 == want { print path }'
 }
 
-# prune <branch> <-d|-D>
+# Agent sessions park their checkouts in a sibling <repo>.worktrees
+# directory and clean up after themselves when I delete the session.
+agent_worktree() {
+    [[ $(dirname "$1") == *.worktrees ]]
+}
+
+# Succeeds when the branch's work already sits in the base, whether it got
+# there as an ancestor (a plain merge or a fast forward) or as a squash. A
+# squash rewrites the branch into one unrelated commit, so replay the
+# branch's tree onto the merge base and ask git cherry whether that patch
+# has already been applied.
+merged_into_base() {
+    local branch=$1 merge_base tree squashed
+
+    if git merge-base --is-ancestor "$branch" "$base"; then
+        return 0
+    fi
+
+    merge_base=$(git merge-base "$base" "$branch") || return 1
+    tree=$(git rev-parse "$branch^{tree}") || return 1
+    squashed=$(git commit-tree "$tree" -p "$merge_base" -m squash) || return 1
+
+    [[ $(git cherry "$base" "$squashed") == -* ]]
+}
+
+# prune <branch>
 prune() {
-    branch=$1
-    flag=$2
+    local branch=$1 path
 
     [[ -n $branch ]] || return 0
     [[ $branch != "$default" ]] || return 0
@@ -75,34 +104,49 @@ prune() {
     [[ $seen != *" $branch "* ]] || return 0
     seen="$seen$branch "
 
-    if $worktrees; then
-        path=$(worktree_for "$branch")
-        if [[ -n $path ]]; then
-            if $dry_run; then
-                echo "Would remove worktree $path"
-            elif ! git worktree remove "$path"; then
-                return 0
-            fi
+    # Settle this before touching the worktree, so a branch we turn out not
+    # to be able to delete keeps its checkout as well.
+    if ! merged_into_base "$branch"; then
+        echo >&2 "Keeping $branch: not merged into $default"
+        return 0
+    fi
+
+    path=$(worktree_for "$branch")
+    if [[ -n $path ]]; then
+        if agent_worktree "$path"; then
+            echo >&2 "Keeping $branch: agent session worktree $path"
+            return 0
+        fi
+        if ! $worktrees; then
+            echo >&2 "Keeping $branch: checked out in $path"
+            return 0
+        fi
+        if $dry_run; then
+            echo "Would remove worktree $path"
+        elif ! git worktree remove "$path"; then
+            return 0
         fi
     fi
 
     if $dry_run; then
         echo "Would delete branch $branch"
     else
-        git branch "$flag" "$branch" || true
+        # -D because a squash merge is not an ancestor; we checked above.
+        git branch -D "$branch" || true
     fi
 }
 
-# Gone branches first, so they claim -D before the merged pass sees them.
+# A gone upstream usually means the pull request merged and the remote
+# branch was reaped, but it also covers a closed pull request or a remote
+# branch I deleted by hand, so these still go through the merge check.
 for branch in $(git for-each-ref refs/heads \
     --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'); do
-    prune "$branch" -D
+    prune "$branch"
 done
 
-# -d here double checks the merge, so we cannot drop unmerged work.
 for branch in $(git for-each-ref refs/heads --merged "$base" \
     --format='%(refname:short)'); do
-    prune "$branch" -d
+    prune "$branch"
 done
 
 $dry_run || git worktree prune
