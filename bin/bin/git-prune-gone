@@ -70,9 +70,12 @@ worktree_for() {
 }
 
 # Agent sessions park their checkouts in a sibling <repo>.worktrees
-# directory and clean up after themselves when I delete the session.
+# directory (subagents) or under <repo>/.claude/worktrees (desktop app
+# sessions) and clean up after themselves when I delete the session.
 agent_worktree() {
-    [[ $(dirname "$1") == *.worktrees ]]
+    local parent
+    parent=$(dirname "$1")
+    [[ $parent == *.worktrees || $parent == */.claude/worktrees ]]
 }
 
 # Succeeds when the branch's work already sits in the base, whether it got
