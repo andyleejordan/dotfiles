@@ -27,18 +27,32 @@ Other tools to install:
 
 ## Zsh
 
-The installer installs
-[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-when Homebrew is available, skipping it if already installed:
+The installer installs two complementary plugins when Homebrew is available,
+skipping each one if already installed:
 
 ```sh
 ./install.sh
 ```
 
-`.zshrc` loads it when available through Homebrew and skips it on machines
-without the package. Suggestions appear in gray as you type, based on local
-shell history. Press Right Arrow at the end of the line to accept a suggestion,
-or keep typing to ignore it. No AI service or credits are involved.
+- [zsh-autocomplete](https://github.com/marlonrichert/zsh-autocomplete)
+  automatically shows completion menus for commands, options, and paths.
+  Press Tab to insert the first completion, Down Arrow to browse the menu,
+  or Up Arrow to search history.
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+  shows gray inline suggestions from shell history, such as
+  `brew update && brew upgrade`. Press Right Arrow at the end of the line
+  to accept one, or keep typing to ignore it.
+
+`cd` commands are excluded from gray history suggestions, so directory
+navigation uses completion in the current location instead of replaying
+paths from somewhere else. Both plugins run locally; neither uses an AI
+service or credits.
+
+`.zshrc` loads autocomplete first and lets it initialize Zsh's completion
+system, then loads autosuggestions with history-only suggestions. Each
+plugin is optional; without autocomplete, `.zshrc` initializes normal Tab
+completion instead. Autocomplete's recent directories are stored under
+`${XDG_DATA_HOME:-$HOME/.local/share}/zsh`.
 
 ## Homebrew
 

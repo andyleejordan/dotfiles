@@ -3,6 +3,14 @@ if command -v brew > /dev/null; then
   eval "$(brew shellenv)"
 fi
 
+if [[ -n ${HOMEBREW_PREFIX:-} && -r "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ]]; then
+  # The plugin records recent directories here but does not create the parent.
+  mkdir -p "${XDG_DATA_HOME:-$HOME/.local/share}/zsh"
+  source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+else
+  autoload -Uz compinit && compinit
+fi
+
 # node
 if command -v fnm > /dev/null; then
   eval "$(fnm env --use-on-cd --shell zsh)"
@@ -18,8 +26,6 @@ SAVEHIST=100000
 setopt EXTENDED_HISTORY INC_APPEND_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST HIST_FIND_NO_DUPS HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE HIST_REDUCE_BLANKS HIST_VERIFY
-
-autoload -Uz compinit && compinit
 
 # aliases
 alias g=git
@@ -64,5 +70,7 @@ copilot() {
 }
 
 if [[ -n ${HOMEBREW_PREFIX:-} && -r "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  ZSH_AUTOSUGGEST_STRATEGY=(history)
+  ZSH_AUTOSUGGEST_HISTORY_IGNORE='cd *'
   source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi

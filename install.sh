@@ -12,8 +12,9 @@ Usage: ./install.sh [--dry-run]
 
 Install and stow bash, bin, git, homebrew, readline, and zsh
 dotfiles. On macOS, also let sudo take Touch ID.
-Install zsh-autosuggestions when Homebrew is available, and with Homebrew
-under /opt/homebrew, load the launch agent that runs brew upgrade daily.
+Install zsh-autocomplete and zsh-autosuggestions when Homebrew is available.
+With Homebrew under /opt/homebrew, load the launch agent that runs brew
+upgrade daily.
 --dry-run reports the changes without applying them.
 EOF
 }
@@ -45,13 +46,16 @@ if git -C "$repo" rev-parse --git-dir >/dev/null 2>&1; then
   fi
 fi
 
-if command -v brew >/dev/null 2>&1 &&
-   ! brew list --versions zsh-autosuggestions >/dev/null 2>&1; then
-  if [[ $dry_run == true ]]; then
-    echo "install would run: brew install zsh-autosuggestions"
-  else
-    brew install zsh-autosuggestions
-  fi
+if command -v brew >/dev/null 2>&1; then
+  for plugin in zsh-autocomplete zsh-autosuggestions; do
+    if ! brew list --versions "$plugin" >/dev/null 2>&1; then
+      if [[ $dry_run == true ]]; then
+        echo "install would run: brew install $plugin"
+      else
+        brew install "$plugin"
+      fi
+    fi
+  done
 fi
 
 if ! command -v stow >/dev/null 2>&1; then
