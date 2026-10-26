@@ -10,7 +10,7 @@ usage() {
   cat <<'EOF'
 Usage: ./install.sh [--dry-run]
 
-Install and stow bash, bin, git, homebrew, powershell, readline, and zsh
+Install and stow bash, bin, git, homebrew, readline, and zsh
 dotfiles. On macOS, also let sudo take Touch ID.
 --dry-run reports the changes without applying them.
 EOF
@@ -63,7 +63,7 @@ if ! command -v stow >/dev/null 2>&1; then
   "${install_command[@]}"
 fi
 
-packages=(bash bin git homebrew powershell readline zsh)
+packages=(bash bin git homebrew readline zsh)
 # Finder drops .DS_Store into package folders, and $HOME has its own.
 stow_args=(--dir="$repo" --target="$HOME" --stow --verbose=1 --ignore='\.DS_Store')
 [[ $dry_run == true ]] && stow_args+=(--simulate)
