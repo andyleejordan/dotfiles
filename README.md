@@ -25,6 +25,20 @@ Other tools to install:
 - [Git](https://git-scm.com/)): best VCS
 - [Solarized](http://ethanschoonover.com/solarized): best color theme
 
+## Zsh
+
+Install [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+with Homebrew:
+
+```sh
+brew install zsh-autosuggestions
+```
+
+`.zshrc` loads it when available through Homebrew and skips it on machines
+without the package. Suggestions appear in gray as you type, based on local
+shell history. Press Right Arrow at the end of the line to accept a suggestion,
+or keep typing to ignore it. No AI service or credits are involved.
+
 ## Windows
 
 Yes, I use much of this on Windows too (I work at Microsoft after all).
