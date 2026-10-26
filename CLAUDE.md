@@ -14,6 +14,11 @@ data into the repo.
 
 ## zsh
 
+Keep machine-specific PATH and environment settings in
+`~/.local/share/zsh/env.zsh`, which `.zshenv` optionally sources, outside this
+checkout. Move installer-added PATH blocks there rather than committing them
+in the tracked shell files. Keep this local hook free of subprocesses too.
+
 `.zshenv` sets PATH only (`typeset -U path`, `~/.local/bin` included) and runs
 no subprocesses, because zsh sources it for every script, not just
 interactive shells. `brew shellenv`, `fnm env`, and other interactive setup
