@@ -10,7 +10,8 @@ usage() {
   cat <<'EOF'
 Usage: ./install.sh [--dry-run]
 
-Install and stow bash, bin, git, powershell, readline, and zsh dotfiles.
+Install and stow bash, bin, git, homebrew, powershell, readline, and zsh
+dotfiles.
 --dry-run reports the changes without applying them.
 EOF
 }
@@ -62,7 +63,7 @@ if ! command -v stow >/dev/null 2>&1; then
   "${install_command[@]}"
 fi
 
-packages=(bash bin git powershell readline zsh)
+packages=(bash bin git homebrew powershell readline zsh)
 stow_args=(--dir="$repo" --target="$HOME" --stow --verbose=1)
 [[ $dry_run == true ]] && stow_args+=(--simulate)
 
