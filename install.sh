@@ -11,7 +11,7 @@ usage() {
 Usage: ./install.sh [--dry-run]
 
 Install and stow bash, bin, git, homebrew, powershell, readline, and zsh
-dotfiles.
+dotfiles. On macOS, also let sudo take Touch ID.
 --dry-run reports the changes without applying them.
 EOF
 }
@@ -68,3 +68,16 @@ stow_args=(--dir="$repo" --target="$HOME" --stow --verbose=1)
 [[ $dry_run == true ]] && stow_args+=(--simulate)
 
 stow "${stow_args[@]}" "${packages[@]}"
+
+# Let sudo take Touch ID. macOS keeps sudo_local across updates, unlike
+# /etc/pam.d/sudo, and ships its template with the line commented out. An
+# existing sudo_local is left alone.
+pam_template=/etc/pam.d/sudo_local.template
+pam_local=/etc/pam.d/sudo_local
+if [[ -f $pam_template && ! -e $pam_local ]]; then
+  if [[ $dry_run == true ]]; then
+    echo "install would enable Touch ID for sudo in $pam_local"
+  else
+    sed 's/^#auth/auth/' "$pam_template" | sudo tee "$pam_local" >/dev/null
+  fi
+fi
