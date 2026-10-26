@@ -64,7 +64,8 @@ if ! command -v stow >/dev/null 2>&1; then
 fi
 
 packages=(bash bin git homebrew powershell readline zsh)
-stow_args=(--dir="$repo" --target="$HOME" --stow --verbose=1)
+# Finder drops .DS_Store into package folders, and $HOME has its own.
+stow_args=(--dir="$repo" --target="$HOME" --stow --verbose=1 --ignore='\.DS_Store')
 [[ $dry_run == true ]] && stow_args+=(--simulate)
 
 stow "${stow_args[@]}" "${packages[@]}"
