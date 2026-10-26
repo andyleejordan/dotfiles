@@ -3,6 +3,15 @@
 `install.sh` stows each package directory into `~`, so never add files to a
 package that shouldn't land in the home directory.
 
+Every link from `~` into this repo belongs to Stow. Create or repair one only
+by running `install.sh`, never with `ln`, even after moving the repo: then
+remove the dead links the old location left and rerun it. Stow won't touch a
+link it didn't make, and one such link stops the whole install; links an
+agent rebuilt by hand after the move from `~/.dotfiles` did that for six
+weeks. Keep `~/.config` a real directory, never a link: when it's missing,
+Stow links the whole folder into one package, and every app then writes its
+data into the repo.
+
 ## zsh
 
 `.zshenv` sets PATH only (`typeset -U path`, `~/.local/bin` included) and runs
