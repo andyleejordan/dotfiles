@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>local.upgradebrew</string>
+
+    <!-- brew upgrade runs brew update first and cleans up after itself.
+         Without no-ask it waits for a confirmation nobody can give. -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/brew</string>
+        <string>upgrade</string>
+        <string>--no-ask</string>
+    </array>
+
+    <!-- brew needs git and curl from /usr/bin; launchd's PATH has no
+         Homebrew. -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/opt/homebrew/sbin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+
+    <!-- Daily at 10 AM. A run missed while asleep happens on the next wake. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>10</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>LowPriorityIO</key>
+    <true/>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+
+    <!-- launchd expands neither ~ nor $HOME, so install.sh writes this
+         file with @HOME@ filled in rather than stowing it. -->
+    <key>StandardOutPath</key>
+    <string>@HOME@/Library/Logs/upgrade-brew.log</string>
+    <key>StandardErrorPath</key>
+    <string>@HOME@/Library/Logs/upgrade-brew.log</string>
+</dict>
+</plist>

@@ -12,7 +12,8 @@ Usage: ./install.sh [--dry-run]
 
 Install and stow bash, bin, git, homebrew, readline, and zsh
 dotfiles. On macOS, also let sudo take Touch ID.
-Install zsh-autosuggestions when Homebrew is available.
+Install zsh-autosuggestions when Homebrew is available, and with Homebrew
+under /opt/homebrew, load the launch agent that runs brew upgrade daily.
 --dry-run reports the changes without applying them.
 EOF
 }
@@ -79,6 +80,25 @@ stow_args=(--dir="$repo" --target="$HOME" --stow --verbose=1 --ignore='\.DS_Stor
 [[ $dry_run == true ]] && stow_args+=(--simulate)
 
 stow "${stow_args[@]}" "${packages[@]}"
+
+# Run brew upgrade daily. launchd expands neither ~ nor $HOME, so the plist is
+# written with this account's home filled in instead of stowed. mv replaces
+# the file itself, including a symlink an older install left in its place.
+upgrade_plist=$HOME/Library/LaunchAgents/local.upgradebrew.plist
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  if [[ $dry_run == true ]]; then
+    echo "install would write and load $upgrade_plist"
+  else
+    mkdir -p "$(dirname "$upgrade_plist")"
+    tmp=$(mktemp "$upgrade_plist.XXXXXX")
+    sed "s#@HOME@#$HOME#g" "$repo/launchd/local.upgradebrew.plist" >"$tmp"
+    chmod 644 "$tmp"
+    mv "$tmp" "$upgrade_plist"
+    launchctl bootout "gui/$(id -u)/local.upgradebrew" 2>/dev/null || true
+    launchctl bootstrap "gui/$(id -u)" "$upgrade_plist"
+    echo "install loaded local.upgradebrew"
+  fi
+fi
 
 # Let sudo take Touch ID. macOS keeps sudo_local across updates, unlike
 # /etc/pam.d/sudo, and ships its template with the line commented out. An

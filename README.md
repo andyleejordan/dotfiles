@@ -40,6 +40,16 @@ without the package. Suggestions appear in gray as you type, based on local
 shell history. Press Right Arrow at the end of the line to accept a suggestion,
 or keep typing to ignore it. No AI service or credits are involved.
 
+## Homebrew
+
+On a Mac with Homebrew under `/opt/homebrew`, the installer loads
+`local.upgradebrew`, a launch agent that runs `brew upgrade --no-ask` daily at
+10 AM, or on the next wake if the Mac was asleep, logging to
+`~/Library/Logs/upgrade-brew.log`. launchd can't expand `~` in a plist, so
+`install.sh` writes [`launchd/local.upgradebrew.plist`](launchd/local.upgradebrew.plist)
+into `~/Library/LaunchAgents` with the home directory filled in; rerun it
+after editing the template.
+
 ## Windows
 
 Yes, I use much of this on Windows too (I work at Microsoft after all).
