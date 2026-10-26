@@ -27,11 +27,12 @@ Other tools to install:
 
 ## Zsh
 
-Install [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-with Homebrew:
+The installer installs
+[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+when Homebrew is available, skipping it if already installed:
 
 ```sh
-brew install zsh-autosuggestions
+./install.sh
 ```
 
 `.zshrc` loads it when available through Homebrew and skips it on machines

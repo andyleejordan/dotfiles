@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Install GNU Stow if needed and link this repository's dotfiles into $HOME.
+# Install shell dependencies and link this repository's dotfiles into $HOME.
 # Safe to re-run: Stow leaves correct links alone and refuses to overwrite
 # conflicting files.
 
@@ -12,6 +12,7 @@ Usage: ./install.sh [--dry-run]
 
 Install and stow bash, bin, git, homebrew, readline, and zsh
 dotfiles. On macOS, also let sudo take Touch ID.
+Install zsh-autosuggestions when Homebrew is available.
 --dry-run reports the changes without applying them.
 EOF
 }
@@ -40,6 +41,15 @@ if git -C "$repo" rev-parse --git-dir >/dev/null 2>&1; then
     echo "Run $canonical/install.sh instead." >&2
     [[ ${ALLOW_WORKTREE_INSTALL:-} == 1 ]] || exit 1
     echo "install.sh: ALLOW_WORKTREE_INSTALL=1 set - continuing anyway." >&2
+  fi
+fi
+
+if command -v brew >/dev/null 2>&1 &&
+   ! brew list --versions zsh-autosuggestions >/dev/null 2>&1; then
+  if [[ $dry_run == true ]]; then
+    echo "install would run: brew install zsh-autosuggestions"
+  else
+    brew install zsh-autosuggestions
   fi
 fi
 
