@@ -79,6 +79,7 @@ if [[ -f $pam_template && ! -e $pam_local ]]; then
   if [[ $dry_run == true ]]; then
     echo "install would enable Touch ID for sudo in $pam_local"
   else
+    echo "install.sh: sudo is needed to enable Touch ID by creating $pam_local."
     sed 's/^#auth/auth/' "$pam_template" | sudo tee "$pam_local" >/dev/null
   fi
 fi
