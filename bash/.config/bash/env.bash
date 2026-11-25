@@ -1,24 +1,16 @@
-# Find SSH agent socket file
-ssh_sock_file=$(compgen -G "/tmp/ssh-*/agent.*" | head -n 1)
-if [[ -z $SSH_AUTH_SOCK && -S $ssh_sock_file ]]; then
-    export SSH_AUTH_SOCK=$ssh_sock_file
-fi
+. "$HOME/.config/shell/env.sh"
 
-# Path setup
-source ~/.config/bash/path-edit.bash
-path_front /sbin /usr/sbin /usr/local/sbin /usr/local/bin /usr/bin /bin
-path_back ~/bin ~/.local/bin ~/.poetry/bin ~/.dotnet/tools /usr/local/share/dotnet /usr/local/microsoft/powershell/7
-
-# macOS
-path_front /opt/homebrew/bin
-path_back "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
-# Rust
-if [[ -f ~/.cargo/env ]]; then
-    . ~/.cargo/env
+if [[ -z ${SSH_AUTH_SOCK:-} ]]; then
+  for ssh_sock_file in /tmp/ssh-*/agent.*; do
+    if [[ -S $ssh_sock_file ]]; then
+      export SSH_AUTH_SOCK=$ssh_sock_file
+      break
+    fi
+  done
+  unset ssh_sock_file
 fi
 
 # Local
 if [[ -r ~/.local/share/bash/env.bash ]]; then
-    source ~/.local/share/bash/env.bash
+  source ~/.local/share/bash/env.bash
 fi

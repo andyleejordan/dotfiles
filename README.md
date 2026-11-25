@@ -25,6 +25,34 @@ Other tools to install:
 - [Git](https://git-scm.com/)): best VCS
 - [Solarized](http://ethanschoonover.com/solarized): best color theme
 
+## Shell environment
+
+Bash's `~/.config/bash/env.bash` and Zsh's `~/.zshenv` both load
+`~/.config/shell/env.sh`. It adds existing tool directories, including the
+SDK launcher in `~/.dotnet` and global tools in `~/.dotnet/tools`, without
+starting subprocesses or loading prompts, completion, or version-manager
+hooks. Inherited system PATH ordering is preserved, with Homebrew promoted
+to the front. Install the new shared `shell` package with `./install.sh`
+from the canonical checkout before starting a new shell.
+
+Bash still provides `path_front dir...` and `path_back dir...`; quote
+directory names containing spaces. Zsh also keeps its unique, PATH-linked
+`path` array, so `path=("$HOME/bin" $path)` and `path+=("$HOME/tools")` work
+as before.
+
+Noninteractive Bash does not read `.bashrc`. Shared startup exports
+`BASH_ENV="$HOME/.config/bash/env.bash"` so descendant Bash command runners
+load the same setup. This entrypoint is safe to source repeatedly. Apps
+launched outside an initialized shell must arrange to source it themselves
+or inherit that variable; already-running apps need a fresh environment.
+
+Put shared machine-local settings in `~/.local/share/shell/env.sh`, using
+Bash/Zsh-compatible builtins. Existing `~/.local/share/bash/env.bash` and
+`~/.local/share/zsh/env.zsh` hooks still load afterward for shell-specific
+settings. Keep all these hooks free of subprocesses.
+
+Run the shell behavior suite with `python3 -m unittest discover -s tests`.
+
 ## Zsh
 
 The installer installs two complementary plugins when Homebrew is available,

@@ -172,7 +172,7 @@ function Edit-Path {
 }
 
 Edit-Path -Front /sbin, /usr/sbin, /usr/local/sbin, /usr/local/bin, /usr/bin, /bin
-Edit-Path ~/bin, ~/.local/bin, ~/.poetry/bin, ~/.cargo/bin, ~/.dotnet/tools, /usr/local/share/dotnet, /usr/local/microsoft/powershell/7
+Edit-Path ~/bin, ~/.local/bin, ~/.poetry/bin, ~/.cargo/bin, ~/.dotnet, ~/.dotnet/tools, /usr/local/share/dotnet, /usr/local/microsoft/powershell/7
 
 # macOS
 Edit-Path -Front /opt/homebrew/bin
