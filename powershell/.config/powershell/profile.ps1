@@ -172,11 +172,10 @@ function Edit-Path {
 }
 
 Edit-Path -Front /sbin, /usr/sbin, /usr/local/sbin, /usr/local/bin, /usr/bin, /bin
-Edit-Path ~/bin, ~/.local/bin, ~/.poetry/bin, ~/.cargo/bin, ~/.dotnet, ~/.dotnet/tools, /usr/local/share/dotnet, /usr/local/microsoft/powershell/7
+Edit-Path ~/bin, ~/.local/bin, ~/.cargo/bin, ~/.dotnet, ~/.dotnet/tools, /usr/local/share/dotnet
 
 # macOS
 Edit-Path -Front /opt/homebrew/bin
-Edit-Path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 $local = "$PSScriptRoot/profile_local.ps1"
 (Test-Path $local) -And (. $local) > $null

@@ -7,12 +7,9 @@ path_front /opt/homebrew/bin /opt/homebrew/sbin
 path_back \
   "$HOME/bin" \
   "$HOME/.local/bin" \
-  "$HOME/.poetry/bin" \
   "$HOME/.dotnet" \
   "$HOME/.dotnet/tools" \
-  /usr/local/share/dotnet \
-  /usr/local/microsoft/powershell/7 \
-  "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+  /usr/local/share/dotnet
 
 if [[ -f $HOME/.cargo/env ]]; then
   . "$HOME/.cargo/env"

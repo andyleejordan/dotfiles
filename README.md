@@ -35,6 +35,10 @@ hooks. Inherited system PATH ordering is preserved, with Homebrew promoted
 to the front. Install the new shared `shell` package with `./install.sh`
 from the canonical checkout before starting a new shell.
 
+`uv`, `code`, and `pwsh` use their installed launchers in standard PATH
+directories such as `/opt/homebrew/bin` and `/usr/local/bin`; startup does
+not add Poetry's old directory or application-internal launcher directories.
+
 Bash still provides `path_front dir...` and `path_back dir...`; quote
 directory names containing spaces. Zsh also keeps its unique, PATH-linked
 `path` array, so `path=("$HOME/bin" $path)` and `path+=("$HOME/tools")` work
